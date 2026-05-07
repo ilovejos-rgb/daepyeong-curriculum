@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>대평고등학교 고교학점제 이수 가이드북</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Pretendard:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="page-guide">
+  <header class="topbar">
+    <a href="index.html" class="topbar-brand">
+      <img src="logo.png" alt="" class="topbar-logo">
+      <div class="topbar-titles">
+        <span class="topbar-school">대평고등학교</span>
+        <span class="topbar-sub">고교학점제 이수 가이드북</span>
+      </div>
+    </a>
+    <div class="topbar-year" id="topbarYear">
+      <span class="year-badge">2026학년도 입학생</span>
+    </div>
+  </header>
+
+  <section class="overview">
+    <div class="overview-inner">
+      <p class="section-eyebrow">졸업 요건</p>
+      <h2 class="section-title">3년간 192학점</h2>
+
+      <div class="credit-summary">
+        <div class="credit-card">
+          <span class="credit-num">192</span>
+          <span class="credit-label">졸업 필수 학점</span>
+        </div>
+        <div class="credit-card credit-card-sub">
+          <span class="credit-num">174</span>
+          <span class="credit-label">교과 이수</span>
+        </div>
+        <div class="credit-card credit-card-sub">
+          <span class="credit-num">18</span>
+          <span class="credit-label">창의적 체험활동</span>
+        </div>
+        <div class="credit-card credit-card-sub">
+          <span class="credit-num">29</span>
+          <span class="credit-label">학기당 운영 학점</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="requirements">
+    <div class="requirements-inner">
+      <p class="section-eyebrow">핵심 이수 경로</p>
+      <h2 class="section-title">교과(군)별 필수 이수 학점</h2>
+      <p class="section-desc">반드시 이수해야 하는 영역의 로드맵입니다.</p>
+
+      <div class="req-grid" id="reqGrid">
+        <!-- JS로 채워짐 -->
+      </div>
+    </div>
+  </section>
+
+  <section class="grades">
+    <div class="grades-inner">
+      <p class="section-eyebrow">학년별 교과목 탐색</p>
+      <h2 class="section-title">과목 카드를 눌러 자세히 살펴보세요</h2>
+      <p class="section-desc">각 과목의 안내·학습 내용·평가 방식을 확인할 수 있습니다.</p>
+
+      <div class="grade-tabs" role="tablist">
+        <button class="grade-tab active" data-grade="1" role="tab">1학년</button>
+        <button class="grade-tab" data-grade="2" role="tab">2학년</button>
+        <button class="grade-tab" data-grade="3" role="tab">3학년</button>
+      </div>
+
+      <div class="grade-meta" id="gradeMeta">
+        <span class="grade-meta-text">학기당 29학점</span>
+      </div>
+
+      <div class="grade-content" id="gradeContent">
+        <!-- JS로 채워짐 -->
+      </div>
+    </div>
+  </section>
+
+  <!-- 모달 -->
+  <div class="modal-overlay" id="modalOverlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-labelledby="modalTitle" aria-modal="true">
+      <button class="modal-close" id="modalClose" aria-label="닫기">×</button>
+      <div class="modal-header">
+        <span class="modal-area" id="modalArea"></span>
+        <h3 class="modal-title" id="modalTitle"></h3>
+        <div class="modal-meta" id="modalMeta"></div>
+      </div>
+      <div class="modal-body" id="modalBody">
+        <!-- JS로 채워짐 -->
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <img src="logo.png" alt="" class="footer-logo">
+      <div class="footer-text">
+        <p class="footer-school">대평고등학교 · DAEPYEONG HIGH SCHOOL</p>
+        <p class="footer-sub">2022 개정 교육과정 고교학점제 이수 가이드북</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,1822 @@
+{
+  "2025": {
+    "school": {
+      "name": "대평고등학교",
+      "nameEn": "DAEPYEONG HIGH SCHOOL",
+      "logo": "logo.png"
+    },
+    "year": 2025,
+    "totalCredits": 192,
+    "subjectCredits": 174,
+    "creativeCredits": 18,
+    "perSemesterCredits": 29,
+    "requirements": [
+      {
+        "area": "국어",
+        "required": 8,
+        "total": 18
+      },
+      {
+        "area": "수학",
+        "required": 8,
+        "total": 19
+      },
+      {
+        "area": "영어",
+        "required": 8,
+        "total": 18
+      },
+      {
+        "area": "사회",
+        "required": 6,
+        "total": 6
+      },
+      {
+        "area": "과학",
+        "required": 10,
+        "total": 10
+      },
+      {
+        "area": "체육",
+        "required": 10,
+        "total": 12
+      },
+      {
+        "area": "예술",
+        "required": 10,
+        "total": 4
+      },
+      {
+        "area": "기술·가정/정보/제2외국어/한문/교양",
+        "required": 16,
+        "total": 6
+      }
+    ],
+    "fixedSubjects": [
+      {
+        "area": "국어",
+        "name": "공통국어1",
+        "baseCredit": 3,
+        "types": [
+          "공통"
+        ],
+        "semesters": [
+          {
+            "grade": 1,
+            "semester": 1,
+            "credits": 3
+          }
+        ]
+      },
+      {
+        "area": "국어",
+        "name": "공통국어2",
+        "baseCredit": 3,
+        "types": [
+          "공통"
+        ],
+        "semesters": [
+          {
+            "grade": 1,
+            "semester": 2,
+            "credits": 3
+          }
+        ]
+      },
+      {
+        "area": "국어",
+        "name": "문학",
+        "baseCredit": 4,
+        "types": [
+          "일반선택"
+        ],
+        "semesters": [
+          {
+            "grade": 2,
+            "semester": 1,
+            "credits": 4
+          }
+        ]
+      },
+      {
+        "area": "국어",
+        "name": "화법과 언어",
+        "baseCredit": 4,
+        "types": [
+          "일반선택"
+        ],
+        "semesters": [
+          {
+            "grade": 2,
+            "semester": 2,
+            "credits": 4
+          }
+        ]
+      },
+      {
+        "area": "국어",
+        "name": "독서와 작문",
+        "baseCredit": 4,
+        "types": [
+          "일반선택"
+        ],
+        "semesters": [
+          {
+            "grade": 3,
+            "semester": 1,
+            "credits": 4
+          }
+        ]
+      },
+      {
+        "area": "수학",
+        "name": "공통수학1",
+        "baseCredit": 4,
+        "types": [
+          "공통"
+        ],
+        "semesters": [
+          {
+            "grade": 1,
+            "semester": 1,
+            "credits": 4
+          }
+        ]
+      },
+      {
+        "area": "수학",
+        "name": "공통수학2",
+        "baseCredit": 4,
+        "types": [
+          "공통"
+        ],
+        "semesters": [
+          {
+            "grade": 1,
+            "semester": 2,
+            "credits": 4
+          }
+        ]
+      },
+      {
+        "area": "수학",
+        "name": "대수",
+        "baseCredit": 4,
+        "types": [
+          "일반선택"
+        ],
+        "semesters": [
+          {
+            "grade": 2,
+            "semester": 1,
+            "credits": 4
+          }
+        ]
+      },
+      {
+        "area": "수학",
+        "name": "미적분Ⅰ",
+        "baseCredit": 4,
+        "types": [
+          "일반선택"
+        ],
+        "semesters": [
+          {
+            "grade": 2,
+            "semester": 2,
+            "credits": 4
+          }
+        ]
+      },
+      {
+        "area": "수학",
+        "name": "확률과 통계",
+        "baseCredit": 3,
+        "types": [
+          "일반선택"
+        ],
+        "semesters": [
+          {
+            "grade": 3,
+            "semester": 1,
+            "credits": 3
+          }
+        ]
+      },
+      {
+        "area": "영어",
+        "name": "공통영어1",
+        "baseCredit": 3,
+        "types": [
+          "공통"
+        ],
+        "semesters": [
+          {
+            "grade": 1,
+            "semester": 1,
+            "credits": 3
+          }
+        ]
+      },
+      {
+        "area": "영어",
+        "name": "공통영어2",
+        "baseCredit": 3,
+        "types": [
+          "공통"
+        ],
+        "semesters": [
+          {
+            "grade": 1,
+            "semester": 2,
+            "credits": 3
+          }
+        ]
+      },
+      {
+        "area": "영어",
+        "name": "영어Ⅰ",
+        "baseCredit": 4,
+        "types": [
+          "일반선택"
+        ],
+        "semesters": [
+          {
+            "grade": 2,
+            "semester": 1,
+            "credits": 4
+          }
+        ]
+      },
+      {
+        "area": "영어",
+        "name": "영어Ⅱ",
+        "baseCredit": 4,
+        "types": [
+          "일반선택"
+        ],
+        "semesters": [
+          {
+            "grade": 2,
+            "semester": 2,
+            "credits": 4
+          }
+        ]
+      },
+      {
+        "area": "영어",
+        "name": "영어 독해와 작문",
+        "baseCredit": 4,
+        "types": [
+          "일반선택"
+        ],
+        "semesters": [
+          {
+            "grade": 3,
+            "semester": 1,
+            "credits": 4
+          }
+        ]
+      },
+      {
+        "area": "사회",
+        "name": "한국사1",
+        "baseCredit": 3,
+        "types": [
+          "공통"
+        ],
+        "semesters": [
+          {
+            "grade": 1,
+            "semester": 1,
+            "credits": 3
+          }
+        ]
+      },
+      {
+        "area": "사회",
+        "name": "한국사2",
+        "baseCredit": 3,
+        "types": [
+          "공통"
+        ],
+        "semesters": [
+          {
+            "grade": 1,
+            "semester": 2,
+            "credits": 3
+          }
+        ]
+      },
+      {
+        "area": "사회",
+        "name": "통합사회1",
+        "baseCredit": 4,
+        "types": [
+          "공통"
+        ],
+        "semesters": [
+          {
+            "grade": 1,
+            "semester": 1,
+            "credits": 4
+          }
+        ]
+      },
+      {
+        "area": "사회",
+        "name": "통합사회2",
+        "baseCredit": 4,
+        "types": [
+          "공통"
+        ],
+        "semesters": [
+          {
+            "grade": 1,
+            "semester": 2,
+            "credits": 4
+          }
+        ]
+      },
+      {
+        "area": "과학",
+        "name": "통합과학1",
+        "baseCredit": 4,
+        "types": [
+          "공통"
+        ],
+        "semesters": [
+          {
+            "grade": 1,
+            "semester": 1,
+            "credits": 4
+          }
+        ]
+      },
+      {
+        "area": "과학",
+        "name": "통합과학2",
+        "baseCredit": 4,
+        "types": [
+          "공통"
+        ],
+        "semesters": [
+          {
+            "grade": 1,
+            "semester": 2,
+            "credits": 4
+          }
+        ]
+      },
+      {
+        "area": "과학",
+        "name": "과학탐구실험1",
+        "baseCredit": 1,
+        "types": [
+          "공통"
+        ],
+        "semesters": [
+          {
+            "grade": 1,
+            "semester": 1,
+            "credits": 1
+          }
+        ]
+      },
+      {
+        "area": "과학",
+        "name": "과학탐구실험2",
+        "baseCredit": 1,
+        "types": [
+          "공통"
+        ],
+        "semesters": [
+          {
+            "grade": 1,
+            "semester": 2,
+            "credits": 1
+          }
+        ]
+      },
+      {
+        "area": "체육",
+        "name": "체육1",
+        "baseCredit": 2,
+        "types": [
+          "일반선택"
+        ],
+        "semesters": [
+          {
+            "grade": 1,
+            "semester": 1,
+            "credits": 2
+          }
+        ]
+      },
+      {
+        "area": "체육",
+        "name": "체육2",
+        "baseCredit": 2,
+        "types": [
+          "일반선택"
+        ],
+        "semesters": [
+          {
+            "grade": 1,
+            "semester": 2,
+            "credits": 2
+          }
+        ]
+      },
+      {
+        "area": "체육",
+        "name": "운동과 건강",
+        "baseCredit": 2,
+        "types": [
+          "진로선택"
+        ],
+        "semesters": [
+          {
+            "grade": 2,
+            "semester": 1,
+            "credits": 2
+          }
+        ]
+      },
+      {
+        "area": "체육",
+        "name": "스포츠 과학",
+        "baseCredit": 2,
+        "types": [
+          "진로선택"
+        ],
+        "semesters": [
+          {
+            "grade": 2,
+            "semester": 2,
+            "credits": 2
+          }
+        ]
+      },
+      {
+        "area": "체육",
+        "name": "스포츠 생활1",
+        "baseCredit": 2,
+        "types": [
+          "융합선택"
+        ],
+        "semesters": [
+          {
+            "grade": 3,
+            "semester": 1,
+            "credits": 2
+          }
+        ]
+      },
+      {
+        "area": "체육",
+        "name": "스포츠 생활2",
+        "baseCredit": 2,
+        "types": [
+          "융합선택"
+        ],
+        "semesters": [
+          {
+            "grade": 3,
+            "semester": 2,
+            "credits": 2
+          }
+        ]
+      },
+      {
+        "area": "예술",
+        "name": "음악↔미술",
+        "baseCredit": 2,
+        "types": [
+          "일반선택"
+        ],
+        "semesters": [
+          {
+            "grade": 1,
+            "semester": 1,
+            "credits": 2
+          }
+        ]
+      },
+      {
+        "area": "예술",
+        "name": "미술↔음악",
+        "baseCredit": 2,
+        "types": [
+          "일반선택"
+        ],
+        "semesters": [
+          {
+            "grade": 1,
+            "semester": 2,
+            "credits": 2
+          }
+        ]
+      },
+      {
+        "area": "기술·가정/정보/제2외국어/한문/교양",
+        "name": "기술·가정↔정보",
+        "baseCredit": 3,
+        "types": [
+          "일반선택"
+        ],
+        "semesters": [
+          {
+            "grade": 1,
+            "semester": 1,
+            "credits": 3
+          }
+        ]
+      },
+      {
+        "area": "기술·가정/정보/제2외국어/한문/교양",
+        "name": "정보↔기술·가정",
+        "baseCredit": 3,
+        "types": [
+          "일반선택"
+        ],
+        "semesters": [
+          {
+            "grade": 1,
+            "semester": 2,
+            "credits": 3
+          }
+        ]
+      }
+    ],
+    "electiveGroups": [
+      {
+        "grade": 2,
+        "area": "제2외국어",
+        "subjects": [
+          "일본어",
+          "중국어",
+          "스페인어",
+          "한문"
+        ],
+        "selectCount": 1,
+        "creditsPerSubject": 3,
+        "semesters": [
+          {
+            "grade": 2,
+            "semester": 1,
+            "credits": 3
+          }
+        ],
+        "types": [
+          "일반선택"
+        ]
+      },
+      {
+        "grade": 2,
+        "area": "제2외국어",
+        "subjects": [
+          "일본어회화",
+          "중국어회화",
+          "스페인어회화",
+          "언어생활과 한자"
+        ],
+        "selectCount": 1,
+        "creditsPerSubject": 3,
+        "semesters": [
+          {
+            "grade": 2,
+            "semester": 2,
+            "credits": 3
+          }
+        ],
+        "types": [
+          "진로선택",
+          "융합선택"
+        ]
+      },
+      {
+        "grade": 2,
+        "area": "교과(군) 간 선택",
+        "subjects": [
+          "독서토론과 글쓰기",
+          "미디어 영어",
+          "프로그래밍",
+          "창의 공학 설계",
+          "음악과 미디어",
+          "정치",
+          "윤리와 사상",
+          "세계시민과 지리",
+          "세계사",
+          "물리학",
+          "화학",
+          "생명과학",
+          "지구과학",
+          "융합과학 탐구"
+        ],
+        "selectCount": 4,
+        "creditsPerSubject": 3,
+        "semesters": [
+          {
+            "grade": 2,
+            "semester": 1,
+            "credits": 3
+          }
+        ],
+        "types": [
+          "일반선택",
+          "진로선택",
+          "융합선택"
+        ]
+      },
+      {
+        "grade": 2,
+        "area": "교과(군) 간 선택",
+        "subjects": [
+          "문학과 영상",
+          "기하",
+          "영미 문학 읽기 인공지능기초",
+          "인간발달",
+          "음악 콘텐츠 제작 기초",
+          "법과 사회",
+          "윤리문제 탐구",
+          "한국지리 탐구",
+          "역사로 탐구하는 현대 세계",
+          "역학과 에너지",
+          "물질과 에너지",
+          "세포와 물질대사",
+          "지구시스템과학"
+        ],
+        "selectCount": 4,
+        "creditsPerSubject": 3,
+        "semesters": [
+          {
+            "grade": 2,
+            "semester": 2,
+            "credits": 3
+          }
+        ],
+        "types": [
+          "진로선택",
+          "융합선택"
+        ]
+      },
+      {
+        "grade": 2,
+        "area": "국어",
+        "subjects": [
+          "매체 의사소통",
+          "직무 의사소통"
+        ],
+        "selectCount": 1,
+        "creditsPerSubject": 4,
+        "semesters": [
+          {
+            "grade": 3,
+            "semester": 2,
+            "credits": 4
+          }
+        ],
+        "types": [
+          "진로선택",
+          "융합선택"
+        ]
+      },
+      {
+        "grade": 2,
+        "area": "수학",
+        "subjects": [
+          "전문 수학",
+          "실용 통계"
+        ],
+        "selectCount": 1,
+        "creditsPerSubject": 3,
+        "semesters": [
+          {
+            "grade": 3,
+            "semester": 2,
+            "credits": 3
+          }
+        ],
+        "types": [
+          "융합선택"
+        ]
+      },
+      {
+        "grade": 3,
+        "area": "영어",
+        "subjects": [
+          "심화 영어 독해와 작문",
+          "영어 발표와 토론"
+        ],
+        "selectCount": 1,
+        "creditsPerSubject": 4,
+        "semesters": [
+          {
+            "grade": 3,
+            "semester": 2,
+            "credits": 4
+          }
+        ],
+        "types": [
+          "진로선택"
+        ]
+      },
+      {
+        "grade": 3,
+        "area": "교과(군) 간 선택",
+        "subjects": [
+          "주제 탐구 독서",
+          "미적분Ⅱ",
+          "심화 영어",
+          "경제"
+        ],
+        "selectCount": 1,
+        "creditsPerSubject": 4,
+        "semesters": [
+          {
+            "grade": 3,
+            "semester": 1,
+            "credits": 4
+          }
+        ],
+        "types": [
+          "진로선택",
+          "융합선택"
+        ]
+      },
+      {
+        "grade": 3,
+        "area": "교과(군) 간 선택",
+        "subjects": [
+          "언어생활 탐구",
+          "수학과 문화",
+          "세계 문화와 영어",
+          "금융과 경제생활"
+        ],
+        "selectCount": 1,
+        "creditsPerSubject": 4,
+        "semesters": [
+          {
+            "grade": 3,
+            "semester": 2,
+            "credits": 4
+          }
+        ],
+        "types": [
+          "진로선택",
+          "융합선택"
+        ]
+      },
+      {
+        "grade": 3,
+        "area": "교과(군) 간 선택",
+        "subjects": [
+          "현대사회와 윤리",
+          "사회와 문화",
+          "기후변화와 지속가능한 세계",
+          "문화로 보는 한국사",
+          "전자기와 양자",
+          "화학 반응의 세계",
+          "생물의 유전",
+          "행성우주과학"
+        ],
+        "selectCount": 2,
+        "creditsPerSubject": 3,
+        "semesters": [
+          {
+            "grade": 3,
+            "semester": 1,
+            "credits": 3
+          }
+        ],
+        "types": [
+          "일반선택",
+          "진로선택",
+          "융합선택"
+        ]
+      },
+      {
+        "grade": 3,
+        "area": "교과(군) 간 선택",
+        "subjects": [
+          "인문학과 윤리",
+          "사회문제 탐구",
+          "여행지리",
+          "동아시아사 역사 기행",
+          "과학의 역사와 문화",
+          "기후변화와 환경생태"
+        ],
+        "selectCount": 2,
+        "creditsPerSubject": 3,
+        "semesters": [
+          {
+            "grade": 3,
+            "semester": 2,
+            "credits": 3
+          }
+        ],
+        "types": [
+          "진로선택",
+          "융합선택"
+        ]
+      },
+      {
+        "grade": 3,
+        "area": "예술",
+        "subjects": [
+          "음악연주와 창작",
+          "미술 창작"
+        ],
+        "selectCount": 1,
+        "creditsPerSubject": 3,
+        "semesters": [
+          {
+            "grade": 3,
+            "semester": 1,
+            "credits": 3
+          }
+        ],
+        "types": [
+          "진로선택"
+        ]
+      },
+      {
+        "grade": 3,
+        "area": "예술",
+        "subjects": [
+          "음악 감상과 비평",
+          "미술 감상과 비평"
+        ],
+        "selectCount": 1,
+        "creditsPerSubject": 3,
+        "semesters": [
+          {
+            "grade": 3,
+            "semester": 2,
+            "credits": 3
+          }
+        ],
+        "types": [
+          "진로선택"
+        ]
+      },
+      {
+        "grade": 3,
+        "area": "교양",
+        "subjects": [
+          "로봇과 공학세계",
+          "정보과학",
+          "일본 문화",
+          "중국문화",
+          "생활속의 한자"
+        ],
+        "selectCount": 1,
+        "creditsPerSubject": 3,
+        "semesters": [
+          {
+            "grade": 3,
+            "semester": 1,
+            "credits": 3
+          }
+        ],
+        "types": [
+          "진로선택",
+          "융합선택"
+        ]
+      },
+      {
+        "grade": 3,
+        "area": "교양",
+        "subjects": [
+          "생활과학 탐구",
+          "소프트웨어와 생활",
+          "심화 일본어",
+          "심화 중국어",
+          "한문 고전 읽기"
+        ],
+        "selectCount": 1,
+        "creditsPerSubject": 3,
+        "semesters": [
+          {
+            "grade": 3,
+            "semester": 2,
+            "credits": 3
+          }
+        ],
+        "types": [
+          "진로선택",
+          "융합선택"
+        ]
+      }
+    ]
+  },
+  "2026": {
+    "school": {
+      "name": "대평고등학교",
+      "nameEn": "DAEPYEONG HIGH SCHOOL",
+      "logo": "logo.png"
+    },
+    "year": 2026,
+    "totalCredits": 192,
+    "subjectCredits": 174,
+    "creativeCredits": 18,
+    "perSemesterCredits": 29,
+    "requirements": [
+      {
+        "area": "국어",
+        "required": 8,
+        "total": 18
+      },
+      {
+        "area": "수학",
+        "required": 8,
+        "total": 19
+      },
+      {
+        "area": "영어",
+        "required": 8,
+        "total": 18
+      },
+      {
+        "area": "사회",
+        "required": 6,
+        "total": 6
+      },
+      {
+        "area": "과학",
+        "required": 10,
+        "total": 10
+      },
+      {
+        "area": "체육",
+        "required": 10,
+        "total": 12
+      },
+      {
+        "area": "예술",
+        "required": 10,
+        "total": 4
+      },
+      {
+        "area": "기술·가정/정보/제2외국어/한문/교양",
+        "required": 16,
+        "total": 6
+      }
+    ],
+    "fixedSubjects": [
+      {
+        "area": "국어",
+        "name": "공통국어1",
+        "baseCredit": 3,
+        "types": [
+          "공통"
+        ],
+        "semesters": [
+          {
+            "grade": 1,
+            "semester": 1,
+            "credits": 3
+          }
+        ]
+      },
+      {
+        "area": "국어",
+        "name": "공통국어2",
+        "baseCredit": 3,
+        "types": [
+          "공통"
+        ],
+        "semesters": [
+          {
+            "grade": 1,
+            "semester": 2,
+            "credits": 3
+          }
+        ]
+      },
+      {
+        "area": "국어",
+        "name": "문학",
+        "baseCredit": 4,
+        "types": [
+          "일반선택"
+        ],
+        "semesters": [
+          {
+            "grade": 2,
+            "semester": 1,
+            "credits": 4
+          }
+        ]
+      },
+      {
+        "area": "국어",
+        "name": "화법과 언어",
+        "baseCredit": 4,
+        "types": [
+          "일반선택"
+        ],
+        "semesters": [
+          {
+            "grade": 2,
+            "semester": 2,
+            "credits": 4
+          }
+        ]
+      },
+      {
+        "area": "국어",
+        "name": "독서와 작문",
+        "baseCredit": 4,
+        "types": [
+          "일반선택"
+        ],
+        "semesters": [
+          {
+            "grade": 3,
+            "semester": 1,
+            "credits": 4
+          }
+        ]
+      },
+      {
+        "area": "수학",
+        "name": "공통수학1",
+        "baseCredit": 4,
+        "types": [
+          "공통"
+        ],
+        "semesters": [
+          {
+            "grade": 1,
+            "semester": 1,
+            "credits": 4
+          }
+        ]
+      },
+      {
+        "area": "수학",
+        "name": "공통수학2",
+        "baseCredit": 4,
+        "types": [
+          "공통"
+        ],
+        "semesters": [
+          {
+            "grade": 1,
+            "semester": 2,
+            "credits": 4
+          }
+        ]
+      },
+      {
+        "area": "수학",
+        "name": "대수",
+        "baseCredit": 4,
+        "types": [
+          "일반선택"
+        ],
+        "semesters": [
+          {
+            "grade": 2,
+            "semester": 1,
+            "credits": 4
+          }
+        ]
+      },
+      {
+        "area": "수학",
+        "name": "미적분Ⅰ",
+        "baseCredit": 4,
+        "types": [
+          "일반선택"
+        ],
+        "semesters": [
+          {
+            "grade": 2,
+            "semester": 2,
+            "credits": 4
+          }
+        ]
+      },
+      {
+        "area": "수학",
+        "name": "확률과 통계",
+        "baseCredit": 3,
+        "types": [
+          "일반선택"
+        ],
+        "semesters": [
+          {
+            "grade": 3,
+            "semester": 1,
+            "credits": 3
+          }
+        ]
+      },
+      {
+        "area": "영어",
+        "name": "공통영어1",
+        "baseCredit": 3,
+        "types": [
+          "공통"
+        ],
+        "semesters": [
+          {
+            "grade": 1,
+            "semester": 1,
+            "credits": 3
+          }
+        ]
+      },
+      {
+        "area": "영어",
+        "name": "공통영어2",
+        "baseCredit": 3,
+        "types": [
+          "공통"
+        ],
+        "semesters": [
+          {
+            "grade": 1,
+            "semester": 2,
+            "credits": 3
+          }
+        ]
+      },
+      {
+        "area": "영어",
+        "name": "영어Ⅰ",
+        "baseCredit": 4,
+        "types": [
+          "일반선택"
+        ],
+        "semesters": [
+          {
+            "grade": 2,
+            "semester": 1,
+            "credits": 4
+          }
+        ]
+      },
+      {
+        "area": "영어",
+        "name": "영어Ⅱ",
+        "baseCredit": 4,
+        "types": [
+          "일반선택"
+        ],
+        "semesters": [
+          {
+            "grade": 2,
+            "semester": 2,
+            "credits": 4
+          }
+        ]
+      },
+      {
+        "area": "영어",
+        "name": "영어 독해와 작문",
+        "baseCredit": 4,
+        "types": [
+          "일반선택"
+        ],
+        "semesters": [
+          {
+            "grade": 3,
+            "semester": 1,
+            "credits": 4
+          }
+        ]
+      },
+      {
+        "area": "사회",
+        "name": "한국사1",
+        "baseCredit": 3,
+        "types": [
+          "공통"
+        ],
+        "semesters": [
+          {
+            "grade": 1,
+            "semester": 1,
+            "credits": 3
+          }
+        ]
+      },
+      {
+        "area": "사회",
+        "name": "한국사2",
+        "baseCredit": 3,
+        "types": [
+          "공통"
+        ],
+        "semesters": [
+          {
+            "grade": 1,
+            "semester": 2,
+            "credits": 3
+          }
+        ]
+      },
+      {
+        "area": "사회",
+        "name": "통합사회1",
+        "baseCredit": 4,
+        "types": [
+          "공통"
+        ],
+        "semesters": [
+          {
+            "grade": 1,
+            "semester": 1,
+            "credits": 4
+          }
+        ]
+      },
+      {
+        "area": "사회",
+        "name": "통합사회2",
+        "baseCredit": 4,
+        "types": [
+          "공통"
+        ],
+        "semesters": [
+          {
+            "grade": 1,
+            "semester": 2,
+            "credits": 4
+          }
+        ]
+      },
+      {
+        "area": "과학",
+        "name": "통합과학1",
+        "baseCredit": 4,
+        "types": [
+          "공통"
+        ],
+        "semesters": [
+          {
+            "grade": 1,
+            "semester": 1,
+            "credits": 4
+          }
+        ]
+      },
+      {
+        "area": "과학",
+        "name": "통합과학2",
+        "baseCredit": 4,
+        "types": [
+          "공통"
+        ],
+        "semesters": [
+          {
+            "grade": 1,
+            "semester": 2,
+            "credits": 4
+          }
+        ]
+      },
+      {
+        "area": "과학",
+        "name": "과학탐구실험1",
+        "baseCredit": 1,
+        "types": [
+          "공통"
+        ],
+        "semesters": [
+          {
+            "grade": 1,
+            "semester": 1,
+            "credits": 1
+          }
+        ]
+      },
+      {
+        "area": "과학",
+        "name": "과학탐구실험2",
+        "baseCredit": 1,
+        "types": [
+          "공통"
+        ],
+        "semesters": [
+          {
+            "grade": 1,
+            "semester": 2,
+            "credits": 1
+          }
+        ]
+      },
+      {
+        "area": "체육",
+        "name": "체육1",
+        "baseCredit": 2,
+        "types": [
+          "일반선택"
+        ],
+        "semesters": [
+          {
+            "grade": 1,
+            "semester": 1,
+            "credits": 2
+          }
+        ]
+      },
+      {
+        "area": "체육",
+        "name": "체육2",
+        "baseCredit": 2,
+        "types": [
+          "일반선택"
+        ],
+        "semesters": [
+          {
+            "grade": 1,
+            "semester": 2,
+            "credits": 2
+          }
+        ]
+      },
+      {
+        "area": "체육",
+        "name": "운동과 건강",
+        "baseCredit": 2,
+        "types": [
+          "진로선택"
+        ],
+        "semesters": [
+          {
+            "grade": 2,
+            "semester": 1,
+            "credits": 2
+          }
+        ]
+      },
+      {
+        "area": "체육",
+        "name": "스포츠 과학",
+        "baseCredit": 2,
+        "types": [
+          "진로선택"
+        ],
+        "semesters": [
+          {
+            "grade": 2,
+            "semester": 2,
+            "credits": 2
+          }
+        ]
+      },
+      {
+        "area": "체육",
+        "name": "스포츠 생활1",
+        "baseCredit": 2,
+        "types": [
+          "융합선택"
+        ],
+        "semesters": [
+          {
+            "grade": 3,
+            "semester": 1,
+            "credits": 2
+          }
+        ]
+      },
+      {
+        "area": "체육",
+        "name": "스포츠 생활2",
+        "baseCredit": 2,
+        "types": [
+          "융합선택"
+        ],
+        "semesters": [
+          {
+            "grade": 3,
+            "semester": 2,
+            "credits": 2
+          }
+        ]
+      },
+      {
+        "area": "예술",
+        "name": "음악↔미술",
+        "baseCredit": 2,
+        "types": [
+          "일반선택"
+        ],
+        "semesters": [
+          {
+            "grade": 1,
+            "semester": 1,
+            "credits": 2
+          }
+        ]
+      },
+      {
+        "area": "예술",
+        "name": "미술↔음악",
+        "baseCredit": 2,
+        "types": [
+          "일반선택"
+        ],
+        "semesters": [
+          {
+            "grade": 1,
+            "semester": 2,
+            "credits": 2
+          }
+        ]
+      },
+      {
+        "area": "기술·가정/정보/제2외국어/한문/교양",
+        "name": "기술·가정↔정보",
+        "baseCredit": 3,
+        "types": [
+          "일반선택"
+        ],
+        "semesters": [
+          {
+            "grade": 1,
+            "semester": 1,
+            "credits": 3
+          }
+        ]
+      },
+      {
+        "area": "기술·가정/정보/제2외국어/한문/교양",
+        "name": "정보↔기술·가정",
+        "baseCredit": 3,
+        "types": [
+          "일반선택"
+        ],
+        "semesters": [
+          {
+            "grade": 1,
+            "semester": 2,
+            "credits": 3
+          }
+        ]
+      }
+    ],
+    "electiveGroups": [
+      {
+        "grade": 2,
+        "area": "제2외국어",
+        "subjects": [
+          "일본어",
+          "중국어",
+          "스페인어",
+          "한문"
+        ],
+        "selectCount": 1,
+        "creditsPerSubject": 3,
+        "semesters": [
+          {
+            "grade": 2,
+            "semester": 1,
+            "credits": 3
+          }
+        ],
+        "types": [
+          "일반선택"
+        ]
+      },
+      {
+        "grade": 2,
+        "area": "제2외국어",
+        "subjects": [
+          "일본어회화",
+          "중국어회화",
+          "스페인어회화",
+          "언어생활과 한자"
+        ],
+        "selectCount": 1,
+        "creditsPerSubject": 3,
+        "semesters": [
+          {
+            "grade": 2,
+            "semester": 2,
+            "credits": 3
+          }
+        ],
+        "types": [
+          "진로선택",
+          "융합선택"
+        ]
+      },
+      {
+        "grade": 2,
+        "area": "교과(군) 간 선택",
+        "subjects": [
+          "프로그래밍",
+          "인간 발달",
+          "음악과 미디어",
+          "정치",
+          "윤리와 사상",
+          "세계시민과 지리",
+          "세계사",
+          "물리학",
+          "화학",
+          "생명과학",
+          "지구과학"
+        ],
+        "selectCount": 4,
+        "creditsPerSubject": 3,
+        "semesters": [
+          {
+            "grade": 2,
+            "semester": 1,
+            "credits": 3
+          }
+        ],
+        "types": [
+          "일반선택",
+          "진로선택",
+          "융합선택"
+        ]
+      },
+      {
+        "grade": 2,
+        "area": "교과(군) 간 선택",
+        "subjects": [
+          "기하",
+          "인공지능기초",
+          "로봇과 공학세계",
+          "음악 콘텐츠 제작 기초",
+          "법과 사회",
+          "윤리문제 탐구",
+          "한국지리 탐구",
+          "역사로 탐구하는 현대 세계",
+          "역학과 에너지",
+          "물질과 에너지",
+          "세포와 물질대사",
+          "지구시스템과학",
+          "융합과학 탐구"
+        ],
+        "selectCount": 4,
+        "creditsPerSubject": 3,
+        "semesters": [
+          {
+            "grade": 2,
+            "semester": 2,
+            "credits": 3
+          }
+        ],
+        "types": [
+          "진로선택",
+          "융합선택"
+        ]
+      },
+      {
+        "grade": 3,
+        "area": "국어",
+        "subjects": [
+          "매체 의사소통",
+          "직무 의사소통"
+        ],
+        "selectCount": 1,
+        "creditsPerSubject": 4,
+        "semesters": [
+          {
+            "grade": 3,
+            "semester": 2,
+            "credits": 4
+          }
+        ],
+        "types": [
+          "진로선택",
+          "융합선택"
+        ]
+      },
+      {
+        "grade": 3,
+        "area": "수학",
+        "subjects": [
+          "전문 수학",
+          "실용 통계"
+        ],
+        "selectCount": 1,
+        "creditsPerSubject": 3,
+        "semesters": [
+          {
+            "grade": 3,
+            "semester": 2,
+            "credits": 3
+          }
+        ],
+        "types": [
+          "융합선택"
+        ]
+      },
+      {
+        "grade": 3,
+        "area": "영어",
+        "subjects": [
+          "심화 영어 독해와 작문",
+          "영어 발표와 토론"
+        ],
+        "selectCount": 1,
+        "creditsPerSubject": 4,
+        "semesters": [
+          {
+            "grade": 3,
+            "semester": 2,
+            "credits": 4
+          }
+        ],
+        "types": [
+          "진로선택"
+        ]
+      },
+      {
+        "grade": 3,
+        "area": "교과(군) 간 선택",
+        "subjects": [
+          "주제 탐구 독서",
+          "미적분Ⅱ",
+          "미디어 영어",
+          "경제"
+        ],
+        "selectCount": 1,
+        "creditsPerSubject": 4,
+        "semesters": [
+          {
+            "grade": 3,
+            "semester": 1,
+            "credits": 4
+          }
+        ],
+        "types": [
+          "진로선택",
+          "융합선택"
+        ]
+      },
+      {
+        "grade": 3,
+        "area": "교과(군) 간 선택",
+        "subjects": [
+          "언어생활 탐구",
+          "수학과 문화",
+          "세계 문화와 영어",
+          "금융과 경제생활"
+        ],
+        "selectCount": 1,
+        "creditsPerSubject": 4,
+        "semesters": [
+          {
+            "grade": 3,
+            "semester": 2,
+            "credits": 4
+          }
+        ],
+        "types": [
+          "진로선택",
+          "융합선택"
+        ]
+      },
+      {
+        "grade": 3,
+        "area": "교과(군) 간 선택",
+        "subjects": [
+          "현대사회와 윤리",
+          "사회와 문화",
+          "기후변화와 지속가능한 세계",
+          "문화로 보는 한국사",
+          "전자기와 양자",
+          "화학 반응의 세계",
+          "생물의 유전",
+          "행성우주과학"
+        ],
+        "selectCount": 2,
+        "creditsPerSubject": 3,
+        "semesters": [
+          {
+            "grade": 3,
+            "semester": 1,
+            "credits": 3
+          }
+        ],
+        "types": [
+          "일반선택",
+          "진로선택",
+          "융합선택"
+        ]
+      },
+      {
+        "grade": 3,
+        "area": "교과(군) 간 선택",
+        "subjects": [
+          "인문학과 윤리",
+          "사회문제 탐구",
+          "여행지리",
+          "동아시아사 역사 기행",
+          "과학의 역사와 문화",
+          "기후변화와 환경생태"
+        ],
+        "selectCount": 2,
+        "creditsPerSubject": 3,
+        "semesters": [
+          {
+            "grade": 3,
+            "semester": 2,
+            "credits": 3
+          }
+        ],
+        "types": [
+          "진로선택",
+          "융합선택"
+        ]
+      },
+      {
+        "grade": 3,
+        "area": "예술",
+        "subjects": [
+          "음악연주와 창작",
+          "미술 창작"
+        ],
+        "selectCount": 1,
+        "creditsPerSubject": 3,
+        "semesters": [
+          {
+            "grade": 3,
+            "semester": 1,
+            "credits": 3
+          }
+        ],
+        "types": [
+          "진로선택"
+        ]
+      },
+      {
+        "grade": 3,
+        "area": "예술",
+        "subjects": [
+          "음악감상과 비평",
+          "미술감상과 비평"
+        ],
+        "selectCount": 1,
+        "creditsPerSubject": 3,
+        "semesters": [
+          {
+            "grade": 3,
+            "semester": 2,
+            "credits": 3
+          }
+        ],
+        "types": [
+          "진로선택"
+        ]
+      },
+      {
+        "grade": 3,
+        "area": "교양",
+        "subjects": [
+          "창의공학설계",
+          "정보과학",
+          "일본 문화",
+          "중국문화"
+        ],
+        "selectCount": 1,
+        "creditsPerSubject": 3,
+        "semesters": [
+          {
+            "grade": 3,
+            "semester": 1,
+            "credits": 3
+          }
+        ],
+        "types": [
+          "진로선택",
+          "융합선택"
+        ]
+      },
+      {
+        "grade": 3,
+        "area": "교양",
+        "subjects": [
+          "생활과학 탐구",
+          "소프트웨어와 생활",
+          "심화 일본어",
+          "심화 중국어",
+          "한문 고전 읽기"
+        ],
+        "selectCount": 1,
+        "creditsPerSubject": 3,
+        "semesters": [
+          {
+            "grade": 3,
+            "semester": 2,
+            "credits": 3
+          }
+        ],
+        "types": [
+          "진로선택",
+          "융합선택"
+        ]
+      }
+    ]
+  }
+}
