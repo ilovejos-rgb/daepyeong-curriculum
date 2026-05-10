@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>관리자 · 대평고 가이드북</title>
+  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* 관리자 전용 스타일 */
+    body.page-admin {
+      background: var(--bg-cream);
+      min-height: 100vh;
+    }
+    .admin-shell {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 32px 24px 80px;
+    }
+    .admin-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--ink-100);
+    }
+    .admin-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--green-900);
+      letter-spacing: -0.025em;
+    }
+    .admin-sub {
+      font-size: 13px;
+      color: var(--ink-500);
+      margin-top: 4px;
+    }
+    .admin-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .btn {
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
+      font-family: inherit;
+    }
+    .btn-primary {
+      background: var(--green-700);
+      color: #fff;
+    }
+    .btn-primary:hover {
+      background: var(--green-900);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
+    }
+    .btn-secondary {
+      background: #fff;
+      color: var(--ink-700);
+      border-color: var(--ink-100);
+    }
+    .btn-secondary:hover {
+      border-color: var(--ink-300);
+    }
+    .btn-danger {
+      background: #fff;
+      color: #b91c1c;
+      border-color: #fecaca;
+    }
+    .btn-danger:hover {
+      background: #fef2f2;
+    }
+
+    /* 로그인 화면 */
+    .login-card {
+      max-width: 400px;
+      margin: 80px auto;
+      background: #fff;
+      border-radius: var(--radius-lg);
+      padding: 40px 32px;
+      box-shadow: var(--shadow-lg);
+      text-align: center;
+    }
+    .login-logo {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 16px;
+    }
+    .login-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--green-900);
+      margin-bottom: 6px;
+    }
+    .login-desc {
+      font-size: 13px;
+      color: var(--ink-500);
+      margin-bottom: 24px;
+    }
+    .login-input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid var(--ink-100);
+      border-radius: var(--radius-sm);
+      font-size: 15px;
+      font-family: inherit;
+      background: var(--bg-cream);
+      transition: border-color 0.2s;
+      box-sizing: border-box;
+    }
+    .login-input:focus {
+      outline: none;
+      border-color: var(--green-600);
+      background: #fff;
+    }
+    .login-error {
+      color: #b91c1c;
+      font-size: 12px;
+      margin-top: 8px;
+      min-height: 16px;
+    }
+    .login-btn {
+      width: 100%;
+      margin-top: 16px;
+      padding: 12px;
+      background: var(--green-700);
+      color: #fff;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: background 0.2s;
+      font-family: inherit;
+    }
+    .login-btn:hover { background: var(--green-900); }
+
+    /* 안내 박스 */
+    .info-box {
+      background: var(--lavender-50);
+      border: 1px solid var(--lavender-200);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      font-size: 13px;
+      color: var(--ink-700);
+      line-height: 1.6;
+    }
+    .info-box strong {
+      color: var(--lavender-700);
+      display: block;
+      margin-bottom: 4px;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    /* 입학년도 탭 */
+    .year-tabs {
+      display: inline-flex;
+      background: #fff;
+      border: 1px solid var(--ink-100);
+      padding: 5px;
+      border-radius: 999px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+    .year-tab {
+      padding: 8px 18px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink-500);
+      border-radius: 999px;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+    .year-tab.active {
+      background: var(--green-700);
+      color: #fff;
+    }
+
+    /* 편집 그룹 카드 */
+    .edit-group {
+      background: #fff;
+      border: 1px solid var(--ink-100);
+      border-radius: var(--radius-lg);
+      padding: 22px 24px;
+      margin-bottom: 16px;
+    }
+    .edit-group-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 6px;
+    }
+    .edit-group-grade {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--lavender-700);
+      background: var(--lavender-50);
+      padding: 3px 10px;
+      border-radius: 999px;
+    }
+    .edit-group-area {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--green-900);
+      letter-spacing: -0.02em;
+    }
+    .edit-group-meta {
+      font-size: 12px;
+      color: var(--ink-500);
+      margin-bottom: 18px;
+      padding-bottom: 14px;
+      border-bottom: 1px dashed var(--ink-100);
+    }
+    .edit-group-meta span { margin-right: 12px; }
+    .edit-group-meta .types-old {
+      color: #b91c1c;
+      font-weight: 600;
+    }
+    .edit-subjects {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    .edit-subject {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 12px 14px;
+      background: var(--bg-cream);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--ink-100);
+    }
+    .edit-subject-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--ink-900);
+      flex: 1;
+      min-width: 0;
+    }
+    .edit-radio-group {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      flex-shrink: 0;
+    }
+    .edit-radio {
+      cursor: pointer;
+    }
+    .edit-radio input { display: none; }
+    .edit-radio span {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      border: 1.5px solid var(--ink-100);
+      border-radius: 999px;
+      color: var(--ink-500);
+      background: #fff;
+      transition: all 0.15s;
+      user-select: none;
+    }
+    .edit-radio:hover span {
+      border-color: var(--green-400);
+      color: var(--green-700);
+    }
+    .edit-radio input:checked + span {
+      background: var(--green-700);
+      border-color: var(--green-700);
+      color: #fff;
+    }
+
+    /* 통계 */
+    .stats {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+      font-size: 12px;
+    }
+    .stat-pill {
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: #fff;
+      border: 1px solid var(--ink-100);
+      color: var(--ink-700);
+    }
+    .stat-pill strong { color: var(--green-700); }
+    .stat-pill.warn strong { color: #b91c1c; }
+
+    /* 저장 안내 모달 */
+    .save-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(6px);
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .save-modal.active { display: flex; }
+    .save-modal-card {
+      background: #fff;
+      border-radius: var(--radius-lg);
+      max-width: 500px;
+      width: 100%;
+      padding: 32px;
+      box-shadow: var(--shadow-xl);
+    }
+    .save-modal h3 {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--green-900);
+      margin-bottom: 8px;
+    }
+    .save-modal p {
+      font-size: 14px;
+      color: var(--ink-700);
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+    .save-modal ol {
+      padding-left: 20px;
+      font-size: 13px;
+      color: var(--ink-700);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+    .save-modal code {
+      background: var(--bg-cream);
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-family: 'Courier New', monospace;
+      color: var(--green-900);
+    }
+
+    @media (max-width: 720px) {
+      .edit-subject {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .edit-radio-group {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body class="page-admin">
+
+  <!-- 로그인 화면 -->
+  <div id="loginScreen">
+    <div class="login-card">
+      <img src="logo.png" alt="" class="login-logo">
+      <h1 class="login-title">관리자 페이지</h1>
+      <p class="login-desc">선택과목 유형을 정리하는 페이지입니다.</p>
+      <input type="password" id="pwInput" class="login-input" placeholder="비밀번호" autocomplete="current-password">
+      <div id="pwError" class="login-error"></div>
+      <button class="login-btn" id="loginBtn">로그인</button>
+    </div>
+  </div>
+
+  <!-- 편집 화면 -->
+  <div id="adminShell" class="admin-shell" style="display: none;">
+    <div class="admin-header">
+      <div>
+        <h1 class="admin-title">선택과목 유형 정리</h1>
+        <p class="admin-sub">유형이 여러 개로 잡힌 선택군 안의 과목별 유형을 지정합니다.</p>
+      </div>
+      <div class="admin-actions">
+        <a href="index.html" class="btn btn-secondary">사이트 보기</a>
+        <button class="btn btn-danger" id="logoutBtn">로그아웃</button>
+        <button class="btn btn-primary" id="saveBtn">저장 (JSON 다운로드)</button>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <strong>사용 방법</strong>
+      편성표상 한 묶음에 여러 유형이 표시된 선택군의 과목들이에요. 과목별로 실제 유형 하나를 골라주세요.
+      모두 정한 뒤 "저장" 버튼을 누르면 새 <code>curriculum.json</code> 파일이 다운로드됩니다.
+      이 파일을 GitHub의 같은 이름 파일에 덮어쓰면 사이트가 업데이트됩니다.
+    </div>
+
+    <div class="year-tabs" role="tablist">
+      <button class="year-tab active" data-year="2026">2026 입학생</button>
+      <button class="year-tab" data-year="2025">2025 입학생</button>
+    </div>
+
+    <div class="stats" id="stats"></div>
+
+    <div id="editArea"></div>
+  </div>
+
+  <!-- 저장 안내 모달 -->
+  <div class="save-modal" id="saveModal">
+    <div class="save-modal-card">
+      <h3>JSON 파일이 다운로드되었어요</h3>
+      <p>다음 단계로 사이트에 반영하세요:</p>
+      <ol>
+        <li>다운로드 폴더에서 <code>curriculum.json</code> 확인</li>
+        <li>GitHub 저장소 → 기존 <code>curriculum.json</code> 파일 클릭</li>
+        <li>연필 아이콘 → 전체 삭제 후, 새 파일 내용 붙여넣기</li>
+        <li>또는 <strong>Add file → Upload files</strong>로 파일 끌어다 놓기 (덮어쓰기)</li>
+        <li>아래 <strong>Commit changes</strong> 클릭</li>
+        <li>1~2분 후 사이트 강제새로고침 (Ctrl/Cmd + Shift + R)</li>
+      </ol>
+      <div style="text-align: right;">
+        <button class="btn btn-primary" onclick="document.getElementById('saveModal').classList.remove('active')">확인</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ===== 비밀번호 (간단한 보호) =====
+    // 코드를 보면 알 수 있어서 보안용이 아니라 "실수 방지"용이에요.
+    // 진짜 보안은 GitHub 푸시 권한이 담당해요.
+    const PASSWORD = 'daepyeong2026';
+
+    // ===== 상태 =====
+    let curriculumData = null;        // 원본 JSON
+    let currentYear = '2026';         // 현재 편집 중인 입학년도
+    // subjectTypes 형식: data[year].subjectTypes[과목명] = '진로선택'
+    // 사이트(app.js)는 그룹 types 대신 이걸 우선 봄
+
+    // ===== 로그인 =====
+    document.getElementById('loginBtn').addEventListener('click', tryLogin);
+    document.getElementById('pwInput').addEventListener('keydown', e => {
+      if (e.key === 'Enter') tryLogin();
+    });
+
+    function tryLogin() {
+      const pw = document.getElementById('pwInput').value;
+      const err = document.getElementById('pwError');
+      if (pw === PASSWORD) {
+        sessionStorage.setItem('admin_ok', '1');
+        showAdmin();
+      } else {
+        err.textContent = '비밀번호가 일치하지 않아요.';
+        document.getElementById('pwInput').value = '';
+      }
+    }
+
+    // 세션 동안 자동 로그인 (탭 닫으면 풀림)
+    if (sessionStorage.getItem('admin_ok') === '1') {
+      // DOMContentLoaded 시점에 호출
+      window.addEventListener('DOMContentLoaded', showAdmin);
+    }
+
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+      sessionStorage.removeItem('admin_ok');
+      location.reload();
+    });
+
+    async function showAdmin() {
+      document.getElementById('loginScreen').style.display = 'none';
+      document.getElementById('adminShell').style.display = 'block';
+
+      // 데이터 로드
+      try {
+        const res = await fetch('curriculum.json');
+        curriculumData = await res.json();
+      } catch (err) {
+        alert('curriculum.json 로드 실패: ' + err.message);
+        return;
+      }
+
+      // 각 년도 데이터에 subjectTypes 객체 보장
+      for (const y of ['2025', '2026']) {
+        if (!curriculumData[y].subjectTypes) {
+          curriculumData[y].subjectTypes = {};
+        }
+      }
+
+      setupYearTabs();
+      render();
+    }
+
+    function setupYearTabs() {
+      document.querySelectorAll('.year-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+          document.querySelectorAll('.year-tab').forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+          currentYear = tab.dataset.year;
+          render();
+        });
+      });
+    }
+
+    // ===== 편집 화면 렌더링 =====
+    function render() {
+      const yd = curriculumData[currentYear];
+      const editArea = document.getElementById('editArea');
+      const statsEl = document.getElementById('stats');
+
+      // 유형이 2개 이상인 선택군만 추리기
+      const groups = yd.electiveGroups
+        .filter(g => g.types.length >= 2)
+        .map((g, idx) => ({ ...g, _idx: idx }));
+
+      // 통계
+      const totalSubjects = groups.reduce((s, g) => s + g.subjects.length, 0);
+      const setCount = groups.reduce((s, g) => {
+        return s + g.subjects.filter(name => yd.subjectTypes[name]).length;
+      }, 0);
+      const remaining = totalSubjects - setCount;
+
+      statsEl.innerHTML = `
+        <div class="stat-pill">대상 선택군 <strong>${groups.length}</strong>개</div>
+        <div class="stat-pill">총 과목 <strong>${totalSubjects}</strong>개</div>
+        <div class="stat-pill">설정 완료 <strong>${setCount}</strong>개</div>
+        <div class="stat-pill ${remaining > 0 ? 'warn' : ''}">미설정 <strong>${remaining}</strong>개</div>
+      `;
+
+      if (groups.length === 0) {
+        editArea.innerHTML = '<p style="color: var(--ink-500); padding: 40px; text-align: center;">정리할 항목이 없어요.</p>';
+        return;
+      }
+
+      editArea.innerHTML = groups.map(g => `
+        <div class="edit-group">
+          <div class="edit-group-header">
+            <span class="edit-group-grade">${g.grade}학년</span>
+            <span class="edit-group-area">${escapeHtml(g.area)}</span>
+          </div>
+          <div class="edit-group-meta">
+            <span>택 ${g.selectCount}</span>
+            <span>${g.creditsPerSubject}학점</span>
+            <span>학기: ${g.semesters.map(s => s.semester + '학기').join(', ')}</span>
+            <span class="types-old">현재 유형: ${g.types.join(' / ')}</span>
+          </div>
+          <div class="edit-subjects">
+            ${g.subjects.map(name => subjectRowHtml(name, g.types, yd.subjectTypes[name])).join('')}
+          </div>
+        </div>
+      `).join('');
+
+      // 라디오 변경 이벤트
+      editArea.querySelectorAll('input[type="radio"]').forEach(input => {
+        input.addEventListener('change', e => {
+          const name = e.target.dataset.name;
+          const type = e.target.value;
+          curriculumData[currentYear].subjectTypes[name] = type;
+          // 통계만 빠르게 갱신
+          updateStats();
+        });
+      });
+    }
+
+    function updateStats() {
+      const yd = curriculumData[currentYear];
+      const groups = yd.electiveGroups.filter(g => g.types.length >= 2);
+      const totalSubjects = groups.reduce((s, g) => s + g.subjects.length, 0);
+      const setCount = groups.reduce((s, g) => s + g.subjects.filter(n => yd.subjectTypes[n]).length, 0);
+      const remaining = totalSubjects - setCount;
+      document.getElementById('stats').innerHTML = `
+        <div class="stat-pill">대상 선택군 <strong>${groups.length}</strong>개</div>
+        <div class="stat-pill">총 과목 <strong>${totalSubjects}</strong>개</div>
+        <div class="stat-pill">설정 완료 <strong>${setCount}</strong>개</div>
+        <div class="stat-pill ${remaining > 0 ? 'warn' : ''}">미설정 <strong>${remaining}</strong>개</div>
+      `;
+    }
+
+    function subjectRowHtml(name, availableTypes, currentType) {
+      const radioName = `t_${name.replace(/\s+/g, '_')}_${currentYear}`;
+      return `
+        <div class="edit-subject">
+          <span class="edit-subject-name">${escapeHtml(name)}</span>
+          <div class="edit-radio-group">
+            ${availableTypes.map(t => `
+              <label class="edit-radio">
+                <input type="radio" name="${radioName}" value="${t}" data-name="${escapeAttr(name)}" ${currentType === t ? 'checked' : ''}>
+                <span>${t}</span>
+              </label>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    // ===== 저장 (JSON 다운로드) =====
+    document.getElementById('saveBtn').addEventListener('click', () => {
+      const json = JSON.stringify(curriculumData, null, 2);
+      const blob = new Blob([json], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'curriculum.json';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      document.getElementById('saveModal').classList.add('active');
+    });
+
+    // ===== 유틸 =====
+    function escapeHtml(s) {
+      if (s == null) return '';
+      return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+    function escapeAttr(s) { return escapeHtml(s); }
+  </script>
+</body>
+</html>

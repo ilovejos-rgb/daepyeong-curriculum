@@ -175,7 +175,10 @@ function subjectCardHtml(subject, grade, isElective) {
 
 function electiveCardHtml(name, group, grade) {
   const semText = group.semesters.map(s => `${s.semester}학기`).join(', ');
-  const types = group.types.join(' / ');
+  // 개별 과목 유형이 지정돼 있으면 그것을, 없으면 그룹의 모든 유형을 표시
+  const subjectTypes = curriculumData.subjectTypes || {};
+  const customType = subjectTypes[name];
+  const types = customType ? customType : group.types.join(' / ');
   return `
     <button class="subject-card subject-card-elective"
             data-name="${escapeAttr(name)}"
