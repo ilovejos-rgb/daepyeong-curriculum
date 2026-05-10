@@ -325,13 +325,13 @@ a { text-decoration: none; color: inherit; }
 .year-card-highlight .year-text { color: rgba(255, 255, 255, 0.85); }
 
 .year-grade {
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   color: var(--lavender-400);
   background: rgba(168, 159, 212, 0.15);
   border: 1px solid rgba(168, 159, 212, 0.25);
-  padding: 4px 10px;
+  padding: 6px 14px;
   border-radius: 999px;
 }
 
