@@ -1031,6 +1031,28 @@ a { text-decoration: none; color: inherit; }
   font-size: 16px;
 }
 
+.youtube-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #c00;
+  color: var(--bg-white);
+  padding: 12px 22px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 16px;
+  transition: all 0.25s ease;
+  box-shadow: var(--shadow-sm);
+  text-decoration: none;
+}
+
+.youtube-button:hover {
+  background: #900;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
 /* 푸터 */
 .site-footer {
   background: var(--green-900);

@@ -257,9 +257,12 @@ function openModal(data) {
     }
   }
   // 시트 정보 없으면 JSON 정보 사용
-  else if (jsonInfo && (jsonInfo.intro || jsonInfo.page)) {
+  else if (jsonInfo && (jsonInfo.intro || jsonInfo.page || jsonInfo.youtube)) {
     if (jsonInfo.intro) {
       body += sectionHtml('한 줄 소개', jsonInfo.intro);
+    }
+    if (jsonInfo.youtube) {
+      body += `<a href="${escapeAttr(jsonInfo.youtube)}" target="_blank" rel="noopener" class="youtube-button">▶ 과목 소개 영상 보기</a>`;
     }
     if (jsonInfo.page && pdfFile) {
       // PDF의 특정 페이지로 이동
