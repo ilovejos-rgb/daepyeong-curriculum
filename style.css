@@ -656,16 +656,6 @@ a { text-decoration: none; color: inherit; }
   text-transform: uppercase;
 }
 
-.req-card-details {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--ink-500);
-  margin-top: 2px;
-  padding-top: 8px;
-  border-top: 1px dashed var(--ink-200);
-  line-height: 1.5;
-}
-
 /* 학년별 탭 */
 .grades { background: var(--bg-cream); }
 
@@ -1031,26 +1021,23 @@ a { text-decoration: none; color: inherit; }
   font-size: 16px;
 }
 
-.youtube-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: #c00;
-  color: var(--bg-white);
-  padding: 12px 22px;
-  border-radius: 999px;
-  font-size: 14px;
-  font-weight: 600;
+.youtube-embed {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
   margin-top: 16px;
-  transition: all 0.25s ease;
-  box-shadow: var(--shadow-sm);
-  text-decoration: none;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #000;
 }
 
-.youtube-button:hover {
-  background: #900;
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
+.youtube-embed iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
 }
 
 /* 푸터 */

@@ -262,7 +262,11 @@ function openModal(data) {
       body += sectionHtml('한 줄 소개', jsonInfo.intro);
     }
     if (jsonInfo.youtube) {
-      body += `<a href="${escapeAttr(jsonInfo.youtube)}" target="_blank" rel="noopener" class="youtube-button">▶ 과목 소개 영상 보기</a>`;
+      const embedUrl = jsonInfo.youtube
+        .replace('https://youtu.be/', 'https://www.youtube.com/embed/')
+        .replace('https://www.youtube.com/watch?v=', 'https://www.youtube.com/embed/')
+        .replace(/[?&]si=[\w-]+/, '');
+      body += `<div class="youtube-embed"><iframe src="${escapeAttr(embedUrl)}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`;
     }
     if (jsonInfo.page && pdfFile) {
       // PDF의 특정 페이지로 이동
