@@ -1387,6 +1387,10 @@
         "page": 239,
         "youtube": "https://youtu.be/4hLZ0w2AUvk?si=NamJgW1fUSDZMJiR"
       },
+      "언어생활 탐구": {
+        "page": 35,
+        "youtube": "https://youtu.be/cvfDBOy9MCQ?si=02QcZ7kI5TMfQrk7"
+      },
       "음악감상과 비평": {
         "youtube": "https://youtu.be/YyEC5cSbt6Y?si=XW1WBFPzboMy69w9",
         "page": 172
@@ -1398,10 +1402,6 @@
       "창의공학설계": {
         "youtube": "https://youtu.be/-4B8pj4bgcY?si=A21gp2GQhVIx5Lax",
         "page": 234
-      },
-      "언어생활 탐구": {
-        "page": 35,
-        "youtube": "https://youtu.be/cvfDBOy9MCQ?si=02QcZ7kI5TMfQrk7"
       }
     },
     "pdfFile": "guide.pdf"
