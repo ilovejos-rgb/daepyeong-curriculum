@@ -656,6 +656,16 @@ a { text-decoration: none; color: inherit; }
   text-transform: uppercase;
 }
 
+.req-card-details {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-500);
+  margin-top: 2px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--ink-200);
+  line-height: 1.5;
+}
+
 /* 학년별 탭 */
 .grades { background: var(--bg-cream); }
 
@@ -1019,35 +1029,6 @@ a { text-decoration: none; color: inherit; }
 .pdf-button::before {
   content: '📄';
   font-size: 16px;
-}
-
-/* 버튼 묶음 (PDF 등) */
-.modal-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 8px;
-}
-
-/* 유튜브 임베드 - 16:9 반응형 */
-.yt-embed {
-  position: relative;
-  width: 100%;
-  padding-bottom: 56.25%; /* 16:9 */
-  height: 0;
-  overflow: hidden;
-  border-radius: var(--radius-md);
-  background: var(--ink-100);
-  box-shadow: var(--shadow-sm);
-}
-
-.yt-embed iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
 }
 
 /* 푸터 */

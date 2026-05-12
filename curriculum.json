@@ -27,9 +27,19 @@
         "total": 18
       },
       {
-        "area": "사회",
-        "required": 6,
-        "total": 6
+        "area": "사회(역사/도덕 포함)",
+        "required": 14,
+        "total": 14,
+        "details": [
+          {
+            "label": "한국사",
+            "credits": 6
+          },
+          {
+            "label": "사회",
+            "credits": 8
+          }
+        ]
       },
       {
         "area": "과학",
@@ -1329,9 +1339,19 @@
         "total": 18
       },
       {
-        "area": "사회",
-        "required": 6,
-        "total": 6
+        "area": "사회(역사/도덕 포함)",
+        "required": 14,
+        "total": 14,
+        "details": [
+          {
+            "label": "한국사",
+            "credits": 6
+          },
+          {
+            "label": "사회",
+            "credits": 8
+          }
+        ]
       },
       {
         "area": "과학",
