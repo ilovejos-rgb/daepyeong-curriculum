@@ -257,7 +257,7 @@ function openModal(data) {
     }
   }
   // 시트 정보 없으면 JSON 정보 사용
-  else if (jsonInfo && (jsonInfo.intro || jsonInfo.page || jsonInfo.youtube)) {
+  else if (jsonInfo && (jsonInfo.intro || jsonInfo.page || jsonInfo.youtube || jsonInfo.pdf_file)) {
     if (jsonInfo.intro) {
       body += sectionHtml('한 줄 소개', jsonInfo.intro);
     }
@@ -267,6 +267,9 @@ function openModal(data) {
         .replace('https://www.youtube.com/watch?v=', 'https://www.youtube.com/embed/')
         .replace(/[?&]si=[\w-]+/, '');
       body += `<div class="youtube-embed"><iframe src="${escapeAttr(embedUrl)}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`;
+    }
+    if (jsonInfo.pdf_file) {
+      body += `<a href="${escapeAttr(jsonInfo.pdf_file)}" target="_blank" rel="noopener" class="pdf-button">선택과목 안내서 보기</a>`;
     }
     if (jsonInfo.page && pdfFile) {
       // PDF의 특정 페이지로 이동
