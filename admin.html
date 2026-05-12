@@ -532,7 +532,7 @@
       <div class="admin-actions">
         <a href="index.html" class="btn btn-secondary">사이트 보기</a>
         <button class="btn btn-danger" id="logoutBtn">로그아웃</button>
-        <button class="btn btn-primary" id="saveBtn">저장 (JSON 다운로드)</button>
+        <button class="btn btn-primary" id="saveBtn">저장 (사이트 반영)</button>
       </div>
     </div>
 
@@ -541,6 +541,7 @@
       <button class="mode-tab active" data-mode="types">선택과목 유형 정리</button>
       <button class="mode-tab" data-mode="info">과목 안내·PDF·유튜브</button>
       <button class="mode-tab" data-mode="pdf">PDF 설정</button>
+      <button class="mode-tab" data-mode="github">GitHub 연동</button>
     </div>
 
     <!-- 모드별 안내 -->
@@ -556,6 +557,11 @@
     <div class="info-box" id="modeInfoPdf" style="display: none;">
       <strong>PDF 설정</strong>
       과목 안내서 PDF 파일의 경로를 설정합니다. PDF 파일을 GitHub 저장소에 같이 업로드한 후 파일명을 적어주세요.
+    </div>
+    <div class="info-box" id="modeInfoGithub" style="display: none;">
+      <strong>GitHub 연동 (자동 저장)</strong>
+      여기에 GitHub Personal Access Token을 입력하면, 이제부터 "저장" 버튼을 누르면 GitHub에 자동으로 업로드됩니다.
+      따로 JSON 파일을 다운받아 올리지 않아도 돼요. (브라우저에만 저장되며 다른 사람에게 노출되지 않습니다)
     </div>
 
     <div class="year-tabs" id="yearTabsWrap" role="tablist">
@@ -665,8 +671,9 @@
           document.getElementById('modeInfoTypes').style.display = currentMode === 'types' ? 'block' : 'none';
           document.getElementById('modeInfoInfo').style.display = currentMode === 'info' ? 'block' : 'none';
           document.getElementById('modeInfoPdf').style.display = currentMode === 'pdf' ? 'block' : 'none';
-          // 년도 탭은 PDF 모드일 때 숨김
-          document.getElementById('yearTabsWrap').style.display = currentMode === 'pdf' ? 'none' : 'inline-flex';
+          document.getElementById('modeInfoGithub').style.display = currentMode === 'github' ? 'block' : 'none';
+          // 년도 탭은 PDF/GitHub 모드일 때 숨김
+          document.getElementById('yearTabsWrap').style.display = (currentMode === 'pdf' || currentMode === 'github') ? 'none' : 'inline-flex';
           render();
         });
       });
@@ -688,6 +695,7 @@
       if (currentMode === 'types') renderTypes();
       else if (currentMode === 'info') renderInfo();
       else if (currentMode === 'pdf') renderPdf();
+      else if (currentMode === 'github') renderGithub();
     }
 
     // ===== 모드 1: 선택과목 유형 정리 (기존) =====
@@ -966,6 +974,196 @@
       });
     }
 
+    // ===== 모드 4: GitHub 연동 설정 =====
+    function renderGithub() {
+      const editArea = document.getElementById('editArea');
+      const statsEl = document.getElementById('stats');
+      statsEl.innerHTML = '';
+
+      const config = getGithubConfig();
+      const isConfigured = !!(config.owner && config.repo && config.token);
+
+      editArea.innerHTML = `
+        <div class="pdf-config">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;">
+            <span style="font-size:13px;font-weight:700;color:${isConfigured ? 'var(--green-700)' : '#b91c1c'};">
+              ${isConfigured ? '✓ 연동 완료' : '✗ 연동 안 됨'}
+            </span>
+            ${isConfigured ? `<span style="font-size:12px;color:var(--ink-500);">${escapeHtml(config.owner)}/${escapeHtml(config.repo)}</span>` : ''}
+          </div>
+
+          <label>GitHub 사용자명 (Owner)</label>
+          <input type="text" class="info-input" id="ghOwner"
+                 placeholder="예: ilovejos-rgb"
+                 value="${escapeAttr(config.owner || '')}">
+          <p class="pdf-help">GitHub 저장소 주소에서 사용자명 부분. 예: <code>github.com/<strong>ilovejos-rgb</strong>/daepyeong-curriculum</code></p>
+
+          <label style="margin-top: 20px;">저장소 이름 (Repository)</label>
+          <input type="text" class="info-input" id="ghRepo"
+                 placeholder="예: daepyeong-curriculum"
+                 value="${escapeAttr(config.repo || '')}">
+
+          <label style="margin-top: 20px;">브랜치 (보통 main)</label>
+          <input type="text" class="info-input" id="ghBranch"
+                 placeholder="main"
+                 value="${escapeAttr(config.branch || 'main')}">
+
+          <label style="margin-top: 20px;">Personal Access Token</label>
+          <input type="password" class="info-input" id="ghToken"
+                 placeholder="ghp_... 또는 github_pat_..."
+                 value="${escapeAttr(config.token || '')}">
+          <p class="pdf-help">
+            <strong>Token이 없으면 발급받아야 해요:</strong><br>
+            1. <code>github.com</code> 로그인 → 우측 상단 프로필 클릭 → <strong>Settings</strong><br>
+            2. 좌측 맨 아래 <strong>Developer settings</strong> 클릭<br>
+            3. <strong>Personal access tokens</strong> → <strong>Tokens (classic)</strong> 선택<br>
+            4. <strong>Generate new token (classic)</strong> 클릭<br>
+            5. Note에 "대평고 사이트 관리자" 같은 이름 입력<br>
+            6. Expiration은 <strong>No expiration</strong> 또는 원하는 기간<br>
+            7. Scopes에서 <strong>repo</strong> 항목 전체 체크<br>
+            8. 맨 아래 <strong>Generate token</strong> 클릭<br>
+            9. 표시되는 <code>ghp_...</code> 토큰을 복사해서 위 칸에 붙여넣기<br><br>
+            ⚠️ 토큰은 발급 직후에만 보입니다. 페이지를 닫으면 다시 못 봐요. 분실 시 다시 발급해야 해요.<br>
+            🔒 입력한 토큰은 이 브라우저에만 저장됩니다 (localStorage).
+          </p>
+
+          <div style="margin-top: 28px; display: flex; gap: 8px; flex-wrap: wrap;">
+            <button class="btn btn-primary" id="ghSaveConfig">설정 저장</button>
+            <button class="btn btn-secondary" id="ghTestConfig">연결 테스트</button>
+            <button class="btn btn-danger" id="ghClearConfig">설정 삭제</button>
+          </div>
+          <div id="ghStatus" style="margin-top: 12px; font-size: 13px; min-height: 20px;"></div>
+        </div>
+      `;
+
+      document.getElementById('ghSaveConfig').addEventListener('click', () => {
+        const cfg = {
+          owner: document.getElementById('ghOwner').value.trim(),
+          repo: document.getElementById('ghRepo').value.trim(),
+          branch: document.getElementById('ghBranch').value.trim() || 'main',
+          token: document.getElementById('ghToken').value.trim(),
+        };
+        if (!cfg.owner || !cfg.repo || !cfg.token) {
+          showGhStatus('사용자명, 저장소, 토큰을 모두 입력해주세요.', 'error');
+          return;
+        }
+        localStorage.setItem('gh_config', JSON.stringify(cfg));
+        showGhStatus('설정이 저장됐습니다. 이제 "저장" 버튼을 누르면 자동으로 GitHub에 업로드됩니다.', 'ok');
+        // 화면 다시 그리기
+        setTimeout(renderGithub, 1500);
+      });
+
+      document.getElementById('ghTestConfig').addEventListener('click', async () => {
+        const cfg = {
+          owner: document.getElementById('ghOwner').value.trim(),
+          repo: document.getElementById('ghRepo').value.trim(),
+          branch: document.getElementById('ghBranch').value.trim() || 'main',
+          token: document.getElementById('ghToken').value.trim(),
+        };
+        if (!cfg.owner || !cfg.repo || !cfg.token) {
+          showGhStatus('사용자명, 저장소, 토큰을 모두 입력해주세요.', 'error');
+          return;
+        }
+        showGhStatus('테스트 중...', 'info');
+        try {
+          const res = await fetch(`https://api.github.com/repos/${cfg.owner}/${cfg.repo}`, {
+            headers: {
+              'Authorization': `Bearer ${cfg.token}`,
+              'Accept': 'application/vnd.github+json',
+            }
+          });
+          if (res.ok) {
+            const data = await res.json();
+            showGhStatus(`✓ 연결 성공! 저장소: ${data.full_name}, 기본 브랜치: ${data.default_branch}`, 'ok');
+          } else if (res.status === 401) {
+            showGhStatus('✗ 토큰이 잘못됐어요. 다시 발급받으세요.', 'error');
+          } else if (res.status === 404) {
+            showGhStatus('✗ 저장소를 찾을 수 없어요. 사용자명과 저장소 이름을 확인하세요.', 'error');
+          } else {
+            showGhStatus(`✗ 오류: HTTP ${res.status}`, 'error');
+          }
+        } catch (err) {
+          showGhStatus('✗ 네트워크 오류: ' + err.message, 'error');
+        }
+      });
+
+      document.getElementById('ghClearConfig').addEventListener('click', () => {
+        if (confirm('GitHub 연동 설정을 삭제할까요? (저장된 토큰이 사라집니다)')) {
+          localStorage.removeItem('gh_config');
+          renderGithub();
+        }
+      });
+    }
+
+    function getGithubConfig() {
+      try {
+        return JSON.parse(localStorage.getItem('gh_config') || '{}');
+      } catch {
+        return {};
+      }
+    }
+
+    function showGhStatus(msg, type) {
+      const el = document.getElementById('ghStatus');
+      if (!el) return;
+      el.textContent = msg;
+      el.style.color = type === 'ok' ? 'var(--green-700)' : type === 'error' ? '#b91c1c' : 'var(--ink-500)';
+    }
+
+    // ===== GitHub에 curriculum.json 업로드 =====
+    async function uploadToGithub(jsonContent) {
+      const cfg = getGithubConfig();
+      if (!cfg.owner || !cfg.repo || !cfg.token) {
+        throw new Error('GitHub 연동이 설정되지 않았어요. "GitHub 연동" 탭에서 설정해주세요.');
+      }
+      const branch = cfg.branch || 'main';
+      const apiBase = `https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/curriculum.json`;
+      const headers = {
+        'Authorization': `Bearer ${cfg.token}`,
+        'Accept': 'application/vnd.github+json',
+      };
+
+      // 1) 현재 파일의 SHA 가져오기 (덮어쓰기에 필요)
+      let sha = null;
+      try {
+        const getRes = await fetch(`${apiBase}?ref=${branch}`, { headers });
+        if (getRes.ok) {
+          const data = await getRes.json();
+          sha = data.sha;
+        }
+      } catch (e) {
+        // 파일이 없으면 sha는 null로 두고 새로 만듦
+      }
+
+      // 2) UTF-8 안전한 base64 인코딩
+      const utf8Bytes = new TextEncoder().encode(jsonContent);
+      let binary = '';
+      for (let i = 0; i < utf8Bytes.length; i++) {
+        binary += String.fromCharCode(utf8Bytes[i]);
+      }
+      const base64Content = btoa(binary);
+
+      // 3) 업로드
+      const body = {
+        message: 'admin: update curriculum.json',
+        content: base64Content,
+        branch: branch,
+      };
+      if (sha) body.sha = sha;
+
+      const putRes = await fetch(apiBase, {
+        method: 'PUT',
+        headers: { ...headers, 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+
+      if (!putRes.ok) {
+        const errText = await putRes.text();
+        throw new Error(`업로드 실패 (HTTP ${putRes.status}): ${errText.slice(0, 200)}`);
+      }
+      return await putRes.json();
+    }
+
     function updateStats() {
       const yd = curriculumData[currentYear];
       const groups = yd.electiveGroups.filter(g => g.types.length >= 2);
@@ -997,9 +1195,52 @@
       `;
     }
 
-    // ===== 저장 (JSON 다운로드) =====
-    document.getElementById('saveBtn').addEventListener('click', () => {
+    // ===== 저장 =====
+    document.getElementById('saveBtn').addEventListener('click', async () => {
       const json = JSON.stringify(curriculumData, null, 2);
+      const cfg = getGithubConfig();
+      const hasGithub = !!(cfg.owner && cfg.repo && cfg.token);
+
+      if (hasGithub) {
+        // GitHub 자동 업로드 모드
+        const btn = document.getElementById('saveBtn');
+        const originalText = btn.textContent;
+        btn.disabled = true;
+        btn.textContent = '업로드 중...';
+        btn.style.opacity = '0.7';
+
+        try {
+          const result = await uploadToGithub(json);
+          btn.textContent = '✓ 업로드 완료';
+          btn.style.background = 'var(--green-700)';
+          // 성공 모달 표시
+          showSaveSuccessModal(true, result);
+          setTimeout(() => {
+            btn.textContent = originalText;
+            btn.disabled = false;
+            btn.style.opacity = '';
+            btn.style.background = '';
+          }, 3000);
+        } catch (err) {
+          btn.textContent = '✗ 실패';
+          btn.style.background = '#b91c1c';
+          alert('업로드 실패:\n\n' + err.message + '\n\n대신 JSON 파일을 다운로드합니다.');
+          downloadJson(json);
+          setTimeout(() => {
+            btn.textContent = originalText;
+            btn.disabled = false;
+            btn.style.opacity = '';
+            btn.style.background = '';
+          }, 2500);
+        }
+      } else {
+        // 기존 동작: JSON 다운로드
+        downloadJson(json);
+        showSaveSuccessModal(false);
+      }
+    });
+
+    function downloadJson(json) {
       const blob = new Blob([json], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
@@ -1009,8 +1250,48 @@
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
-      document.getElementById('saveModal').classList.add('active');
-    });
+    }
+
+    function showSaveSuccessModal(isAuto, result) {
+      const modal = document.getElementById('saveModal');
+      const inner = modal.querySelector('.save-modal-card');
+      if (isAuto) {
+        const cfg = getGithubConfig();
+        const url = `https://${cfg.owner}.github.io/${cfg.repo}/`;
+        inner.innerHTML = `
+          <h3>✓ GitHub에 자동 업로드 완료!</h3>
+          <p>변경 사항이 GitHub 저장소에 반영됐습니다. 잠시 후 사이트에 자동 반영돼요.</p>
+          <ol>
+            <li><strong>30초~1분</strong> 정도 기다리기 (GitHub Pages 빌드)</li>
+            <li>사이트에서 <strong>강제새로고침</strong> (Ctrl/Cmd + Shift + R)</li>
+          </ol>
+          <p style="font-size:12px;color:var(--ink-500);">사이트 주소: <code>${url}</code></p>
+          <div style="text-align: right;">
+            <button class="btn btn-primary" onclick="document.getElementById('saveModal').classList.remove('active')">확인</button>
+          </div>
+        `;
+      } else {
+        inner.innerHTML = `
+          <h3>JSON 파일이 다운로드되었어요</h3>
+          <p>다음 단계로 사이트에 반영하세요:</p>
+          <ol>
+            <li>다운로드 폴더에서 <code>curriculum.json</code> 확인</li>
+            <li>GitHub 저장소 → 기존 <code>curriculum.json</code> 파일 클릭</li>
+            <li>연필 아이콘 → 전체 삭제 후, 새 파일 내용 붙여넣기</li>
+            <li>또는 <strong>Add file → Upload files</strong>로 파일 끌어다 놓기 (덮어쓰기)</li>
+            <li>아래 <strong>Commit changes</strong> 클릭</li>
+            <li>1~2분 후 사이트 강제새로고침 (Ctrl/Cmd + Shift + R)</li>
+          </ol>
+          <p style="font-size:12px;color:var(--ink-500);margin-top:12px;">
+            💡 매번 다운로드/업로드가 번거로우면 <strong>"GitHub 연동"</strong> 탭에서 토큰을 설정하세요. 자동 업로드됩니다.
+          </p>
+          <div style="text-align: right;">
+            <button class="btn btn-primary" onclick="document.getElementById('saveModal').classList.remove('active')">확인</button>
+          </div>
+        `;
+      }
+      modal.classList.add('active');
+    }
 
     // ===== 유틸 =====
     function escapeHtml(s) {
