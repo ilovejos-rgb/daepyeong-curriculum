@@ -135,6 +135,75 @@
       font-size: 14px;
     }
 
+    /* 섹션 구분 */
+    .res-section-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--lavender-600);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      margin-top: 40px;
+    }
+    .res-section-label:first-child {
+      margin-top: 0;
+    }
+
+    /* 링크 카드 */
+    .res-link-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .res-link-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 20px;
+      background: var(--bg-white);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      text-decoration: none;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+    }
+    .res-link-card:hover {
+      border-color: var(--green-200);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+    .res-link-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .res-link-icon.blue { background: #e8f4fd; }
+    .res-link-icon.orange { background: #fef3e2; }
+    .res-link-icon.purple { background: var(--lavender-50); }
+    .res-link-icon.green { background: var(--green-50); }
+    .res-link-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--ink-900);
+      line-height: 1.4;
+    }
+    .res-link-sub {
+      font-size: 11px;
+      color: var(--ink-500);
+      margin-top: 2px;
+    }
+
+    @media (max-width: 600px) {
+      .res-link-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     /* 반응형 */
     @media (max-width: 600px) {
       .res-hero { padding: 48px 20px 36px; }
@@ -195,6 +264,82 @@
       </div>
 
       <!-- 자료 추가 시 위 구조를 복사해서 파일명/제목만 바꾸면 됩니다 -->
+
+      <!-- 참고 사이트 -->
+      <div class="res-section-label">📌 참고 사이트</div>
+
+      <div class="res-link-grid">
+        <a href="https://more.goe.go.kr/hagjeomje/subList/30300002197" target="_blank" rel="noopener" class="res-link-card">
+          <div class="res-link-icon blue">🎓</div>
+          <div>
+            <div class="res-link-title">고교학점제 안내</div>
+            <div class="res-link-sub">경기고교학점제 지원센터</div>
+          </div>
+        </a>
+        <a href="https://more.goe.go.kr/hagjeomje/subList/30300002205" target="_blank" rel="noopener" class="res-link-card">
+          <div class="res-link-icon blue">📚</div>
+          <div>
+            <div class="res-link-title">고등학교 과목 안내</div>
+            <div class="res-link-sub">경기고교학점제 지원센터</div>
+          </div>
+        </a>
+        <a href="https://www.jinhak.or.kr/subList/20000000271?pmode=detail&nttSeq=20000020844" target="_blank" rel="noopener" class="res-link-card">
+          <div class="res-link-icon purple">📖</div>
+          <div>
+            <div class="res-link-title">선택과목 안내서</div>
+            <div class="res-link-sub">서울진로진학정보센터 · 2015/2022 개정</div>
+          </div>
+        </a>
+        <a href="https://more.goe.go.kr/hagjeomje/subList/30300001175" target="_blank" rel="noopener" class="res-link-card">
+          <div class="res-link-icon blue">🤝</div>
+          <div>
+            <div class="res-link-title">공동교육과정 안내</div>
+            <div class="res-link-sub">경기고교학점제 지원센터</div>
+          </div>
+        </a>
+        <a href="https://www.jinhak.or.kr/subList/20000000284" target="_blank" rel="noopener" class="res-link-card">
+          <div class="res-link-icon purple">📝</div>
+          <div>
+            <div class="res-link-title">학생부종합전형 가이드북</div>
+            <div class="res-link-sub">서울진로진학정보센터</div>
+          </div>
+        </a>
+        <a href="https://www.adiga.kr/man/inf/mainView.do?menuId=PCMANINF1000" target="_blank" rel="noopener" class="res-link-card">
+          <div class="res-link-icon orange">🏫</div>
+          <div>
+            <div class="res-link-title">학과 및 전공정보</div>
+            <div class="res-link-sub">대입정보포털</div>
+          </div>
+        </a>
+        <a href="https://www.jinhak.or.kr/subList/20000000222" target="_blank" rel="noopener" class="res-link-card">
+          <div class="res-link-icon green">🧭</div>
+          <div>
+            <div class="res-link-title">진로 종합 검사</div>
+            <div class="res-link-sub">서울진로진학정보센터</div>
+          </div>
+        </a>
+        <a href="https://www.togetherschool.go.kr/consulting/consultingReqMain" target="_blank" rel="noopener" class="res-link-card">
+          <div class="res-link-icon green">💬</div>
+          <div>
+            <div class="res-link-title">진로학업설계 컨설팅</div>
+            <div class="res-link-sub">함께학교</div>
+          </div>
+        </a>
+        <a href="https://www.work24.go.kr/cm/main.do" target="_blank" rel="noopener" class="res-link-card">
+          <div class="res-link-icon orange">💼</div>
+          <div>
+            <div class="res-link-title">직업 정보 탐색 (워크넷)</div>
+            <div class="res-link-sub">고용24</div>
+          </div>
+        </a>
+        <a href="https://www.career.go.kr/cloud/w/main/home" target="_blank" rel="noopener" class="res-link-card">
+          <div class="res-link-icon orange">🔍</div>
+          <div>
+            <div class="res-link-title">직업 정보 탐색 (커리어넷)</div>
+            <div class="res-link-sub">진로정보망 커리어넷</div>
+          </div>
+        </a>
+      </div>
 
     </div>
   </section>
