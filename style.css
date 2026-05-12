@@ -1021,6 +1021,35 @@ a { text-decoration: none; color: inherit; }
   font-size: 16px;
 }
 
+/* 버튼 묶음 (PDF 등) */
+.modal-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+/* 유튜브 임베드 - 16:9 반응형 */
+.yt-embed {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background: var(--ink-100);
+  box-shadow: var(--shadow-sm);
+}
+
+.yt-embed iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
 /* 푸터 */
 .site-footer {
   background: var(--green-900);

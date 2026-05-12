@@ -372,7 +372,7 @@
     }
     .info-subject {
       display: grid;
-      grid-template-columns: 180px 1fr 120px;
+      grid-template-columns: 160px 1fr 100px 1fr;
       gap: 12px;
       align-items: center;
       padding: 10px 0;
@@ -539,7 +539,7 @@
     <!-- 모드 탭 -->
     <div class="mode-tabs">
       <button class="mode-tab active" data-mode="types">선택과목 유형 정리</button>
-      <button class="mode-tab" data-mode="info">과목 안내·PDF 연결</button>
+      <button class="mode-tab" data-mode="info">과목 안내·PDF·유튜브</button>
       <button class="mode-tab" data-mode="pdf">PDF 설정</button>
     </div>
 
@@ -549,8 +549,8 @@
       편성표상 한 묶음에 여러 유형이 표시된 선택군의 과목들이에요. 과목별로 실제 유형 하나를 골라주세요.
     </div>
     <div class="info-box" id="modeInfoInfo" style="display: none;">
-      <strong>과목 안내·PDF 연결</strong>
-      각 과목의 한 줄 소개와 PDF 안내서의 시작 페이지 번호를 입력하세요.
+      <strong>과목 안내·PDF·유튜브 연결</strong>
+      각 과목의 한 줄 소개, PDF 안내서 시작 페이지 번호, 유튜브 영상 URL을 입력하세요.
       과목 카드 클릭 시 학생들에게 표시됩니다.
     </div>
     <div class="info-box" id="modeInfoPdf" style="display: none;">
@@ -822,12 +822,16 @@
         const info = yd.subjectInfo[it.name];
         return info && info.page;
       }).length;
+      const ytDone = unique.filter(it => {
+        const info = yd.subjectInfo[it.name];
+        return info && info.youtube && info.youtube.trim();
+      }).length;
 
       statsEl.innerHTML = `
         <div class="stat-pill">총 과목 <strong>${total}</strong>개</div>
         <div class="stat-pill">소개 작성 <strong>${done}</strong>개</div>
         <div class="stat-pill">PDF 페이지 <strong>${pdfDone}</strong>개</div>
-        <div class="stat-pill ${total - done > 0 ? 'warn' : ''}">미작성 <strong>${total - done}</strong>개</div>
+        <div class="stat-pill">유튜브 <strong>${ytDone}</strong>개</div>
       `;
 
       // HTML 생성
@@ -863,6 +867,7 @@
             const n = parseInt(e.target.value, 10);
             info.page = isNaN(n) ? null : n;
           }
+          else if (field === 'youtube') info.youtube = e.target.value.trim();
           updateInfoStats();
         });
       });
@@ -871,6 +876,7 @@
     function infoSubjectRowHtml(item, info) {
       const intro = info?.intro || '';
       const page = info?.page || '';
+      const youtube = info?.youtube || '';
       return `
         <div class="info-subject">
           <div>
@@ -886,6 +892,10 @@
                  value="${page}"
                  min="1"
                  data-name="${escapeAttr(item.name)}" data-field="page">
+          <input type="text" class="info-input"
+                 placeholder="유튜브 URL (https://youtu.be/... 또는 https://www.youtube.com/watch?v=...)"
+                 value="${escapeAttr(youtube)}"
+                 data-name="${escapeAttr(item.name)}" data-field="youtube">
         </div>
       `;
     }
@@ -905,11 +915,15 @@
         const info = yd.subjectInfo[n];
         return info && info.page;
       }).length;
+      const ytDone = [...allNames].filter(n => {
+        const info = yd.subjectInfo[n];
+        return info && info.youtube && info.youtube.trim();
+      }).length;
       document.getElementById('stats').innerHTML = `
         <div class="stat-pill">총 과목 <strong>${total}</strong>개</div>
         <div class="stat-pill">소개 작성 <strong>${done}</strong>개</div>
         <div class="stat-pill">PDF 페이지 <strong>${pdfDone}</strong>개</div>
-        <div class="stat-pill ${total - done > 0 ? 'warn' : ''}">미작성 <strong>${total - done}</strong>개</div>
+        <div class="stat-pill">유튜브 <strong>${ytDone}</strong>개</div>
       `;
     }
 
