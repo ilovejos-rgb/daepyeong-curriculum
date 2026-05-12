@@ -515,9 +515,9 @@ a { text-decoration: none; color: inherit; }
 }
 
 /* 섹션 공통 */
-.overview, .requirements, .grades { padding: 64px 24px; }
+.overview, .requirements, .grades, .subject-types { padding: 64px 24px; }
 
-.overview-inner, .requirements-inner, .grades-inner {
+.overview-inner, .requirements-inner, .grades-inner, .subject-types-inner {
   max-width: 1080px;
   margin: 0 auto;
 }
@@ -686,6 +686,109 @@ a { text-decoration: none; color: inherit; }
   letter-spacing: 0.04em;
   color: var(--lavender-600);
   text-transform: uppercase;
+}
+
+/* 과목 유형 안내 */
+.subject-types {
+  background: var(--bg-white);
+}
+
+.stype-table-wrap {
+  overflow-x: auto;
+  margin-top: 24px;
+}
+
+.stype-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--ink-100);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.stype-table thead {
+  background: var(--green-50);
+}
+
+.stype-table th {
+  padding: 14px 18px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink-700);
+  text-align: left;
+  border-bottom: 1px solid var(--ink-100);
+}
+
+.stype-th-type { width: 120px; }
+.stype-th-grade { width: 80px; text-align: center; }
+
+.stype-table td {
+  padding: 16px 18px;
+  font-size: 14px;
+  color: var(--ink-700);
+  line-height: 1.6;
+  border-bottom: 1px solid var(--ink-100);
+  vertical-align: middle;
+}
+
+.stype-table tr:last-child td {
+  border-bottom: none;
+}
+
+.stype-grade-cell {
+  text-align: center;
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--green-700);
+}
+
+.stype-grade-note {
+  color: #c00;
+  font-weight: 800;
+}
+
+.stype-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.stype-common {
+  background: var(--green-100);
+  color: var(--green-800);
+}
+
+.stype-general {
+  background: #e8f4fd;
+  color: #1a73c7;
+}
+
+.stype-career {
+  background: #fef3e2;
+  color: #c77d1a;
+}
+
+.stype-fusion {
+  background: var(--lavender-50);
+  color: var(--lavender-700);
+}
+
+.stype-footnote {
+  margin-top: 16px;
+  font-size: 12px;
+  color: var(--ink-500);
+  line-height: 1.7;
+  padding: 12px 16px;
+  background: var(--green-50);
+  border-radius: var(--radius-sm);
+}
+
+.stype-footnote strong {
+  color: var(--ink-700);
 }
 
 /* 학년별 탭 */
@@ -1127,7 +1230,7 @@ a { text-decoration: none; color: inherit; }
   }
   .year-cards { grid-template-columns: 1fr; }
 
-  .overview, .requirements, .grades { padding: 44px 20px; }
+  .overview, .requirements, .grades, .subject-types { padding: 44px 20px; }
 
   .credit-summary {
     grid-template-columns: 1fr 1fr;
