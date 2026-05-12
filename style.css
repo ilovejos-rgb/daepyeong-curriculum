@@ -405,6 +405,38 @@ a { text-decoration: none; color: inherit; }
 
 .year-card:hover .year-arrow { transform: translateX(6px); }
 
+/* 하단 링크 (참고자료, Q&A) */
+.sub-links {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.sub-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 22px;
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.20);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.sub-link:hover {
+  background: rgba(255, 255, 255, 0.20);
+  border-color: rgba(255, 255, 255, 0.40);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
 .hero-footer {
   position: absolute;
   bottom: 24px;
