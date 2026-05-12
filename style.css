@@ -156,19 +156,24 @@ a { text-decoration: none; color: inherit; }
   text-align: left;
 }
 
-/* 로고 애니메이션 - 부드러운 부유 + 호버 시 회전 */
+/* 로고 wrapper - 부유 애니메이션만 담당 */
+.hero-logo-wrap {
+  display: inline-block;
+  animation: float 4s ease-in-out infinite;
+  cursor: pointer;
+}
+
+/* 로고 이미지 - 호버 회전·확대만 담당 */
 .hero-logo-animated {
   width: 120px;
   height: 120px;
   filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.25));
-  animation: float 4s ease-in-out infinite;
-  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-  cursor: pointer;
+  transition: transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: block;
 }
 
-.hero-logo-animated:hover {
-  animation-play-state: paused;
-  transform: rotate(360deg) scale(1.08);
+.hero-logo-wrap:hover .hero-logo-animated {
+  transform: rotate(360deg) scale(1.1);
 }
 
 @keyframes float {
@@ -261,12 +266,13 @@ a { text-decoration: none; color: inherit; }
 
 .hero-title {
   font-family: var(--font-display);
-  font-size: clamp(30px, 5vw, 44px);
+  font-size: clamp(24px, 3.6vw, 36px);
   font-weight: 800;
-  line-height: 1.15;
+  line-height: 1.2;
   letter-spacing: -0.035em;
   color: #fff;
   margin-bottom: 0;
+  white-space: nowrap;
 }
 
 .hero-subtitle {
@@ -1061,11 +1067,12 @@ a { text-decoration: none; color: inherit; }
     text-align: center;
   }
   .hero-logo-animated {
-    width: 96px;
-    height: 96px;
+    width: 88px;
+    height: 88px;
   }
   .hero-title {
-    font-size: clamp(28px, 7vw, 38px);
+    font-size: clamp(20px, 5.2vw, 28px);
+    white-space: nowrap;
   }
   .year-cards { grid-template-columns: 1fr; }
 

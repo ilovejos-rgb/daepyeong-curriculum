@@ -225,24 +225,49 @@ function openModal(data) {
     <span class="modal-meta-tag tag-semester">${data.semester}</span>
   `;
 
-  // 시트에서 정보 가져오기
-  const key = `${YEAR}::${data.name}`;
-  const info = subjectInfoMap[key];
+  // 1) 시트에서 가져온 정보 (구글 시트 연동 시)
+  const sheetKey = `${YEAR}::${data.name}`;
+  const sheetInfo = subjectInfoMap[sheetKey];
 
-  if (info) {
-    let body = '';
-    if (info.intro) body += sectionHtml('한 줄 소개', info.intro);
-    if (info.content) body += sectionHtml('학습 내용', info.content);
-    if (info.eval) body += sectionHtml('평가 방식', info.eval);
-    if (info.target) body += sectionHtml('추천 대상', info.target);
-    if (info.teacher) body += `<div class="modal-section"><div class="modal-section-content" style="font-size:13px; color: var(--ink-500);">담당: ${escapeHtml(info.teacher)}</div></div>`;
-    if (info.pdf) {
-      body += `<a href="${escapeAttr(info.pdf)}" target="_blank" rel="noopener" class="pdf-button">선택과목 안내서 보기</a>`;
+  // 2) JSON에 저장된 정보 (관리자 페이지에서 입력)
+  const jsonInfo = (curriculumData.subjectInfo || {})[data.name];
+
+  // 3) 학교 공통 PDF 파일
+  const pdfFile = curriculumData.pdfFile || '';
+
+  let body = '';
+
+  // 시트 정보 우선
+  if (sheetInfo) {
+    if (sheetInfo.intro) body += sectionHtml('한 줄 소개', sheetInfo.intro);
+    if (sheetInfo.content) body += sectionHtml('학습 내용', sheetInfo.content);
+    if (sheetInfo.eval) body += sectionHtml('평가 방식', sheetInfo.eval);
+    if (sheetInfo.target) body += sectionHtml('추천 대상', sheetInfo.target);
+    if (sheetInfo.teacher) {
+      body += `<div class="modal-section"><div class="modal-section-content" style="font-size:13px; color: var(--ink-500);">담당: ${escapeHtml(sheetInfo.teacher)}</div></div>`;
     }
-    if (!body) body = emptyHtml();
-    bodyEl.innerHTML = body;
-  } else {
+    if (sheetInfo.pdf) {
+      body += `<a href="${escapeAttr(sheetInfo.pdf)}" target="_blank" rel="noopener" class="pdf-button">선택과목 안내서 보기</a>`;
+    }
+  }
+  // 시트 정보 없으면 JSON 정보 사용
+  else if (jsonInfo && (jsonInfo.intro || jsonInfo.page)) {
+    if (jsonInfo.intro) {
+      body += sectionHtml('한 줄 소개', jsonInfo.intro);
+    }
+    if (jsonInfo.page && pdfFile) {
+      // PDF의 특정 페이지로 이동
+      const pdfUrl = `${pdfFile}#page=${jsonInfo.page}`;
+      body += `<a href="${escapeAttr(pdfUrl)}" target="_blank" rel="noopener" class="pdf-button">선택과목 안내서 보기 (p.${jsonInfo.page})</a>`;
+    } else if (jsonInfo.page && !pdfFile) {
+      body += `<div class="modal-section"><div class="modal-section-content" style="font-size:12px; color: var(--ink-500);">PDF 안내서 p.${jsonInfo.page}</div></div>`;
+    }
+  }
+
+  if (!body) {
     bodyEl.innerHTML = emptyHtml();
+  } else {
+    bodyEl.innerHTML = body;
   }
 
   overlay.classList.add('active');

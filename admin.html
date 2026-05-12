@@ -306,6 +306,144 @@
     .stat-pill strong { color: var(--green-700); }
     .stat-pill.warn strong { color: #b91c1c; }
 
+    /* 모드 탭 */
+    .mode-tabs {
+      display: flex;
+      gap: 4px;
+      background: #fff;
+      border: 1px solid var(--ink-100);
+      padding: 5px;
+      border-radius: 12px;
+      margin-bottom: 18px;
+      box-shadow: var(--shadow-sm);
+      width: fit-content;
+      flex-wrap: wrap;
+    }
+    .mode-tab {
+      padding: 9px 18px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink-500);
+      border-radius: 8px;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+    .mode-tab:hover { color: var(--green-700); }
+    .mode-tab.active {
+      background: var(--green-700);
+      color: #fff;
+    }
+
+    /* 과목 안내 입력 카드 */
+    .info-group {
+      background: #fff;
+      border: 1px solid var(--ink-100);
+      border-radius: var(--radius-lg);
+      padding: 20px 24px;
+      margin-bottom: 14px;
+    }
+    .info-group-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px dashed var(--ink-100);
+      flex-wrap: wrap;
+    }
+    .info-group-area {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--green-900);
+      letter-spacing: -0.02em;
+    }
+    .info-group-meta {
+      font-size: 12px;
+      color: var(--ink-500);
+    }
+
+    .info-subjects {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .info-subject {
+      display: grid;
+      grid-template-columns: 180px 1fr 120px;
+      gap: 12px;
+      align-items: center;
+      padding: 10px 0;
+    }
+    .info-subject-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--ink-900);
+    }
+    .info-subject-name-sub {
+      display: block;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--ink-500);
+      margin-top: 2px;
+    }
+    .info-input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1.5px solid var(--ink-100);
+      border-radius: 8px;
+      font-size: 13px;
+      font-family: inherit;
+      background: var(--bg-cream);
+      transition: all 0.15s;
+      box-sizing: border-box;
+    }
+    .info-input:focus {
+      outline: none;
+      border-color: var(--green-600);
+      background: #fff;
+    }
+    .info-input::placeholder { color: var(--ink-300); }
+    .page-input {
+      text-align: center;
+    }
+
+    /* PDF 설정 화면 */
+    .pdf-config {
+      background: #fff;
+      border: 1px solid var(--ink-100);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      max-width: 700px;
+    }
+    .pdf-config label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--green-900);
+      margin-bottom: 6px;
+    }
+    .pdf-config .info-input {
+      font-size: 14px;
+      padding: 12px 14px;
+    }
+    .pdf-help {
+      font-size: 12px;
+      color: var(--ink-500);
+      line-height: 1.7;
+      margin-top: 8px;
+    }
+    .pdf-help code {
+      background: var(--bg-cream);
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      font-size: 11px;
+      color: var(--green-900);
+    }
+
     /* 저장 안내 모달 */
     .save-modal {
       position: fixed;
@@ -363,6 +501,10 @@
       .edit-radio-group {
         width: 100%;
       }
+      .info-subject {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
     }
   </style>
 </head>
@@ -384,8 +526,8 @@
   <div id="adminShell" class="admin-shell" style="display: none;">
     <div class="admin-header">
       <div>
-        <h1 class="admin-title">선택과목 유형 정리</h1>
-        <p class="admin-sub">유형이 여러 개로 잡힌 선택군 안의 과목별 유형을 지정합니다.</p>
+        <h1 class="admin-title">관리자 페이지</h1>
+        <p class="admin-sub" id="adminSub">선택과목 유형 및 안내 정보를 관리합니다.</p>
       </div>
       <div class="admin-actions">
         <a href="index.html" class="btn btn-secondary">사이트 보기</a>
@@ -394,14 +536,29 @@
       </div>
     </div>
 
-    <div class="info-box">
-      <strong>사용 방법</strong>
-      편성표상 한 묶음에 여러 유형이 표시된 선택군의 과목들이에요. 과목별로 실제 유형 하나를 골라주세요.
-      모두 정한 뒤 "저장" 버튼을 누르면 새 <code>curriculum.json</code> 파일이 다운로드됩니다.
-      이 파일을 GitHub의 같은 이름 파일에 덮어쓰면 사이트가 업데이트됩니다.
+    <!-- 모드 탭 -->
+    <div class="mode-tabs">
+      <button class="mode-tab active" data-mode="types">선택과목 유형 정리</button>
+      <button class="mode-tab" data-mode="info">과목 안내·PDF 연결</button>
+      <button class="mode-tab" data-mode="pdf">PDF 설정</button>
     </div>
 
-    <div class="year-tabs" role="tablist">
+    <!-- 모드별 안내 -->
+    <div class="info-box" id="modeInfoTypes">
+      <strong>선택과목 유형 정리</strong>
+      편성표상 한 묶음에 여러 유형이 표시된 선택군의 과목들이에요. 과목별로 실제 유형 하나를 골라주세요.
+    </div>
+    <div class="info-box" id="modeInfoInfo" style="display: none;">
+      <strong>과목 안내·PDF 연결</strong>
+      각 과목의 한 줄 소개와 PDF 안내서의 시작 페이지 번호를 입력하세요.
+      과목 카드 클릭 시 학생들에게 표시됩니다.
+    </div>
+    <div class="info-box" id="modeInfoPdf" style="display: none;">
+      <strong>PDF 설정</strong>
+      과목 안내서 PDF 파일의 경로를 설정합니다. PDF 파일을 GitHub 저장소에 같이 업로드한 후 파일명을 적어주세요.
+    </div>
+
+    <div class="year-tabs" id="yearTabsWrap" role="tablist">
       <button class="year-tab active" data-year="2026">2026 입학생</button>
       <button class="year-tab" data-year="2025">2025 입학생</button>
     </div>
@@ -439,8 +596,10 @@
     // ===== 상태 =====
     let curriculumData = null;        // 원본 JSON
     let currentYear = '2026';         // 현재 편집 중인 입학년도
+    let currentMode = 'types';        // 'types' | 'info' | 'pdf'
     // subjectTypes 형식: data[year].subjectTypes[과목명] = '진로선택'
-    // 사이트(app.js)는 그룹 types 대신 이걸 우선 봄
+    // subjectInfo 형식: data[year].subjectInfo[과목명] = { intro: '...', page: 12 }
+    // pdfFile 형식: data[year].pdfFile = 'course_guide.pdf'  (또는 https://...)
 
     // ===== 로그인 =====
     document.getElementById('loginBtn').addEventListener('click', tryLogin);
@@ -484,15 +643,33 @@
         return;
       }
 
-      // 각 년도 데이터에 subjectTypes 객체 보장
+      // 각 년도 데이터에 subjectTypes, subjectInfo, pdfFile 보장
       for (const y of ['2025', '2026']) {
-        if (!curriculumData[y].subjectTypes) {
-          curriculumData[y].subjectTypes = {};
-        }
+        if (!curriculumData[y].subjectTypes) curriculumData[y].subjectTypes = {};
+        if (!curriculumData[y].subjectInfo) curriculumData[y].subjectInfo = {};
+        if (typeof curriculumData[y].pdfFile === 'undefined') curriculumData[y].pdfFile = '';
       }
 
       setupYearTabs();
+      setupModeTabs();
       render();
+    }
+
+    function setupModeTabs() {
+      document.querySelectorAll('.mode-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+          document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+          currentMode = tab.dataset.mode;
+          // 안내 박스 전환
+          document.getElementById('modeInfoTypes').style.display = currentMode === 'types' ? 'block' : 'none';
+          document.getElementById('modeInfoInfo').style.display = currentMode === 'info' ? 'block' : 'none';
+          document.getElementById('modeInfoPdf').style.display = currentMode === 'pdf' ? 'block' : 'none';
+          // 년도 탭은 PDF 모드일 때 숨김
+          document.getElementById('yearTabsWrap').style.display = currentMode === 'pdf' ? 'none' : 'inline-flex';
+          render();
+        });
+      });
     }
 
     function setupYearTabs() {
@@ -506,8 +683,15 @@
       });
     }
 
-    // ===== 편집 화면 렌더링 =====
+    // ===== 메인 렌더 - 모드별 분기 =====
     function render() {
+      if (currentMode === 'types') renderTypes();
+      else if (currentMode === 'info') renderInfo();
+      else if (currentMode === 'pdf') renderPdf();
+    }
+
+    // ===== 모드 1: 선택과목 유형 정리 (기존) =====
+    function renderTypes() {
       const yd = curriculumData[currentYear];
       const editArea = document.getElementById('editArea');
       const statsEl = document.getElementById('stats');
@@ -563,6 +747,208 @@
           // 통계만 빠르게 갱신
           updateStats();
         });
+      });
+    }
+
+    // ===== 모드 2: 과목 안내·PDF 연결 =====
+    function renderInfo() {
+      const yd = curriculumData[currentYear];
+      const editArea = document.getElementById('editArea');
+      const statsEl = document.getElementById('stats');
+
+      // 모든 과목 수집: 학교지정 + 선택군 (중복 제거)
+      // 출력 순서: 학년별 → 학교지정 먼저, 선택군 다음 → 교과군 → 과목명
+      const items = [];
+
+      // 학교지정
+      yd.fixedSubjects.forEach(s => {
+        s.semesters.forEach(sem => {
+          items.push({
+            grade: sem.grade,
+            semester: sem.semester,
+            area: s.area,
+            name: s.name,
+            category: '학교지정',
+            credit: sem.credits,
+          });
+        });
+      });
+
+      // 선택군
+      yd.electiveGroups.forEach(g => {
+        g.subjects.forEach(name => {
+          const semText = g.semesters.map(s => s.semester).join('·');
+          items.push({
+            grade: g.grade,
+            semester: semText,
+            area: g.area,
+            name: name,
+            category: `${g.grade}학년 선택 (택${g.selectCount})`,
+            credit: g.creditsPerSubject,
+          });
+        });
+      });
+
+      // 과목명 기준 중복 제거 (학교지정에서 같은 과목이 1·2학기 두번 들어가도 한번만)
+      const seen = new Set();
+      const unique = [];
+      items.forEach(it => {
+        if (!seen.has(it.name)) {
+          seen.add(it.name);
+          unique.push(it);
+        }
+      });
+
+      // 학년별 그룹핑
+      const byGrade = { 1: [], 2: [], 3: [] };
+      unique.forEach(it => {
+        if (byGrade[it.grade]) byGrade[it.grade].push(it);
+      });
+      // 각 학년 내에서 교과군 → 과목명 정렬
+      [1, 2, 3].forEach(g => {
+        byGrade[g].sort((a, b) => {
+          if (a.area !== b.area) return a.area.localeCompare(b.area, 'ko');
+          return a.name.localeCompare(b.name, 'ko');
+        });
+      });
+
+      // 통계
+      const total = unique.length;
+      const done = unique.filter(it => {
+        const info = yd.subjectInfo[it.name];
+        return info && info.intro && info.intro.trim();
+      }).length;
+      const pdfDone = unique.filter(it => {
+        const info = yd.subjectInfo[it.name];
+        return info && info.page;
+      }).length;
+
+      statsEl.innerHTML = `
+        <div class="stat-pill">총 과목 <strong>${total}</strong>개</div>
+        <div class="stat-pill">소개 작성 <strong>${done}</strong>개</div>
+        <div class="stat-pill">PDF 페이지 <strong>${pdfDone}</strong>개</div>
+        <div class="stat-pill ${total - done > 0 ? 'warn' : ''}">미작성 <strong>${total - done}</strong>개</div>
+      `;
+
+      // HTML 생성
+      let html = '';
+      [1, 2, 3].forEach(grade => {
+        if (byGrade[grade].length === 0) return;
+        html += `
+          <div class="info-group">
+            <div class="info-group-header">
+              <span class="info-group-area">${grade}학년</span>
+              <span class="info-group-meta">${byGrade[grade].length}개 과목</span>
+            </div>
+            <div class="info-subjects">
+              ${byGrade[grade].map(it => infoSubjectRowHtml(it, yd.subjectInfo[it.name])).join('')}
+            </div>
+          </div>
+        `;
+      });
+
+      editArea.innerHTML = html || '<p style="color: var(--ink-500); padding: 40px; text-align: center;">과목이 없어요.</p>';
+
+      // 입력 이벤트
+      editArea.querySelectorAll('.info-input').forEach(input => {
+        input.addEventListener('input', e => {
+          const name = e.target.dataset.name;
+          const field = e.target.dataset.field;
+          if (!curriculumData[currentYear].subjectInfo[name]) {
+            curriculumData[currentYear].subjectInfo[name] = {};
+          }
+          const info = curriculumData[currentYear].subjectInfo[name];
+          if (field === 'intro') info.intro = e.target.value;
+          else if (field === 'page') {
+            const n = parseInt(e.target.value, 10);
+            info.page = isNaN(n) ? null : n;
+          }
+          updateInfoStats();
+        });
+      });
+    }
+
+    function infoSubjectRowHtml(item, info) {
+      const intro = info?.intro || '';
+      const page = info?.page || '';
+      return `
+        <div class="info-subject">
+          <div>
+            <div class="info-subject-name">${escapeHtml(item.name)}</div>
+            <span class="info-subject-name-sub">${escapeHtml(item.area)} · ${escapeHtml(item.category)} · ${item.credit}학점</span>
+          </div>
+          <input type="text" class="info-input"
+                 placeholder="한 줄 소개 (예: 우리말의 다채로움을 깊이 있게 탐구하는 과목)"
+                 value="${escapeAttr(intro)}"
+                 data-name="${escapeAttr(item.name)}" data-field="intro">
+          <input type="number" class="info-input page-input"
+                 placeholder="PDF 페이지"
+                 value="${page}"
+                 min="1"
+                 data-name="${escapeAttr(item.name)}" data-field="page">
+        </div>
+      `;
+    }
+
+    function updateInfoStats() {
+      const yd = curriculumData[currentYear];
+      // 간단히 다시 계산
+      const allNames = new Set();
+      yd.fixedSubjects.forEach(s => allNames.add(s.name));
+      yd.electiveGroups.forEach(g => g.subjects.forEach(n => allNames.add(n)));
+      const total = allNames.size;
+      const done = [...allNames].filter(n => {
+        const info = yd.subjectInfo[n];
+        return info && info.intro && info.intro.trim();
+      }).length;
+      const pdfDone = [...allNames].filter(n => {
+        const info = yd.subjectInfo[n];
+        return info && info.page;
+      }).length;
+      document.getElementById('stats').innerHTML = `
+        <div class="stat-pill">총 과목 <strong>${total}</strong>개</div>
+        <div class="stat-pill">소개 작성 <strong>${done}</strong>개</div>
+        <div class="stat-pill">PDF 페이지 <strong>${pdfDone}</strong>개</div>
+        <div class="stat-pill ${total - done > 0 ? 'warn' : ''}">미작성 <strong>${total - done}</strong>개</div>
+      `;
+    }
+
+    // ===== 모드 3: PDF 설정 =====
+    function renderPdf() {
+      const editArea = document.getElementById('editArea');
+      const statsEl = document.getElementById('stats');
+      statsEl.innerHTML = '';
+
+      const pdf2025 = curriculumData['2025'].pdfFile || '';
+      const pdf2026 = curriculumData['2026'].pdfFile || '';
+
+      editArea.innerHTML = `
+        <div class="pdf-config">
+          <label>2026 입학생용 PDF 안내서</label>
+          <input type="text" class="info-input" id="pdfInput2026"
+                 placeholder="예: course_guide_2026.pdf"
+                 value="${escapeAttr(pdf2026)}">
+          <p class="pdf-help">
+            GitHub 저장소에 PDF 파일을 함께 올린 후 그 파일명을 적어주세요. 예: <code>course_guide_2026.pdf</code><br>
+            또는 외부 URL을 사용할 수도 있어요. 예: <code>https://example.com/guide.pdf</code>
+          </p>
+
+          <label style="margin-top: 24px;">2025 입학생용 PDF 안내서</label>
+          <input type="text" class="info-input" id="pdfInput2025"
+                 placeholder="예: course_guide_2025.pdf"
+                 value="${escapeAttr(pdf2025)}">
+          <p class="pdf-help">
+            2025 입학생과 2026 입학생이 같은 PDF를 쓴다면 두 칸 모두 같은 파일명을 적어주세요.
+          </p>
+        </div>
+      `;
+
+      // 변경 이벤트
+      document.getElementById('pdfInput2026').addEventListener('input', e => {
+        curriculumData['2026'].pdfFile = e.target.value.trim();
+      });
+      document.getElementById('pdfInput2025').addEventListener('input', e => {
+        curriculumData['2025'].pdfFile = e.target.value.trim();
       });
     }
 
