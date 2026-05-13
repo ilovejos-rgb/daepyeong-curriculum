@@ -1401,7 +1401,12 @@
         "page": 234
       },
       "문화로 보는 한국사": {
-        "pdf_file": "선택과목_안내_문화로보는한국사_.pdf"
+        "pdfFile": "선택과목_안내_문화로보는한국사_.pdf",
+        "page": 1
+      },
+      "전문 수학": {
+        "page": 1,
+        "pdfFile": "professional_math.pdf"
       }
     },
     "pdfFile": "guide.pdf"
@@ -2777,7 +2782,12 @@
         "youtube": "https://youtu.be/cvfDBOy9MCQ?si=02QcZ7kI5TMfQrk7"
       },
       "문화로 보는 한국사": {
-        "pdf_file": "선택과목_안내_문화로보는한국사_.pdf"
+        "pdfFile": "선택과목_안내_문화로보는한국사_.pdf",
+        "page": 1
+      },
+      "전문 수학": {
+        "page": 1,
+        "pdfFile": "professional_math.pdf"
       }
     },
     "pdfFile": "guide.pdf"

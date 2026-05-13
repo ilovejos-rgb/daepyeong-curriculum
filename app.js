@@ -53,22 +53,16 @@ function renderRequirements() {
   const grid = document.getElementById('reqGrid');
   if (!grid) return;
 
-  grid.innerHTML = curriculumData.requirements.map(r => {
-    const detailsHtml = r.details
-      ? `<span class="req-card-details">${r.details.map(d => `${escapeHtml(d.label)} ${d.credits}학점`).join(' · ')}</span>`
-      : '';
-    return `
-    <div class="req-card${r.details ? ' req-card-has-details' : ''}">
+  grid.innerHTML = curriculumData.requirements.map(r => `
+    <div class="req-card">
       <span class="req-card-label">필수 이수</span>
       <span class="req-card-area">${escapeHtml(r.area)}</span>
       <span class="req-card-credit">
         <span class="req-card-num">${r.required}</span>
         <span class="req-card-unit">학점</span>
       </span>
-      ${detailsHtml}
     </div>
-  `;
-  }).join('');
+  `).join('');
 }
 
 // ----- 학년 탭 -----
@@ -257,26 +251,43 @@ function openModal(data) {
     }
   }
   // 시트 정보 없으면 JSON 정보 사용
-  else if (jsonInfo && (jsonInfo.intro || jsonInfo.page || jsonInfo.youtube || jsonInfo.pdf_file)) {
+  else if (jsonInfo && (jsonInfo.intro || jsonInfo.page || jsonInfo.youtube)) {
     if (jsonInfo.intro) {
       body += sectionHtml('한 줄 소개', jsonInfo.intro);
     }
-    if (jsonInfo.youtube) {
-      const embedUrl = jsonInfo.youtube
-        .replace('https://youtu.be/', 'https://www.youtube.com/embed/')
-        .replace('https://www.youtube.com/watch?v=', 'https://www.youtube.com/embed/')
-        .replace(/[?&]si=[\w-]+/, '');
-      body += `<div class="youtube-embed"><iframe src="${escapeAttr(embedUrl)}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`;
-    }
-    if (jsonInfo.pdf_file) {
-      body += `<a href="${escapeAttr(jsonInfo.pdf_file)}" target="_blank" rel="noopener" class="pdf-button">선택과목 안내서 보기</a>`;
-    }
-    if (jsonInfo.page && pdfFile) {
-      // PDF의 특정 페이지로 이동
-      const pdfUrl = `${pdfFile}#page=${jsonInfo.page}`;
-      body += `<a href="${escapeAttr(pdfUrl)}" target="_blank" rel="noopener" class="pdf-button">선택과목 안내서 보기 (p.${jsonInfo.page})</a>`;
-    } else if (jsonInfo.page && !pdfFile) {
+
+    // PDF 페이지 + 유튜브를 같이 묶어서 보여줌
+    // 과목별로 지정된 PDF가 있으면 그걸 우선, 없으면 공통 PDF 사용
+    const subjectPdf = jsonInfo.pdfFile || pdfFile;
+    const buttons = [];
+    if (jsonInfo.page && subjectPdf) {
+      const pdfUrl = `${subjectPdf}#page=${jsonInfo.page}`;
+      buttons.push(`<a href="${escapeAttr(pdfUrl)}" target="_blank" rel="noopener" class="pdf-button">선택과목 안내서 보기 (p.${jsonInfo.page})</a>`);
+    } else if (jsonInfo.page && !subjectPdf) {
       body += `<div class="modal-section"><div class="modal-section-content" style="font-size:12px; color: var(--ink-500);">PDF 안내서 p.${jsonInfo.page}</div></div>`;
+    }
+    if (buttons.length) body += `<div class="modal-buttons">${buttons.join('')}</div>`;
+
+    // 유튜브 임베드
+    if (jsonInfo.youtube) {
+      const ytId = parseYoutubeId(jsonInfo.youtube);
+      if (ytId) {
+        body += `
+          <div class="modal-section">
+            <div class="modal-section-label">안내 영상</div>
+            <div class="yt-embed">
+              <iframe src="https://www.youtube.com/embed/${ytId}"
+                title="${escapeAttr(data.name)} 안내 영상"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+            </div>
+          </div>
+        `;
+      } else {
+        // 유효 ID 추출 실패 시 외부 링크로 fallback
+        body += `<a href="${escapeAttr(jsonInfo.youtube)}" target="_blank" rel="noopener" class="pdf-button" style="background: #c4302b;">🎬 유튜브 영상 보기</a>`;
+      }
     }
   }
 
@@ -369,6 +380,27 @@ function parseCSV(text) {
   }
   if (cell || row.length) { row.push(cell); rows.push(row); }
   return rows;
+}
+
+// ----- 유튜브 URL → 영상 ID 추출 -----
+function parseYoutubeId(url) {
+  if (!url) return '';
+  url = String(url).trim();
+  // 1) youtu.be/VIDEOID
+  let m = url.match(/youtu\.be\/([A-Za-z0-9_-]{11})/);
+  if (m) return m[1];
+  // 2) youtube.com/watch?v=VIDEOID
+  m = url.match(/[?&]v=([A-Za-z0-9_-]{11})/);
+  if (m) return m[1];
+  // 3) youtube.com/embed/VIDEOID
+  m = url.match(/youtube\.com\/embed\/([A-Za-z0-9_-]{11})/);
+  if (m) return m[1];
+  // 4) youtube.com/shorts/VIDEOID
+  m = url.match(/youtube\.com\/shorts\/([A-Za-z0-9_-]{11})/);
+  if (m) return m[1];
+  // 5) 그냥 ID만 입력한 경우
+  if (/^[A-Za-z0-9_-]{11}$/.test(url)) return url;
+  return '';
 }
 
 // ----- 안전 처리 -----
