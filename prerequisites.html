@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="2022 개정 교육과정 선이수 과목 정보">
+  <title>선이수 과목 정보 · 대평고등학교 교육과정 안내</title>
+  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body.page-prereq {
+      background: var(--bg-cream);
+      min-height: 100vh;
+    }
+    .prereq-shell {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+    .prereq-header {
+      padding: 32px 0 24px;
+      border-bottom: 1px solid var(--ink-100);
+      margin-bottom: 32px;
+    }
+    .prereq-title {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--green-900);
+      letter-spacing: -0.025em;
+      margin-bottom: 6px;
+    }
+    .prereq-sub {
+      font-size: 14px;
+      color: var(--ink-500);
+      line-height: 1.6;
+    }
+    .prereq-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--ink-500);
+      margin-bottom: 14px;
+      transition: color 0.15s;
+    }
+    .prereq-back:hover { color: var(--green-700); }
+
+    .info-callout {
+      background: var(--lavender-50);
+      border: 1px solid var(--lavender-200);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      margin-bottom: 28px;
+      font-size: 13px;
+      color: var(--ink-700);
+      line-height: 1.7;
+    }
+    .info-callout strong {
+      color: var(--lavender-700);
+      display: block;
+      margin-bottom: 4px;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .area-section {
+      background: #fff;
+      border: 1px solid var(--ink-100);
+      border-radius: var(--radius-lg);
+      margin-bottom: 18px;
+      overflow: hidden;
+    }
+    .area-section-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 24px;
+      background: linear-gradient(135deg, var(--green-50), #fff);
+      border-bottom: 1px solid var(--ink-100);
+    }
+    .area-section-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green-700);
+    }
+    .area-section-name {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--green-900);
+      letter-spacing: -0.02em;
+    }
+    .area-section-count {
+      font-size: 12px;
+      color: var(--ink-500);
+      margin-left: auto;
+    }
+
+    .prereq-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    .prereq-table thead th {
+      background: var(--bg-cream);
+      color: var(--ink-500);
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 12px 20px;
+      text-align: left;
+      border-bottom: 1px solid var(--ink-100);
+    }
+    .prereq-table tbody td {
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--ink-100);
+      vertical-align: top;
+      line-height: 1.5;
+    }
+    .prereq-table tbody tr:last-child td {
+      border-bottom: 0;
+    }
+    .prereq-table tbody tr:hover {
+      background: var(--bg-cream);
+    }
+    .col-name {
+      font-weight: 700;
+      color: var(--ink-900);
+      width: 28%;
+    }
+    .col-required {
+      width: 36%;
+    }
+    .col-recommended {
+      width: 36%;
+    }
+    .tag-required {
+      display: inline-block;
+      padding: 3px 10px;
+      background: var(--lavender-50);
+      color: var(--lavender-700);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      margin: 2px 4px 2px 0;
+    }
+    .tag-recommended {
+      display: inline-block;
+      padding: 3px 10px;
+      background: var(--green-50);
+      color: var(--green-700);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      margin: 2px 4px 2px 0;
+    }
+    .empty-cell {
+      color: var(--ink-300);
+      font-size: 12px;
+    }
+
+    .source-note {
+      text-align: center;
+      font-size: 12px;
+      color: var(--ink-500);
+      margin-top: 32px;
+      padding: 16px;
+      line-height: 1.7;
+    }
+    .source-note a {
+      color: var(--lavender-700);
+      text-decoration: underline;
+    }
+
+    /* 모바일 - 카드 형태 */
+    @media (max-width: 720px) {
+      .prereq-table thead { display: none; }
+      .prereq-table, .prereq-table tbody, .prereq-table tr, .prereq-table td {
+        display: block;
+        width: 100%;
+      }
+      .prereq-table tbody tr {
+        padding: 14px 18px;
+        border-bottom: 1px solid var(--ink-100);
+      }
+      .prereq-table tbody tr:hover { background: transparent; }
+      .prereq-table tbody td {
+        padding: 4px 0;
+        border: none;
+      }
+      .col-name {
+        font-size: 15px;
+        margin-bottom: 6px;
+        width: auto;
+      }
+      .col-required::before {
+        content: '필수: ';
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--lavender-700);
+        margin-right: 4px;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+      .col-recommended::before {
+        content: '권장: ';
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--green-700);
+        margin-right: 4px;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+    }
+  </style>
+</head>
+<body class="page-prereq">
+  <div class="prereq-shell">
+    <header class="prereq-header">
+      <a href="index.html" class="prereq-back">← 처음으로</a>
+      <h1 class="prereq-title">선이수 과목 정보</h1>
+      <p class="prereq-sub">2022 개정 교육과정 · 선택 과목을 듣기 전에 먼저 이수해야 하거나 권장되는 과목입니다.</p>
+    </header>
+
+    <div class="info-callout">
+      <strong>안내</strong>
+      <strong style="color: var(--lavender-700); display: inline; text-transform: none; letter-spacing: 0; font-size: 13px;">선이수 필수 과목</strong>은 해당 과목을 듣기 전에 반드시 이수해야 하는 과목입니다.
+      <strong style="color: var(--green-700); display: inline; text-transform: none; letter-spacing: 0; font-size: 13px;">선이수 권장 과목</strong>은 함께 이수하면 학습에 도움이 되는 과목입니다.
+      과목 선택 시 참고해주세요.
+    </div>
+
+    <div id="prereqContent"></div>
+
+    <p class="source-note">
+      자료 출처: <a href="https://home.pen.go.kr/hscredit/cm/cntnts/cntntsView.do?mi=17411&cntntsId=3729" target="_blank" rel="noopener">부산광역시교육청 고교학점제지원센터</a>
+    </p>
+  </div>
+
+  <script>
+    // 선이수 과목 데이터 (출처: 부산광역시교육청 고교학점제지원센터, 2022 개정 교육과정)
+    const PREREQ_DATA = [
+      {
+        area: '국어',
+        subjects: [
+          { name: '주제 탐구 독서', required: [], recommended: ['독서와 작문'] },
+          { name: '문학과 영상', required: [], recommended: ['문학'] },
+          { name: '독서 토론과 글쓰기', required: [], recommended: ['독서와 작문'] },
+          { name: '언어생활 탐구', required: [], recommended: ['화법과 언어'] },
+        ]
+      },
+      {
+        area: '수학',
+        subjects: [
+          { name: '미적분Ⅱ', required: ['대수', '미적분Ⅰ'], recommended: [] },
+          { name: '실용 통계', required: ['확률과 통계'], recommended: [] },
+          { name: '전문 수학', required: ['대수', '미적분Ⅰ'], recommended: [] },
+          { name: '이산 수학', required: ['대수'], recommended: [] },
+          { name: '고급 기하', required: ['기하'], recommended: ['미적분Ⅰ'] },
+          { name: '고급 대수', required: ['대수'], recommended: ['미적분Ⅰ'] },
+          { name: '고급 미적분', required: ['미적분Ⅱ'], recommended: [] },
+        ]
+      },
+      {
+        area: '영어',
+        subjects: [
+          { name: '영어Ⅱ', required: ['영어Ⅰ'], recommended: [] },
+          { name: '심화 영어', required: [], recommended: ['영어Ⅰ', '영어Ⅱ'] },
+          { name: '심화 영어 독해와 작문', required: [], recommended: ['영어 독해와 작문'] },
+        ]
+      },
+      {
+        area: '사회(역사/도덕 포함)',
+        subjects: [
+          { name: '한국지리 탐구', required: [], recommended: ['세계시민과 지리'] },
+          { name: '도시의 미래 탐구', required: [], recommended: ['세계시민과 지리'] },
+          { name: '동아시아 역사 기행', required: [], recommended: ['세계사'] },
+          { name: '인문학과 윤리', required: [], recommended: ['현대사회와 윤리', '윤리와 사상'] },
+          { name: '역사로 탐구하는 현대 세계', required: [], recommended: ['세계사'] },
+          { name: '사회문제 탐구', required: [], recommended: ['사회와 문화'] },
+          { name: '금융과 경제생활', required: [], recommended: ['경제'] },
+          { name: '윤리문제 탐구', required: [], recommended: ['현대사회와 윤리', '윤리와 사상'] },
+          { name: '기후변화와 지속가능한 세계', required: [], recommended: ['세계시민과 지리'] },
+          { name: '여행지리', required: [], recommended: ['세계시민과 지리'] },
+        ]
+      },
+      {
+        area: '과학',
+        subjects: [
+          { name: '역학과 에너지', required: [], recommended: ['물리학'] },
+          { name: '전자기와 양자', required: [], recommended: ['물리학'] },
+          { name: '물질과 에너지', required: [], recommended: ['화학'] },
+          { name: '화학 반응의 세계', required: [], recommended: ['화학'] },
+          { name: '세포와 물질대사', required: [], recommended: ['생명과학'] },
+          { name: '생물의 유전', required: [], recommended: ['생명과학'] },
+          { name: '지구시스템과학', required: [], recommended: ['지구과학'] },
+          { name: '행성우주과학', required: [], recommended: ['지구과학'] },
+          { name: '고급 물리학', required: [], recommended: ['물리학'] },
+          { name: '고급 화학', required: [], recommended: ['화학'] },
+          { name: '고급 생명과학', required: [], recommended: ['생명과학'] },
+          { name: '고급 지구과학', required: [], recommended: ['지구과학'] },
+          { name: '물리학 실험', required: [], recommended: ['물리학'] },
+          { name: '화학 실험', required: [], recommended: ['화학'] },
+          { name: '생명과학 실험', required: [], recommended: ['생명과학'] },
+          { name: '지구과학 실험', required: [], recommended: ['지구과학'] },
+        ]
+      },
+      {
+        area: '정보',
+        subjects: [
+          { name: '인공지능 기초', required: [], recommended: ['정보'] },
+          { name: '데이터 과학', required: [], recommended: ['정보'] },
+          { name: '정보과학', required: [], recommended: ['정보'] },
+        ]
+      },
+    ];
+
+    function renderPrereq() {
+      const wrap = document.getElementById('prereqContent');
+      wrap.innerHTML = PREREQ_DATA.map(area => `
+        <div class="area-section">
+          <div class="area-section-header">
+            <span class="area-section-dot"></span>
+            <span class="area-section-name">${escapeHtml(area.area)}</span>
+            <span class="area-section-count">${area.subjects.length}개 과목</span>
+          </div>
+          <table class="prereq-table">
+            <thead>
+              <tr>
+                <th class="col-name">과목명</th>
+                <th class="col-required">선이수 필수 과목</th>
+                <th class="col-recommended">선이수 권장 과목</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${area.subjects.map(s => `
+                <tr>
+                  <td class="col-name">${escapeHtml(s.name)}</td>
+                  <td class="col-required">${s.required.length
+                    ? s.required.map(r => `<span class="tag-required">${escapeHtml(r)}</span>`).join('')
+                    : '<span class="empty-cell">―</span>'}</td>
+                  <td class="col-recommended">${s.recommended.length
+                    ? s.recommended.map(r => `<span class="tag-recommended">${escapeHtml(r)}</span>`).join('')
+                    : '<span class="empty-cell">―</span>'}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      `).join('');
+    }
+
+    function escapeHtml(s) {
+      if (s == null) return '';
+      return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+
+    renderPrereq();
+  </script>
+</body>
+</html>
