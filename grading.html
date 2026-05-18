@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="2022 개정 교육과정 과목별 성적처리방식">
+  <title>과목별 성적처리방식 · 대평고등학교 교육과정 안내</title>
+  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body.page-grading {
+      background: var(--bg-cream);
+      min-height: 100vh;
+    }
+    .grading-shell {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+    .grading-header {
+      padding: 32px 0 24px;
+      border-bottom: 1px solid var(--ink-100);
+      margin-bottom: 32px;
+    }
+    .grading-title {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--green-900);
+      letter-spacing: -0.025em;
+      margin-bottom: 6px;
+    }
+    .grading-sub {
+      font-size: 14px;
+      color: var(--ink-500);
+      line-height: 1.6;
+    }
+    .grading-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--ink-500);
+      margin-bottom: 14px;
+      transition: color 0.15s;
+    }
+    .grading-back:hover { color: var(--green-700); }
+
+    .info-callout {
+      background: var(--lavender-50);
+      border: 1px solid var(--lavender-200);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      margin-bottom: 28px;
+      font-size: 13px;
+      color: var(--ink-700);
+      line-height: 1.7;
+    }
+    .info-callout strong {
+      color: var(--lavender-700);
+      display: block;
+      margin-bottom: 4px;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    /* 범례 */
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 24px;
+      padding: 14px 18px;
+      background: #fff;
+      border: 1px solid var(--ink-100);
+      border-radius: var(--radius-md);
+      font-size: 12px;
+    }
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--ink-700);
+    }
+    .legend-pill {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .pill-common { background: var(--ink-100); color: var(--ink-700); }
+    .pill-general { background: var(--green-50); color: var(--green-700); }
+    .pill-career { background: var(--lavender-50); color: var(--lavender-700); }
+    .pill-fusion { background: rgba(168, 159, 212, 0.15); color: var(--lavender-700); border: 1px solid var(--lavender-200); }
+
+    .area-section {
+      background: #fff;
+      border: 1px solid var(--ink-100);
+      border-radius: var(--radius-lg);
+      margin-bottom: 18px;
+      overflow: hidden;
+    }
+    .area-section-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 24px;
+      background: linear-gradient(135deg, var(--green-50), #fff);
+      border-bottom: 1px solid var(--ink-100);
+    }
+    .area-section-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green-700);
+    }
+    .area-section-name {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--green-900);
+      letter-spacing: -0.02em;
+    }
+    .area-section-meta {
+      margin-left: auto;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .meta-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      background: #fff;
+      border: 1px solid var(--ink-100);
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--ink-700);
+    }
+    .meta-pill-grade {
+      color: var(--green-700);
+      border-color: var(--green-200);
+    }
+    .meta-pill-rank {
+      color: var(--lavender-700);
+      border-color: var(--lavender-200);
+    }
+    .meta-pill-no {
+      color: var(--ink-500);
+    }
+
+    .grading-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    .grading-table thead th {
+      background: var(--bg-cream);
+      color: var(--ink-500);
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 12px 20px;
+      text-align: left;
+      border-bottom: 1px solid var(--ink-100);
+    }
+    .grading-table tbody td {
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--ink-100);
+      vertical-align: top;
+      line-height: 1.6;
+    }
+    .grading-table tbody tr:last-child td {
+      border-bottom: 0;
+    }
+    .grading-table tbody tr:hover {
+      background: var(--bg-cream);
+    }
+    .col-type { width: 130px; }
+    .col-subjects { }
+    .col-grade { width: 100px; text-align: center; }
+    .col-rank { width: 100px; text-align: center; }
+
+    .type-tag {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .type-tag.공통 { background: var(--ink-100); color: var(--ink-700); }
+    .type-tag.일반 { background: var(--green-50); color: var(--green-700); }
+    .type-tag.진로 { background: var(--lavender-50); color: var(--lavender-700); }
+    .type-tag.융합 { background: rgba(168, 159, 212, 0.15); color: var(--lavender-700); border: 1px solid var(--lavender-200); }
+
+    .subject-list {
+      color: var(--ink-900);
+      line-height: 1.7;
+    }
+    .grade-value {
+      display: inline-block;
+      padding: 4px 12px;
+      background: var(--green-50);
+      color: var(--green-700);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .grade-value.three {
+      background: rgba(168, 159, 212, 0.15);
+      color: var(--lavender-700);
+    }
+    .grade-value.pf {
+      background: var(--ink-100);
+      color: var(--ink-700);
+    }
+    .rank-value {
+      display: inline-block;
+      padding: 4px 12px;
+      background: var(--lavender-50);
+      color: var(--lavender-700);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .rank-value.no {
+      background: var(--ink-100);
+      color: var(--ink-500);
+    }
+
+    .source-note {
+      text-align: center;
+      font-size: 12px;
+      color: var(--ink-500);
+      margin-top: 32px;
+      padding: 16px;
+      line-height: 1.7;
+    }
+    .source-note a {
+      color: var(--lavender-700);
+      text-decoration: underline;
+    }
+
+    /* 모바일 - 카드 형태 */
+    @media (max-width: 720px) {
+      .grading-table thead { display: none; }
+      .grading-table, .grading-table tbody, .grading-table tr, .grading-table td {
+        display: block;
+        width: 100%;
+      }
+      .grading-table tbody tr {
+        padding: 14px 18px;
+        border-bottom: 1px solid var(--ink-100);
+      }
+      .grading-table tbody tr:hover { background: transparent; }
+      .grading-table tbody td {
+        padding: 4px 0;
+        border: none;
+        width: auto !important;
+        text-align: left !important;
+      }
+      .col-type { margin-bottom: 8px; }
+      .col-subjects { font-size: 14px; margin-bottom: 8px; }
+      .col-grade, .col-rank {
+        display: inline-block !important;
+        margin-right: 8px;
+      }
+      .col-grade::before {
+        content: '성취도: ';
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--green-700);
+        margin-right: 4px;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+      .col-rank::before {
+        content: '석차등급: ';
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--lavender-700);
+        margin-right: 4px;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+      .area-section-meta { display: none; }
+    }
+  </style>
+</head>
+<body class="page-grading">
+  <div class="grading-shell">
+    <header class="grading-header">
+      <a href="index.html" class="grading-back">← 처음으로</a>
+      <h1 class="grading-title">과목별 성적처리방식</h1>
+      <p class="grading-sub">2025학년도 입학생 적용 · 2022 개정 교육과정에 따른 교과(군)·과목 유형별 성취도 및 석차등급 안내</p>
+    </header>
+
+    <div class="info-callout">
+      <strong>안내</strong>
+      과목 유형에 따라 성적 처리 방식이 다릅니다. <strong style="color: var(--green-700); display: inline; text-transform: none; letter-spacing: 0; font-size: 13px;">성취도</strong>는 학습 성취 수준(5단계, 3단계 또는 P/F)을, <strong style="color: var(--lavender-700); display: inline; text-transform: none; letter-spacing: 0; font-size: 13px;">석차등급</strong>은 상대평가 등급(5등급 또는 미산출)을 의미합니다.
+    </div>
+
+    <div class="legend">
+      <span class="legend-item"><span class="legend-pill pill-common">공통</span> 공통 과목</span>
+      <span class="legend-item"><span class="legend-pill pill-general">일반</span> 일반 선택</span>
+      <span class="legend-item"><span class="legend-pill pill-career">진로</span> 진로 선택</span>
+      <span class="legend-item"><span class="legend-pill pill-fusion">융합</span> 융합 선택</span>
+    </div>
+
+    <div id="gradingContent"></div>
+
+    <p class="source-note">
+      자료 출처: <a href="https://home.pen.go.kr/hscredit/cm/cntnts/cntntsView.do?mi=17411&cntntsId=3729" target="_blank" rel="noopener">부산광역시교육청 고교학점제지원센터</a>
+    </p>
+  </div>
+
+  <script>
+    // 과목별 성적처리방식 데이터 (출처: 부산광역시교육청 고교학점제지원센터, 2025학년도 입학생 기준)
+    // 각 행: { type: '공통/일반/진로/융합', subjects: '...', grade: '성취도', rank: '석차등급' }
+    const GRADING_DATA = [
+      {
+        area: '국어',
+        rows: [
+          { type: '공통', subjects: '공통국어1, 공통국어2', grade: '5단계', rank: '5등급' },
+          { type: '일반', subjects: '화법과 언어, 독서와 작문, 문학', grade: '5단계', rank: '5등급' },
+          { type: '진로', subjects: '주제 탐구 독서, 문학과 영상, 직무 의사소통', grade: '5단계', rank: '5등급' },
+          { type: '융합', subjects: '독서 토론과 글쓰기, 매체 의사소통, 언어생활 탐구', grade: '5단계', rank: '5등급' },
+        ]
+      },
+      {
+        area: '수학',
+        rows: [
+          { type: '공통', subjects: '공통수학1, 공통수학2, 기본수학1, 기본수학2', grade: '5단계', rank: '5등급' },
+          { type: '일반', subjects: '대수, 미적분Ⅰ, 확률과 통계', grade: '5단계', rank: '5등급' },
+          { type: '진로', subjects: '기하, 미적분Ⅱ, 경제 수학, 인공지능 수학, 직무 수학', grade: '5단계', rank: '5등급' },
+          { type: '융합', subjects: '수학과 문화, 실용 통계, 수학과제 탐구', grade: '5단계', rank: '5등급' },
+        ]
+      },
+      {
+        area: '영어',
+        rows: [
+          { type: '공통', subjects: '공통영어1, 공통영어2, 기본영어1, 기본영어2', grade: '5단계', rank: '5등급' },
+          { type: '일반', subjects: '영어Ⅰ, 영어Ⅱ, 영어 독해와 작문', grade: '5단계', rank: '5등급' },
+          { type: '진로', subjects: '영미 문학 읽기, 영어 발표와 토론, 심화 영어, 심화 영어 독해와 작문, 직무 영어', grade: '5단계', rank: '5등급' },
+          { type: '융합', subjects: '실생활 영어 회화, 미디어 영어, 세계 문화와 영어', grade: '5단계', rank: '5등급' },
+        ]
+      },
+      {
+        area: '사회(역사/도덕 포함)',
+        rows: [
+          { type: '공통', subjects: '통합사회1, 통합사회2, 한국사1, 한국사2', grade: '5단계', rank: '5등급' },
+          { type: '일반', subjects: '세계시민과 지리, 세계사, 사회와 문화, 현대사회와 윤리', grade: '5단계', rank: '5등급' },
+          { type: '진로', subjects: '한국지리 탐구, 도시의 미래 탐구, 동아시아 역사 기행, 정치, 법과 사회, 경제, 윤리와 사상, 인문학과 윤리, 국제 관계의 이해', grade: '5단계', rank: '5등급' },
+          { type: '융합', subjects: '여행지리, 역사로 탐구하는 현대 세계, 사회문제 탐구, 금융과 경제생활, 윤리문제 탐구, 기후변화와 지속가능한 세계', grade: '5단계', rank: 'X' },
+        ]
+      },
+      {
+        area: '과학',
+        rows: [
+          { type: '공통', subjects: '과학탐구실험1, 과학탐구실험2', grade: '3단계', rank: 'X' },
+          { type: '공통', subjects: '통합과학1, 통합과학2', grade: '5단계', rank: '5등급' },
+          { type: '일반', subjects: '물리학, 화학, 생명과학, 지구과학', grade: '5단계', rank: '5등급' },
+          { type: '진로', subjects: '역학과 에너지, 전자기와 양자, 물질과 에너지, 화학 반응의 세계, 세포와 물질대사, 생물의 유전, 지구시스템과학, 행성우주과학', grade: '5단계', rank: '5등급' },
+          { type: '융합', subjects: '과학의 역사와 문화, 기후변화와 환경생태, 융합과학 탐구', grade: '5단계', rank: 'X' },
+        ]
+      },
+      {
+        area: '체육',
+        rows: [
+          { type: '일반', subjects: '체육1, 체육2', grade: '3단계', rank: 'X' },
+          { type: '진로', subjects: '운동과 건강, 스포츠 문화, 스포츠 과학', grade: '3단계', rank: 'X' },
+          { type: '융합', subjects: '스포츠 생활1, 스포츠 생활2', grade: '3단계', rank: 'X' },
+        ]
+      },
+      {
+        area: '예술',
+        rows: [
+          { type: '일반', subjects: '음악, 미술, 연극', grade: '3단계', rank: 'X' },
+          { type: '진로', subjects: '음악 연주와 창작, 음악 감상과 비평, 미술 창작, 미술 감상과 비평', grade: '3단계', rank: 'X' },
+          { type: '융합', subjects: '음악과 미디어, 미술과 매체', grade: '3단계', rank: 'X' },
+        ]
+      },
+      {
+        area: '기술·가정',
+        rows: [
+          { type: '일반', subjects: '기술·가정', grade: '5단계', rank: '5등급' },
+          { type: '진로', subjects: '로봇과 공학세계, 생활과학 탐구', grade: '5단계', rank: '5등급' },
+          { type: '융합', subjects: '창의 공학 설계, 지식 재산 일반, 아동발달과 부모, 생애 설계와 자립', grade: '5단계', rank: '5등급' },
+        ]
+      },
+      {
+        area: '정보',
+        rows: [
+          { type: '일반', subjects: '정보', grade: '5단계', rank: '5등급' },
+          { type: '진로', subjects: '인공지능 기초, 데이터 과학', grade: '5단계', rank: '5등급' },
+          { type: '융합', subjects: '소프트웨어와 생활', grade: '5단계', rank: '5등급' },
+        ]
+      },
+      {
+        area: '제2외국어',
+        rows: [
+          { type: '일반', subjects: '독일어, 프랑스어, 스페인어, 중국어, 일본어, 러시아어, 아랍어, 베트남어', grade: '5단계', rank: '5등급' },
+          { type: '진로', subjects: '~어 회화, 심화 ~어', grade: '5단계', rank: '5등급' },
+          { type: '융합', subjects: '독일어권 문화, 프랑스어권 문화, 스페인어권 문화, 중국 문화, 일본 문화, 러시아 문화, 아랍 문화, 베트남 문화', grade: '5단계', rank: '5등급' },
+        ]
+      },
+      {
+        area: '한문',
+        rows: [
+          { type: '일반', subjects: '한문', grade: '5단계', rank: '5등급' },
+          { type: '진로', subjects: '한문 고전 읽기', grade: '5단계', rank: '5등급' },
+          { type: '융합', subjects: '언어생활과 한자', grade: '5단계', rank: '5등급' },
+        ]
+      },
+      {
+        area: '교양',
+        rows: [
+          { type: '일반', subjects: '진로와 직업, 생태와 환경', grade: 'P/F', rank: 'X' },
+          { type: '진로', subjects: '인간과 철학, 논리와 사고, 인간과 심리, 교육의 이해, 삶과 종교, 보건', grade: 'P/F', rank: 'X' },
+          { type: '융합', subjects: '인간과 경제활동, 논술', grade: 'P/F', rank: 'X' },
+        ]
+      },
+    ];
+
+    function renderGrading() {
+      const wrap = document.getElementById('gradingContent');
+      wrap.innerHTML = GRADING_DATA.map(area => {
+        // 영역별 메타: 이 영역에서 사용되는 성취도/석차등급 종류
+        const grades = [...new Set(area.rows.map(r => r.grade))];
+        const ranks = [...new Set(area.rows.map(r => r.rank))];
+        return `
+        <div class="area-section">
+          <div class="area-section-header">
+            <span class="area-section-dot"></span>
+            <span class="area-section-name">${escapeHtml(area.area)}</span>
+            <div class="area-section-meta">
+              <span class="meta-pill meta-pill-grade">성취도: ${grades.join(' / ')}</span>
+              <span class="meta-pill ${ranks.every(r => r === 'X') ? 'meta-pill-no' : 'meta-pill-rank'}">석차: ${ranks.join(' / ')}</span>
+            </div>
+          </div>
+          <table class="grading-table">
+            <thead>
+              <tr>
+                <th class="col-type">과목 유형</th>
+                <th class="col-subjects">과목명</th>
+                <th class="col-grade">성취도</th>
+                <th class="col-rank">석차등급</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${area.rows.map(r => `
+                <tr>
+                  <td class="col-type"><span class="type-tag ${r.type}">${r.type}</span></td>
+                  <td class="col-subjects"><span class="subject-list">${escapeHtml(r.subjects)}</span></td>
+                  <td class="col-grade">
+                    <span class="grade-value ${r.grade === '3단계' ? 'three' : r.grade === 'P/F' ? 'pf' : ''}">${escapeHtml(r.grade)}</span>
+                  </td>
+                  <td class="col-rank">
+                    <span class="rank-value ${r.rank === 'X' ? 'no' : ''}">${escapeHtml(r.rank)}</span>
+                  </td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      `}).join('');
+    }
+
+    function escapeHtml(s) {
+      if (s == null) return '';
+      return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+
+    renderGrading();
+  </script>
+</body>
+</html>
