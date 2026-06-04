@@ -673,7 +673,7 @@
         ]
       },
       {
-        "grade": 2,
+        "grade": 3,
         "area": "국어",
         "subjects": [
           "매체 의사소통",
@@ -694,7 +694,7 @@
         ]
       },
       {
-        "grade": 2,
+        "grade": 3,
         "area": "수학",
         "subjects": [
           "전문 수학",
@@ -879,7 +879,7 @@
           "로봇과 공학세계",
           "정보과학",
           "일본 문화",
-          "중국문화",
+          "중국 문화",
           "생활과 한문"
         ],
         "selectCount": 1,
@@ -979,7 +979,6 @@
       "로봇과 공학세계": "진로선택",
       "정보과학": "진로선택",
       "일본 문화": "융합선택",
-      "중국문화": "융합선택",
       "생활과학 탐구": "진로선택",
       "소프트웨어와 생활": "융합선택",
       "심화 일본어": "진로선택",
@@ -987,7 +986,8 @@
       "한문 고전 읽기": "진로선택",
       "언어생활 탐구": "융합선택",
       "생활과 한문": "진로선택",
-      "인간 발달": "진로선택"
+      "인간 발달": "진로선택",
+      "중국 문화": "융합선택"
     },
     "subjectInfo": {
       "언어생활과 한자": {
@@ -1105,10 +1105,6 @@
       "주제 탐구 독서": {
         "page": 30,
         "youtube": "https://youtu.be/xfVsxIQ6Jm4?si=SUC0ujHezOhOMf0D"
-      },
-      "중국문화": {
-        "page": 263,
-        "youtube": "https://youtu.be/rs8rdtrNenk?si=DHMw7cedcDlRSVhA"
       },
       "통합사회1": {
         "page": 84
@@ -1229,7 +1225,8 @@
         "youtube": "https://youtu.be/e3KvK6g3mQM?si=oGJHAVSkYPxIWUwG"
       },
       "창의 공학 설계": {
-        "page": 234
+        "page": 234,
+        "youtube": "https://youtu.be/-4B8pj4bgcY?si=A21gp2GQhVIx5Lax"
       },
       "대수": {
         "page": 44,
@@ -1396,10 +1393,6 @@
         "youtube": "https://youtu.be/dJLyYiJw73s?si=lV0LOl4kVhkn6pP6",
         "page": 174
       },
-      "창의공학설계": {
-        "youtube": "https://youtu.be/-4B8pj4bgcY?si=A21gp2GQhVIx5Lax",
-        "page": 234
-      },
       "문화로 보는 한국사": {
         "pdfFile": "선택과목_안내_문화로보는한국사_.pdf",
         "page": 1
@@ -1407,6 +1400,10 @@
       "전문 수학": {
         "page": 1,
         "pdfFile": "professional_math.pdf"
+      },
+      "중국 문화": {
+        "page": 263,
+        "youtube": "https://youtu.be/rs8rdtrNenk?si=DHMw7cedcDlRSVhA"
       }
     },
     "pdfFile": "guide.pdf"
@@ -2284,10 +2281,10 @@
         "grade": 3,
         "area": "교양",
         "subjects": [
-          "창의공학설계",
+          "창의 공학 설계",
           "정보과학",
           "일본 문화",
-          "중국문화",
+          "중국 문화",
           "생활과 한문"
         ],
         "selectCount": 1,
@@ -2381,16 +2378,16 @@
       "동아시아 역사 기행": "진로선택",
       "과학의 역사와 문화": "융합선택",
       "기후변화와 환경생태": "융합선택",
-      "창의공학설계": "융합선택",
       "정보과학": "진로선택",
       "일본 문화": "융합선택",
-      "중국문화": "융합선택",
       "생활과학 탐구": "진로선택",
       "소프트웨어와 생활": "융합선택",
       "심화 일본어": "진로선택",
       "심화 중국어": "진로선택",
       "한문 고전 읽기": "진로선택",
-      "언어생활 탐구": "융합선택"
+      "언어생활 탐구": "융합선택",
+      "창의 공학 설계": "융합선택",
+      "중국 문화": "융합선택"
     },
     "subjectInfo": {
       "언어생활과 한자": {
@@ -2510,10 +2507,6 @@
         "page": 30,
         "youtube": "https://youtu.be/xfVsxIQ6Jm4?si=SUC0ujHezOhOMf0D"
       },
-      "중국문화": {
-        "page": 263,
-        "youtube": "https://youtu.be/rs8rdtrNenk?si=DHMw7cedcDlRSVhA"
-      },
       "통합사회1": {
         "page": 84
       },
@@ -2623,10 +2616,6 @@
       "체육1": {
         "page": 144,
         "youtube": "https://youtu.be/e3KvK6g3mQM?si=oGJHAVSkYPxIWUwG"
-      },
-      "창의공학설계": {
-        "page": 234,
-        "youtube": "https://youtu.be/-4B8pj4bgcY?si=A21gp2GQhVIx5Lax"
       },
       "대수": {
         "page": 44,
@@ -2789,6 +2778,14 @@
       "전문 수학": {
         "page": 1,
         "pdfFile": "professional_math.pdf"
+      },
+      "창의 공학 설계": {
+        "page": 234,
+        "youtube": "https://youtu.be/-4B8pj4bgcY?si=A21gp2GQhVIx5Lax"
+      },
+      "중국 문화": {
+        "page": 263,
+        "youtube": "https://youtu.be/rs8rdtrNenk?si=DHMw7cedcDlRSVhA"
       }
     },
     "pdfFile": "guide.pdf"
