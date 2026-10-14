@@ -506,6 +506,307 @@
         gap: 8px;
       }
     }
+
+    /* ===== 편제표 편집 모드 전용 스타일 ===== */
+    .edit-section {
+      background: #fff;
+      border: 1px solid var(--ink-100);
+      border-radius: var(--radius-lg);
+      margin-bottom: 16px;
+      overflow: hidden;
+    }
+    .edit-section-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 24px;
+      background: linear-gradient(135deg, var(--green-50, #f5f6f2), #fff);
+      border-bottom: 1px solid var(--ink-100);
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.15s;
+    }
+    .edit-section-head:hover {
+      background: var(--bg-cream);
+    }
+    .edit-caret {
+      display: inline-block;
+      font-size: 11px;
+      color: var(--ink-500);
+      transition: transform 0.2s;
+      transform: rotate(90deg);
+    }
+    .edit-section.edit-collapsed .edit-caret {
+      transform: rotate(0deg);
+    }
+    .edit-section.edit-collapsed .edit-section-body {
+      display: none;
+    }
+    .edit-section.edit-collapsed .edit-section-head {
+      border-bottom: 0;
+    }
+    .edit-section-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--green-900);
+      letter-spacing: -0.02em;
+      margin: 0;
+    }
+    .edit-section-count {
+      margin-left: auto;
+      font-size: 12px;
+      color: var(--ink-500);
+      padding: 2px 10px;
+      background: #fff;
+      border: 1px solid var(--ink-100);
+      border-radius: 999px;
+    }
+    .edit-section-body {
+      padding: 18px 24px 22px;
+    }
+
+    /* 편제 편집 테이블 */
+    .edit-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .edit-table thead th {
+      background: var(--bg-cream);
+      color: var(--ink-500);
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 8px 10px;
+      text-align: left;
+      border-bottom: 1px solid var(--ink-100);
+    }
+    .edit-table tbody td {
+      padding: 6px 6px;
+      border-bottom: 1px solid var(--ink-100);
+      vertical-align: middle;
+    }
+    .edit-table tbody tr:last-child td {
+      border-bottom: 0;
+    }
+    .edit-table .info-input {
+      padding: 7px 10px;
+      font-size: 13px;
+    }
+
+    /* 삭제 x 버튼 */
+    .btn-xmark {
+      background: #fff;
+      border: 1px solid var(--ink-100);
+      color: #b91c1c;
+      font-size: 16px;
+      line-height: 1;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.15s;
+      padding: 0;
+      font-family: inherit;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .btn-xmark:hover {
+      background: #fef2f2;
+      border-color: #fecaca;
+    }
+
+    /* 선택군 카드 */
+    .elec-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .elec-card {
+      border: 1px solid var(--ink-100);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      background: var(--bg-cream);
+    }
+    .elec-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .elec-badge {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--lavender-700);
+      background: var(--lavender-50);
+      padding: 3px 10px;
+      border-radius: 999px;
+      flex-shrink: 0;
+    }
+    .elec-area {
+      flex: 1;
+      font-weight: 700;
+      font-size: 14px !important;
+      background: #fff !important;
+    }
+    .elec-meta {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+    .elec-meta label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--ink-500);
+      font-weight: 600;
+    }
+    .elec-meta .info-input {
+      width: auto;
+      min-width: 60px;
+      padding: 6px 8px;
+      font-size: 12px;
+      background: #fff;
+    }
+    .elec-types {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 12px;
+      padding: 8px 0;
+      border-top: 1px dashed var(--ink-100);
+      border-bottom: 1px dashed var(--ink-100);
+    }
+    .elec-types-label {
+      font-size: 12px;
+      color: var(--ink-500);
+      font-weight: 600;
+      margin-right: 4px;
+    }
+    .elec-type-chip {
+      cursor: pointer;
+    }
+    .elec-type-chip input {
+      display: none;
+    }
+    .elec-type-chip span {
+      display: inline-block;
+      padding: 4px 10px;
+      font-size: 11px;
+      font-weight: 600;
+      border: 1.5px solid var(--ink-100);
+      border-radius: 999px;
+      color: var(--ink-500);
+      background: #fff;
+      transition: all 0.15s;
+      user-select: none;
+    }
+    .elec-type-chip:hover span {
+      border-color: var(--green-400, var(--green-700));
+      color: var(--green-700);
+    }
+    .elec-type-chip input:checked + span {
+      background: var(--green-700);
+      border-color: var(--green-700);
+      color: #fff;
+    }
+    .elec-subjects-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--ink-500);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .elec-subject-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+    }
+    .elec-subject-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      background: #fff;
+      border: 1px solid var(--ink-100);
+      border-radius: 999px;
+      padding: 2px 4px 2px 10px;
+      transition: border-color 0.15s;
+    }
+    .elec-subject-chip:focus-within {
+      border-color: var(--green-600, var(--green-700));
+    }
+    .elec-subject-input {
+      border: none;
+      background: transparent;
+      font-size: 13px;
+      padding: 4px 2px;
+      font-family: inherit;
+      color: var(--ink-900);
+      min-width: 50px;
+      width: auto;
+    }
+    .elec-subject-input:focus {
+      outline: none;
+    }
+    .elec-subject-x {
+      background: transparent;
+      border: none;
+      color: var(--ink-300);
+      cursor: pointer;
+      font-size: 15px;
+      line-height: 1;
+      padding: 2px 6px;
+      border-radius: 50%;
+      transition: all 0.15s;
+      font-family: inherit;
+    }
+    .elec-subject-x:hover {
+      color: #b91c1c;
+      background: #fef2f2;
+    }
+    .btn-add-sub {
+      background: transparent;
+      border: 1px dashed var(--ink-300, var(--ink-100));
+      color: var(--ink-500);
+      padding: 5px 12px;
+      font-size: 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.15s;
+    }
+    .btn-add-sub:hover {
+      border-color: var(--green-600, var(--green-700));
+      color: var(--green-700);
+    }
+
+    @media (max-width: 720px) {
+      .edit-section-body { padding: 14px; }
+      .edit-table thead { display: none; }
+      .edit-table, .edit-table tbody, .edit-table tr, .edit-table td {
+        display: block;
+        width: 100%;
+      }
+      .edit-table tbody tr {
+        padding: 10px;
+        border-bottom: 1px solid var(--ink-100);
+      }
+      .edit-table tbody td {
+        padding: 4px 0;
+        border: none;
+        width: auto !important;
+      }
+      .elec-meta label {
+        flex: 1 1 45%;
+      }
+    }
   </style>
 </head>
 <body class="page-admin">
@@ -540,6 +841,7 @@
     <div class="mode-tabs">
       <button class="mode-tab active" data-mode="types">선택과목 유형 정리</button>
       <button class="mode-tab" data-mode="info">과목 안내·PDF·유튜브</button>
+      <button class="mode-tab" data-mode="edit">편제표 편집</button>
       <button class="mode-tab" data-mode="pdf">PDF 설정</button>
       <button class="mode-tab" data-mode="github">GitHub 연동</button>
     </div>
@@ -563,9 +865,15 @@
       여기에 GitHub Personal Access Token을 입력하면, 이제부터 "저장" 버튼을 누르면 GitHub에 자동으로 업로드됩니다.
       따로 JSON 파일을 다운받아 올리지 않아도 돼요. (브라우저에만 저장되며 다른 사람에게 노출되지 않습니다)
     </div>
+    <div class="info-box" id="modeInfoEdit" style="display: none;">
+      <strong>편제표 편집</strong>
+      교과(군)별 필수 이수 학점, 학교지정 과목, 선택군을 직접 수정할 수 있어요.
+      섹션 제목을 클릭하면 접기/펼치기가 돼요. 수정 후 상단의 <strong style="color:var(--green-700);display:inline;text-transform:none;letter-spacing:0;font-size:13px;">"저장 (사이트 반영)"</strong> 버튼으로 적용합니다.
+    </div>
 
     <div class="year-tabs" id="yearTabsWrap" role="tablist">
-      <button class="year-tab active" data-year="2026">2026 입학생</button>
+      <button class="year-tab active" data-year="2027">2027 입학생</button>
+      <button class="year-tab" data-year="2026">2026 입학생</button>
       <button class="year-tab" data-year="2025">2025 입학생</button>
     </div>
 
@@ -601,8 +909,11 @@
 
     // ===== 상태 =====
     let curriculumData = null;        // 원본 JSON
-    let currentYear = '2026';         // 현재 편집 중인 입학년도
-    let currentMode = 'types';        // 'types' | 'info' | 'pdf'
+    let currentYear = '2027';         // 현재 편집 중인 입학년도
+    let currentMode = 'types';        // 'types' | 'info' | 'edit' | 'pdf' | 'github'
+    const YEARS = ['2025', '2026', '2027'];
+    const AREA_OPTIONS = ['국어','수학','영어','사회','과학','체육','예술','기술·가정/정보/제2외국어/한문/교양','제2외국어','교과(군) 간 선택','교과(군) 간 선택 1','교과(군) 간 선택 2','교양','기술·가정/정보/제2외국어'];
+    const TYPE_OPTIONS = ['공통','일반선택','진로선택','융합선택'];
     // subjectTypes 형식: data[year].subjectTypes[과목명] = '진로선택'
     // subjectInfo 형식: data[year].subjectInfo[과목명] = { intro: '...', page: 12 }
     // pdfFile 형식: data[year].pdfFile = 'course_guide.pdf'  (또는 https://...)
@@ -650,10 +961,17 @@
       }
 
       // 각 년도 데이터에 subjectTypes, subjectInfo, pdfFile 보장
-      for (const y of ['2025', '2026']) {
+      for (const y of YEARS) {
+        if (!curriculumData[y]) {
+          alert(`curriculum.json에 ${y} 데이터가 없어요.`);
+          continue;
+        }
         if (!curriculumData[y].subjectTypes) curriculumData[y].subjectTypes = {};
         if (!curriculumData[y].subjectInfo) curriculumData[y].subjectInfo = {};
         if (typeof curriculumData[y].pdfFile === 'undefined') curriculumData[y].pdfFile = '';
+        if (!curriculumData[y].fixedSubjects) curriculumData[y].fixedSubjects = [];
+        if (!curriculumData[y].electiveGroups) curriculumData[y].electiveGroups = [];
+        if (!curriculumData[y].requirements) curriculumData[y].requirements = [];
       }
 
       setupYearTabs();
@@ -670,6 +988,7 @@
           // 안내 박스 전환
           document.getElementById('modeInfoTypes').style.display = currentMode === 'types' ? 'block' : 'none';
           document.getElementById('modeInfoInfo').style.display = currentMode === 'info' ? 'block' : 'none';
+          document.getElementById('modeInfoEdit').style.display = currentMode === 'edit' ? 'block' : 'none';
           document.getElementById('modeInfoPdf').style.display = currentMode === 'pdf' ? 'block' : 'none';
           document.getElementById('modeInfoGithub').style.display = currentMode === 'github' ? 'block' : 'none';
           // 년도 탭은 PDF/GitHub 모드일 때 숨김
@@ -694,6 +1013,7 @@
     function render() {
       if (currentMode === 'types') renderTypes();
       else if (currentMode === 'info') renderInfo();
+      else if (currentMode === 'edit') renderEdit();
       else if (currentMode === 'pdf') renderPdf();
       else if (currentMode === 'github') renderGithub();
     }
@@ -941,36 +1261,40 @@
       const statsEl = document.getElementById('stats');
       statsEl.innerHTML = '';
 
-      const pdf2025 = curriculumData['2025'].pdfFile || '';
-      const pdf2026 = curriculumData['2026'].pdfFile || '';
+      const pdfs = {};
+      YEARS.forEach(y => { pdfs[y] = (curriculumData[y] && curriculumData[y].pdfFile) || ''; });
 
       editArea.innerHTML = `
         <div class="pdf-config">
-          <label>2026 입학생용 PDF 안내서</label>
-          <input type="text" class="info-input" id="pdfInput2026"
-                 placeholder="예: course_guide_2026.pdf"
-                 value="${escapeAttr(pdf2026)}">
+          <label>2027 입학생용 PDF 안내서</label>
+          <input type="text" class="info-input" data-pdf-year="2027"
+                 placeholder="예: guide.pdf"
+                 value="${escapeAttr(pdfs['2027'])}">
           <p class="pdf-help">
-            GitHub 저장소에 PDF 파일을 함께 올린 후 그 파일명을 적어주세요. 예: <code>course_guide_2026.pdf</code><br>
-            또는 외부 URL을 사용할 수도 있어요. 예: <code>https://example.com/guide.pdf</code>
+            GitHub 저장소에 PDF 파일을 함께 올린 후 그 파일명을 적어주세요. 예: <code>guide.pdf</code><br>
+            또는 외부 URL. 예: <code>https://example.com/guide.pdf</code>
           </p>
 
+          <label style="margin-top: 24px;">2026 입학생용 PDF 안내서</label>
+          <input type="text" class="info-input" data-pdf-year="2026"
+                 placeholder="예: guide.pdf"
+                 value="${escapeAttr(pdfs['2026'])}">
+
           <label style="margin-top: 24px;">2025 입학생용 PDF 안내서</label>
-          <input type="text" class="info-input" id="pdfInput2025"
-                 placeholder="예: course_guide_2025.pdf"
-                 value="${escapeAttr(pdf2025)}">
+          <input type="text" class="info-input" data-pdf-year="2025"
+                 placeholder="예: guide.pdf"
+                 value="${escapeAttr(pdfs['2025'])}">
           <p class="pdf-help">
-            2025 입학생과 2026 입학생이 같은 PDF를 쓴다면 두 칸 모두 같은 파일명을 적어주세요.
+            세 입학년도가 같은 PDF를 쓴다면 세 칸 모두 같은 파일명을 적으세요.
           </p>
         </div>
       `;
 
-      // 변경 이벤트
-      document.getElementById('pdfInput2026').addEventListener('input', e => {
-        curriculumData['2026'].pdfFile = e.target.value.trim();
-      });
-      document.getElementById('pdfInput2025').addEventListener('input', e => {
-        curriculumData['2025'].pdfFile = e.target.value.trim();
+      editArea.querySelectorAll('input[data-pdf-year]').forEach(input => {
+        input.addEventListener('input', e => {
+          const y = e.target.dataset.pdfYear;
+          curriculumData[y].pdfFile = e.target.value.trim();
+        });
       });
     }
 
@@ -1092,6 +1416,379 @@
           localStorage.removeItem('gh_config');
           renderGithub();
         }
+      });
+    }
+
+    // ===== 모드 5: 편제표 편집 =====
+    // 접기/펼치기 상태 (세션 동안 유지)
+    let editCollapsed = { req: false, fixed: false, elective: false };
+
+    function renderEdit() {
+      const yd = curriculumData[currentYear];
+      const editArea = document.getElementById('editArea');
+      const statsEl = document.getElementById('stats');
+
+      // 통계
+      const nFixed = yd.fixedSubjects.length;
+      const nElective = yd.electiveGroups.length;
+      const nSubjectsInElective = yd.electiveGroups.reduce((s,g) => s + (g.subjects||[]).length, 0);
+      statsEl.innerHTML = `
+        <div class="stat-pill">학교지정 <strong>${nFixed}</strong>개</div>
+        <div class="stat-pill">선택군 <strong>${nElective}</strong>개</div>
+        <div class="stat-pill">선택과목 <strong>${nSubjectsInElective}</strong>개</div>
+        <div class="stat-pill">입학년도 <strong>${currentYear}</strong></div>
+      `;
+
+      editArea.innerHTML = `
+        ${sectionRequirementsHtml(yd)}
+        ${sectionFixedHtml(yd)}
+        ${sectionElectiveHtml(yd)}
+      `;
+
+      bindEditHandlers();
+    }
+
+    // --- 섹션: 요구사항 (교과(군)별 필수 이수) ---
+    function sectionRequirementsHtml(yd) {
+      const collapsed = editCollapsed.req ? ' edit-collapsed' : '';
+      const rows = (yd.requirements || []).map((r, idx) => `
+        <tr>
+          <td><input class="info-input" value="${escapeAttr(r.area || '')}" data-req-idx="${idx}" data-req-field="area"></td>
+          <td style="width:100px;"><input class="info-input" type="number" min="0" value="${r.required || 0}" data-req-idx="${idx}" data-req-field="required"></td>
+          <td style="width:100px;"><input class="info-input" type="number" min="0" value="${r.total || 0}" data-req-idx="${idx}" data-req-field="total"></td>
+          <td style="width:40px; text-align:center;"><button class="btn-xmark" data-req-del="${idx}" title="삭제">×</button></td>
+        </tr>
+      `).join('');
+
+      return `
+        <div class="edit-section${collapsed}">
+          <div class="edit-section-head" data-toggle="req">
+            <span class="edit-caret">▸</span>
+            <h3 class="edit-section-title">교과(군)별 필수 이수 학점</h3>
+            <span class="edit-section-count">${(yd.requirements||[]).length}개</span>
+          </div>
+          <div class="edit-section-body">
+            <table class="edit-table">
+              <thead><tr>
+                <th>교과(군)</th><th>필수</th><th>영역합계</th><th></th>
+              </tr></thead>
+              <tbody>${rows}</tbody>
+            </table>
+            <div style="margin-top:12px;">
+              <button class="btn btn-secondary" data-req-add>+ 교과(군) 추가</button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // --- 섹션: 학교지정 과목 ---
+    function sectionFixedHtml(yd) {
+      const collapsed = editCollapsed.fixed ? ' edit-collapsed' : '';
+      const rows = (yd.fixedSubjects || []).map((s, idx) => {
+        // semesters는 보통 단일 (grade, semester, credits)
+        const sem = (s.semesters && s.semesters[0]) || { grade: 1, semester: 1, credits: 0 };
+        const type = (s.types && s.types[0]) || '공통';
+        return `
+          <tr>
+            <td><input class="info-input" value="${escapeAttr(s.area||'')}" data-fs-idx="${idx}" data-fs-field="area" list="area-datalist"></td>
+            <td><input class="info-input" value="${escapeAttr(s.name||'')}" data-fs-idx="${idx}" data-fs-field="name"></td>
+            <td style="width:70px;">
+              <select class="info-input" data-fs-idx="${idx}" data-fs-field="grade">
+                ${[1,2,3].map(g => `<option value="${g}" ${sem.grade==g?'selected':''}>${g}학년</option>`).join('')}
+              </select>
+            </td>
+            <td style="width:70px;">
+              <select class="info-input" data-fs-idx="${idx}" data-fs-field="semester">
+                ${[1,2].map(s2 => `<option value="${s2}" ${sem.semester==s2?'selected':''}>${s2}학기</option>`).join('')}
+              </select>
+            </td>
+            <td style="width:70px;"><input class="info-input" type="number" min="0" value="${sem.credits || 0}" data-fs-idx="${idx}" data-fs-field="credits"></td>
+            <td style="width:110px;">
+              <select class="info-input" data-fs-idx="${idx}" data-fs-field="type">
+                ${TYPE_OPTIONS.map(t => `<option value="${t}" ${type==t?'selected':''}>${t}</option>`).join('')}
+              </select>
+            </td>
+            <td style="width:40px; text-align:center;"><button class="btn-xmark" data-fs-del="${idx}" title="삭제">×</button></td>
+          </tr>
+        `;
+      }).join('');
+
+      // 교과군 자동완성용 datalist
+      const areaSet = new Set();
+      (yd.fixedSubjects || []).forEach(s => areaSet.add(s.area));
+      (yd.electiveGroups || []).forEach(g => areaSet.add(g.area));
+      AREA_OPTIONS.forEach(a => areaSet.add(a));
+      const datalist = `<datalist id="area-datalist">${[...areaSet].filter(Boolean).map(a => `<option value="${escapeAttr(a)}">`).join('')}</datalist>`;
+
+      return `
+        ${datalist}
+        <div class="edit-section${collapsed}">
+          <div class="edit-section-head" data-toggle="fixed">
+            <span class="edit-caret">▸</span>
+            <h3 class="edit-section-title">학교지정 과목</h3>
+            <span class="edit-section-count">${(yd.fixedSubjects||[]).length}개</span>
+          </div>
+          <div class="edit-section-body">
+            <table class="edit-table">
+              <thead><tr>
+                <th>교과(군)</th><th>과목명</th><th>학년</th><th>학기</th><th>학점</th><th>유형</th><th></th>
+              </tr></thead>
+              <tbody>${rows}</tbody>
+            </table>
+            <div style="margin-top:12px;">
+              <button class="btn btn-secondary" data-fs-add>+ 학교지정 과목 추가</button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // --- 섹션: 선택군 ---
+    function sectionElectiveHtml(yd) {
+      const collapsed = editCollapsed.elective ? ' edit-collapsed' : '';
+      const cards = (yd.electiveGroups || []).map((g, idx) => {
+        const sem = (g.semesters && g.semesters[0]) || { grade: g.grade || 2, semester: 1, credits: g.creditsPerSubject || 3 };
+        const types = g.types || [];
+        return `
+          <div class="elec-card" data-elec-idx="${idx}">
+            <div class="elec-head">
+              <span class="elec-badge">${idx + 1}</span>
+              <input class="info-input elec-area" value="${escapeAttr(g.area||'')}" data-elec-idx="${idx}" data-elec-field="area" list="area-datalist" placeholder="교과(군)">
+              <button class="btn-xmark" data-elec-del="${idx}" title="선택군 삭제">×</button>
+            </div>
+            <div class="elec-meta">
+              <label>학년
+                <select class="info-input" data-elec-idx="${idx}" data-elec-field="grade">
+                  ${[1,2,3].map(gg => `<option value="${gg}" ${sem.grade==gg?'selected':''}>${gg}</option>`).join('')}
+                </select>
+              </label>
+              <label>학기
+                <select class="info-input" data-elec-idx="${idx}" data-elec-field="semester">
+                  ${[1,2].map(ss => `<option value="${ss}" ${sem.semester==ss?'selected':''}>${ss}</option>`).join('')}
+                </select>
+              </label>
+              <label>택
+                <input class="info-input" type="number" min="1" value="${g.selectCount||1}" data-elec-idx="${idx}" data-elec-field="selectCount">
+              </label>
+              <label>학점
+                <input class="info-input" type="number" min="0" value="${sem.credits||g.creditsPerSubject||0}" data-elec-idx="${idx}" data-elec-field="credits">
+              </label>
+            </div>
+            <div class="elec-types">
+              <span class="elec-types-label">유형:</span>
+              ${TYPE_OPTIONS.map(t => `
+                <label class="elec-type-chip">
+                  <input type="checkbox" value="${t}" data-elec-idx="${idx}" data-elec-field="type" ${types.includes(t)?'checked':''}>
+                  <span>${t}</span>
+                </label>
+              `).join('')}
+            </div>
+            <div class="elec-subjects">
+              <div class="elec-subjects-label">과목 (${(g.subjects||[]).length}개)</div>
+              <div class="elec-subject-list">
+                ${(g.subjects||[]).map((sub, si) => `
+                  <span class="elec-subject-chip">
+                    <input class="elec-subject-input" value="${escapeAttr(sub)}" data-elec-idx="${idx}" data-sub-idx="${si}">
+                    <button class="elec-subject-x" data-elec-idx="${idx}" data-sub-del="${si}" title="삭제">×</button>
+                  </span>
+                `).join('')}
+                <button class="btn-add-sub" data-elec-sub-add="${idx}">+ 과목 추가</button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      return `
+        <div class="edit-section${collapsed}">
+          <div class="edit-section-head" data-toggle="elective">
+            <span class="edit-caret">▸</span>
+            <h3 class="edit-section-title">선택군</h3>
+            <span class="edit-section-count">${(yd.electiveGroups||[]).length}개</span>
+          </div>
+          <div class="edit-section-body">
+            <div class="elec-cards">${cards || '<p style="color:var(--ink-500);padding:20px;text-align:center;">선택군이 없어요.</p>'}</div>
+            <div style="margin-top:16px;">
+              <button class="btn btn-secondary" data-elec-add>+ 선택군 추가</button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // --- 이벤트 바인딩 ---
+    function bindEditHandlers() {
+      const editArea = document.getElementById('editArea');
+
+      // 섹션 접기/펼치기
+      editArea.querySelectorAll('[data-toggle]').forEach(el => {
+        el.addEventListener('click', e => {
+          const key = e.currentTarget.dataset.toggle;
+          editCollapsed[key] = !editCollapsed[key];
+          e.currentTarget.closest('.edit-section').classList.toggle('edit-collapsed');
+        });
+      });
+
+      const yd = curriculumData[currentYear];
+
+      // --- 요구사항 ---
+      editArea.querySelectorAll('[data-req-idx]').forEach(input => {
+        input.addEventListener('input', e => {
+          const idx = +e.target.dataset.reqIdx;
+          const field = e.target.dataset.reqField;
+          if (!yd.requirements[idx]) return;
+          if (field === 'area') yd.requirements[idx].area = e.target.value;
+          else yd.requirements[idx][field] = parseInt(e.target.value, 10) || 0;
+        });
+      });
+      editArea.querySelectorAll('[data-req-del]').forEach(btn => {
+        btn.addEventListener('click', e => {
+          const idx = +e.target.dataset.reqDel;
+          if (confirm(`"${yd.requirements[idx]?.area}" 교과(군) 요구사항을 삭제할까요?`)) {
+            yd.requirements.splice(idx, 1);
+            renderEdit();
+          }
+        });
+      });
+      const reqAddBtn = editArea.querySelector('[data-req-add]');
+      if (reqAddBtn) reqAddBtn.addEventListener('click', () => {
+        yd.requirements.push({ area: '새 교과(군)', required: 0, total: 0 });
+        renderEdit();
+      });
+
+      // --- 학교지정 ---
+      editArea.querySelectorAll('[data-fs-idx]').forEach(input => {
+        input.addEventListener('input', e => {
+          const idx = +e.target.dataset.fsIdx;
+          const field = e.target.dataset.fsField;
+          const s = yd.fixedSubjects[idx];
+          if (!s) return;
+          if (!s.semesters || !s.semesters[0]) s.semesters = [{grade:1, semester:1, credits:0}];
+          if (field === 'area') s.area = e.target.value;
+          else if (field === 'name') s.name = e.target.value;
+          else if (field === 'grade') s.semesters[0].grade = parseInt(e.target.value, 10);
+          else if (field === 'semester') s.semesters[0].semester = parseInt(e.target.value, 10);
+          else if (field === 'credits') {
+            s.semesters[0].credits = parseInt(e.target.value, 10) || 0;
+            s.baseCredit = s.semesters[0].credits;
+          }
+          else if (field === 'type') s.types = [e.target.value];
+        });
+      });
+      editArea.querySelectorAll('[data-fs-del]').forEach(btn => {
+        btn.addEventListener('click', e => {
+          const idx = +e.target.dataset.fsDel;
+          if (confirm(`"${yd.fixedSubjects[idx]?.name}" 과목을 삭제할까요?`)) {
+            yd.fixedSubjects.splice(idx, 1);
+            renderEdit();
+          }
+        });
+      });
+      const fsAddBtn = editArea.querySelector('[data-fs-add]');
+      if (fsAddBtn) fsAddBtn.addEventListener('click', () => {
+        yd.fixedSubjects.push({
+          area: '국어', name: '새 과목', baseCredit: 0,
+          types: ['공통'],
+          semesters: [{grade:1, semester:1, credits:0}]
+        });
+        renderEdit();
+      });
+
+      // --- 선택군 ---
+      editArea.querySelectorAll('[data-elec-field]').forEach(input => {
+        if (input.dataset.elecField === 'type') {
+          input.addEventListener('change', e => {
+            const idx = +e.target.dataset.elecIdx;
+            const g = yd.electiveGroups[idx];
+            if (!g) return;
+            if (!g.types) g.types = [];
+            const t = e.target.value;
+            if (e.target.checked) {
+              if (!g.types.includes(t)) g.types.push(t);
+            } else {
+              g.types = g.types.filter(x => x !== t);
+            }
+          });
+        } else {
+          input.addEventListener('input', e => {
+            const idx = +e.target.dataset.elecIdx;
+            const field = e.target.dataset.elecField;
+            const g = yd.electiveGroups[idx];
+            if (!g) return;
+            if (!g.semesters || !g.semesters[0]) g.semesters = [{grade:2, semester:1, credits:0}];
+            if (field === 'area') g.area = e.target.value;
+            else if (field === 'grade') {
+              const v = parseInt(e.target.value, 10);
+              g.grade = v;
+              g.semesters[0].grade = v;
+            }
+            else if (field === 'semester') g.semesters[0].semester = parseInt(e.target.value, 10);
+            else if (field === 'selectCount') g.selectCount = parseInt(e.target.value, 10) || 1;
+            else if (field === 'credits') {
+              const v = parseInt(e.target.value, 10) || 0;
+              g.creditsPerSubject = v;
+              g.semesters[0].credits = v;
+            }
+          });
+        }
+      });
+
+      editArea.querySelectorAll('.elec-subject-input').forEach(input => {
+        input.addEventListener('input', e => {
+          const idx = +e.target.dataset.elecIdx;
+          const si = +e.target.dataset.subIdx;
+          if (yd.electiveGroups[idx] && yd.electiveGroups[idx].subjects) {
+            yd.electiveGroups[idx].subjects[si] = e.target.value;
+          }
+        });
+      });
+      editArea.querySelectorAll('[data-sub-del]').forEach(btn => {
+        btn.addEventListener('click', e => {
+          const idx = +e.target.dataset.elecIdx;
+          const si = +e.target.dataset.subDel;
+          const g = yd.electiveGroups[idx];
+          if (g && g.subjects) {
+            g.subjects.splice(si, 1);
+            renderEdit();
+          }
+        });
+      });
+      editArea.querySelectorAll('[data-elec-sub-add]').forEach(btn => {
+        btn.addEventListener('click', e => {
+          const idx = +e.target.dataset.elecSubAdd;
+          const g = yd.electiveGroups[idx];
+          if (!g) return;
+          if (!g.subjects) g.subjects = [];
+          const name = prompt('추가할 과목명을 입력하세요:');
+          if (name && name.trim()) {
+            g.subjects.push(name.trim());
+            renderEdit();
+          }
+        });
+      });
+      editArea.querySelectorAll('[data-elec-del]').forEach(btn => {
+        btn.addEventListener('click', e => {
+          const idx = +e.target.dataset.elecDel;
+          const g = yd.electiveGroups[idx];
+          if (confirm(`선택군 "${g?.area}" (${(g?.subjects||[]).length}개 과목)를 통째로 삭제할까요?`)) {
+            yd.electiveGroups.splice(idx, 1);
+            renderEdit();
+          }
+        });
+      });
+      const elecAddBtn = editArea.querySelector('[data-elec-add]');
+      if (elecAddBtn) elecAddBtn.addEventListener('click', () => {
+        yd.electiveGroups.push({
+          grade: 2,
+          area: '교과(군) 간 선택',
+          subjects: [],
+          selectCount: 1,
+          creditsPerSubject: 3,
+          semesters: [{grade:2, semester:1, credits:3}],
+          types: ['진로선택'],
+        });
+        renderEdit();
       });
     }
 
