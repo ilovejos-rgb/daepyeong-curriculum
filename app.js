@@ -4,7 +4,9 @@
 
 // ----- 입학년도 결정 -----
 const params = new URLSearchParams(location.search);
-const YEAR = params.get('year') === '2025' ? '2025' : '2026';
+// 2025, 2026, 2027 입학년도 지원. 그 외는 2026(가장 최근 재학생)으로 폴백
+const _yearParam = params.get('year');
+const YEAR = ['2025', '2026', '2027'].includes(_yearParam) ? _yearParam : '2026';
 
 // ----- 구글 시트 연동 설정 (나중에 입력) -----
 // 구글 시트를 "웹에 게시" → CSV 형식으로 게시한 URL을 여기에 붙여넣으면
