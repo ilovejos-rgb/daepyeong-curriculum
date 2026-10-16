@@ -647,7 +647,7 @@
           "기하",
           "영미 문학 읽기",
           "인공지능 기초",
-          "인간발달",
+          "인간 발달",
           "음악 콘텐츠 제작 기초",
           "법과 사회",
           "윤리문제 탐구",
@@ -676,8 +676,7 @@
         "grade": 2,
         "area": "국어",
         "subjects": [
-          "매체 의사소통",
-          "직무 의사소통"
+          "매체 의사소통"
         ],
         "selectCount": 1,
         "creditsPerSubject": 4,
@@ -717,8 +716,7 @@
         "grade": 3,
         "area": "영어",
         "subjects": [
-          "심화 영어 독해와 작문",
-          "영어 발표와 토론"
+          "심화 영어 독해와 작문"
         ],
         "selectCount": 1,
         "creditsPerSubject": 4,
@@ -739,7 +737,6 @@
         "subjects": [
           "주제 탐구 독서",
           "미적분Ⅱ",
-          "심화 영어",
           "경제"
         ],
         "selectCount": 1,
@@ -762,7 +759,6 @@
         "subjects": [
           "언어생활 탐구",
           "수학과 문화",
-          "세계 문화와 영어",
           "금융과 경제생활"
         ],
         "selectCount": 1,
@@ -789,8 +785,7 @@
           "문화로 보는 한국사",
           "전자기와 양자",
           "화학 반응의 세계",
-          "생물의 유전",
-          "행성우주과학"
+          "생물의 유전"
         ],
         "selectCount": 2,
         "creditsPerSubject": 3,
@@ -879,8 +874,7 @@
           "로봇과 공학세계",
           "정보과학",
           "일본 문화",
-          "중국문화",
-          "생활속의 한자"
+          "중국문화"
         ],
         "selectCount": 1,
         "creditsPerSubject": 3,
@@ -903,8 +897,7 @@
           "생활과학 탐구",
           "소프트웨어와 생활",
           "심화 일본어",
-          "심화 중국어",
-          "한문 고전 읽기"
+          "심화 중국어"
         ],
         "selectCount": 1,
         "creditsPerSubject": 3,
@@ -1478,7 +1471,7 @@
       {
         "area": "국어",
         "name": "공통국어1",
-        "baseCredit": 3,
+        "baseCredit": 4,
         "types": [
           "공통"
         ],
@@ -1486,14 +1479,14 @@
           {
             "grade": 1,
             "semester": 1,
-            "credits": 3
+            "credits": 4
           }
         ]
       },
       {
         "area": "국어",
         "name": "공통국어2",
-        "baseCredit": 3,
+        "baseCredit": 4,
         "types": [
           "공통"
         ],
@@ -1501,7 +1494,7 @@
           {
             "grade": 1,
             "semester": 2,
-            "credits": 3
+            "credits": 4
           }
         ]
       },
@@ -1628,7 +1621,7 @@
       {
         "area": "영어",
         "name": "공통영어1",
-        "baseCredit": 3,
+        "baseCredit": 4,
         "types": [
           "공통"
         ],
@@ -1636,14 +1629,14 @@
           {
             "grade": 1,
             "semester": 1,
-            "credits": 3
+            "credits": 4
           }
         ]
       },
       {
         "area": "영어",
         "name": "공통영어2",
-        "baseCredit": 3,
+        "baseCredit": 4,
         "types": [
           "공통"
         ],
@@ -1651,7 +1644,7 @@
           {
             "grade": 1,
             "semester": 2,
-            "credits": 3
+            "credits": 4
           }
         ]
       },
@@ -1978,8 +1971,7 @@
         "subjects": [
           "일본어",
           "중국어",
-          "스페인어",
-          "한문"
+          "스페인어"
         ],
         "selectCount": 1,
         "creditsPerSubject": 3,
@@ -2000,8 +1992,7 @@
         "subjects": [
           "일본어회화",
           "중국어회화",
-          "스페인어회화",
-          "언어생활과 한자"
+          "스페인어회화"
         ],
         "selectCount": 1,
         "creditsPerSubject": 3,
@@ -2821,8 +2812,8 @@
       },
       {
         "area": "사회(역사/도덕 포함)",
-        "required": 16,
-        "total": 16,
+        "required": 14,
+        "total": 14,
         "details": [
           {
             "label": "한국사",
@@ -3377,8 +3368,8 @@
         "grade": 2,
         "area": "제2외국어",
         "subjects": [
-          "일본어회화",
-          "중국어회화"
+          "일본어 회화",
+          "중국어 회화"
         ],
         "selectCount": 1,
         "creditsPerSubject": 3,
