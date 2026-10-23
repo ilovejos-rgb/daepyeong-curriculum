@@ -295,11 +295,139 @@
       padding: 10px;
     }
 
-    /* 모바일 */
+    /* ==== 모바일 전용 카드 뷰 ==== */
+    .mobile-only { display: none; }
+
+    .m-area-group {
+      border: 1px solid var(--ink-100);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      margin-bottom: 10px;
+      background: #fff;
+    }
+    .m-area-head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px dashed var(--ink-100);
+    }
+    .m-area-name {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--green-900);
+      flex: 1;
+    }
+    .m-area-stat {
+      font-size: 11px;
+      color: var(--ink-500);
+    }
+    .m-area-stat strong {
+      color: var(--green-700);
+      font-weight: 700;
+    }
+    .m-subject {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 8px 0;
+      border-bottom: 1px dashed var(--ink-100);
+    }
+    .m-subject:last-child { border-bottom: 0; }
+    .m-subject-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .m-subject-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--ink-900);
+      flex: 1;
+      min-width: 0;
+    }
+    .m-sem-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+    .m-sem-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 9px;
+      background: var(--bg-cream);
+      border: 1px solid var(--ink-100);
+      border-radius: 999px;
+      font-size: 11px;
+      color: var(--ink-500);
+    }
+    .m-sem-pill strong {
+      color: var(--green-700);
+      font-weight: 700;
+      font-family: 'SF Mono', Menlo, monospace;
+    }
+
+    /* 모바일 선택군 카드 */
+    .m-elec-group {
+      border: 1px solid var(--ink-100);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      margin-bottom: 10px;
+      background: #fff;
+    }
+    .m-elec-head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px dashed var(--ink-100);
+      flex-wrap: wrap;
+    }
+    .m-elec-grade {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--lavender-700);
+      background: var(--lavender-50);
+      padding: 2px 8px;
+      border-radius: 999px;
+    }
+    .m-elec-name {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--green-900);
+      flex: 1;
+    }
+    .m-elec-meta {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+
     @media (max-width: 820px) {
       .cur-shell { padding: 0 12px 60px; }
       .cur-title { font-size: 22px; }
       .req-grid { grid-template-columns: 1fr 1fr; padding: 12px; }
+      .cur-year-tabs {
+        display: flex;
+        width: 100%;
+        overflow-x: auto;
+      }
+      .cur-year-tab { padding: 8px 14px; font-size: 12px; white-space: nowrap; }
+
+      /* 데스크톱 테이블 숨기고 모바일 카드 보이기 */
+      .desktop-only { display: none; }
+      .mobile-only { display: block; }
+
+      .cur-section-head { padding: 12px 14px; }
+      .cur-section-title { font-size: 14px; }
+    }
+    @media (max-width: 480px) {
+      .req-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -472,6 +600,40 @@
         });
       });
 
+      // 모바일 카드 뷰 생성 (교과(군)별 그룹핑)
+      const mobileCards = areaOrder.map(area => {
+        const subjects = byArea[area];
+        const req = reqMap[area];
+        const subjectsHtml = subjects.map(s => {
+          const sems = {};
+          (s.semesters || []).forEach(x => { sems[semKey(x.grade, x.semester)] = x.credits; });
+          const type = (s.types && s.types[0]) || '공통';
+          const pills = semCols.filter(sk => sems[sk]).map(sk => {
+            const [g, s2] = sk.split('-');
+            return `<span class="m-sem-pill">${g}-${s2} <strong>${sems[sk]}</strong></span>`;
+          }).join('');
+          return `
+            <div class="m-subject">
+              <div class="m-subject-row">
+                <span class="m-subject-name">${escapeHtml(s.name)}</span>
+                <span class="type-chip ${type}">${type.replace('선택','')}</span>
+              </div>
+              <div class="m-sem-pills">${pills}</div>
+            </div>
+          `;
+        }).join('');
+        const reqText = req ? `<span class="m-area-stat">필수 <strong>${req.required||0}</strong> · 합계 <strong>${req.total||0}</strong></span>` : '';
+        return `
+          <div class="m-area-group">
+            <div class="m-area-head">
+              <span class="m-area-name">${escapeHtml(area)}</span>
+              ${reqText}
+            </div>
+            ${subjectsHtml}
+          </div>
+        `;
+      }).join('');
+
       return `
         <div class="cur-section">
           <div class="cur-section-head">
@@ -479,7 +641,7 @@
             <h3 class="cur-section-title">학교지정 과목</h3>
             <span class="cur-section-count">${yd.fixedSubjects.length}개 과목</span>
           </div>
-          <div class="cur-table-wrap">
+          <div class="cur-table-wrap desktop-only">
             <table class="cur-table">
               <thead>
                 <tr>
@@ -501,6 +663,9 @@
               </thead>
               <tbody>${rows}</tbody>
             </table>
+          </div>
+          <div class="mobile-only" style="padding:14px;">
+            ${mobileCards}
           </div>
         </div>
       `;
@@ -547,6 +712,37 @@
         });
       });
 
+      // 모바일 카드 뷰
+      let mobileCards = '';
+      [2, 3].forEach(grade => {
+        if (byGrade[grade].length === 0) return;
+        byGrade[grade].forEach(g => {
+          const sems = {};
+          (g.semesters || []).forEach(x => { sems[semKey(x.grade, x.semester)] = x.credits; });
+          const types = g.types || [];
+          const subjectsHtml = (g.subjects || []).map(sub => `<span class="subject-choice-item">${escapeHtml(sub)}</span>`).join('');
+          const pills = semCols.filter(sk => sems[sk]).map(sk => {
+            const [g2, s2] = sk.split('-');
+            return `<span class="m-sem-pill">${g2}-${s2} <strong>${sems[sk]}</strong></span>`;
+          }).join('');
+          const typeChips = types.map(t => `<span class="type-chip ${t}">${t.replace('선택','')}</span>`).join('');
+          mobileCards += `
+            <div class="m-elec-group">
+              <div class="m-elec-head">
+                <span class="m-elec-grade">${grade}학년</span>
+                <span class="m-elec-name">${escapeHtml(g.area)}</span>
+                <span class="choice-badge">택 ${g.selectCount || 1}</span>
+              </div>
+              <div class="subject-choice">${subjectsHtml}</div>
+              <div class="m-elec-meta">
+                ${typeChips}
+                ${pills}
+              </div>
+            </div>
+          `;
+        });
+      });
+
       return `
         <div class="cur-section">
           <div class="cur-section-head">
@@ -554,7 +750,7 @@
             <h3 class="cur-section-title">선택 과목</h3>
             <span class="cur-section-count">${yd.electiveGroups.length}개 선택군</span>
           </div>
-          <div class="cur-table-wrap">
+          <div class="cur-table-wrap desktop-only">
             <table class="cur-table">
               <thead>
                 <tr>
@@ -575,6 +771,9 @@
               </thead>
               <tbody>${allRows}</tbody>
             </table>
+          </div>
+          <div class="mobile-only" style="padding:14px;">
+            ${mobileCards}
           </div>
         </div>
       `;
