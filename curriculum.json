@@ -647,7 +647,7 @@
           "기하",
           "영미 문학 읽기",
           "인공지능 기초",
-          "인간 발달",
+          "인간발달",
           "음악 콘텐츠 제작 기초",
           "법과 사회",
           "윤리문제 탐구",
@@ -673,10 +673,11 @@
         ]
       },
       {
-        "grade": 2,
+        "grade": 3,
         "area": "국어",
         "subjects": [
-          "매체 의사소통"
+          "매체 의사소통",
+          "직무 의사소통"
         ],
         "selectCount": 1,
         "creditsPerSubject": 4,
@@ -693,7 +694,7 @@
         ]
       },
       {
-        "grade": 2,
+        "grade": 3,
         "area": "수학",
         "subjects": [
           "전문 수학",
@@ -716,7 +717,8 @@
         "grade": 3,
         "area": "영어",
         "subjects": [
-          "심화 영어 독해와 작문"
+          "심화 영어 독해와 작문",
+          "영어 발표와 토론"
         ],
         "selectCount": 1,
         "creditsPerSubject": 4,
@@ -737,6 +739,7 @@
         "subjects": [
           "주제 탐구 독서",
           "미적분Ⅱ",
+          "심화 영어",
           "경제"
         ],
         "selectCount": 1,
@@ -759,6 +762,7 @@
         "subjects": [
           "언어생활 탐구",
           "수학과 문화",
+          "세계 문화와 영어",
           "금융과 경제생활"
         ],
         "selectCount": 1,
@@ -785,7 +789,8 @@
           "문화로 보는 한국사",
           "전자기와 양자",
           "화학 반응의 세계",
-          "생물의 유전"
+          "생물의 유전",
+          "행성우주과학"
         ],
         "selectCount": 2,
         "creditsPerSubject": 3,
@@ -874,7 +879,8 @@
           "로봇과 공학세계",
           "정보과학",
           "일본 문화",
-          "중국문화"
+          "중국 문화",
+          "생활속의 한자"
         ],
         "selectCount": 1,
         "creditsPerSubject": 3,
@@ -897,7 +903,8 @@
           "생활과학 탐구",
           "소프트웨어와 생활",
           "심화 일본어",
-          "심화 중국어"
+          "심화 중국어",
+          "한문 고전 읽기"
         ],
         "selectCount": 1,
         "creditsPerSubject": 3,
@@ -973,14 +980,14 @@
       "로봇과 공학세계": "진로선택",
       "정보과학": "진로선택",
       "일본 문화": "융합선택",
-      "중국문화": "융합선택",
       "생활속의 한자": "진로선택",
       "생활과학 탐구": "진로선택",
       "소프트웨어와 생활": "융합선택",
       "심화 일본어": "진로선택",
       "심화 중국어": "진로선택",
       "한문 고전 읽기": "진로선택",
-      "언어생활 탐구": "융합선택"
+      "언어생활 탐구": "융합선택",
+      "중국 문화": "융합선택"
     },
     "subjectInfo": {
       "언어생활과 한자": {
@@ -1098,10 +1105,6 @@
       "주제 탐구 독서": {
         "page": 30,
         "youtube": "https://youtu.be/xfVsxIQ6Jm4?si=SUC0ujHezOhOMf0D"
-      },
-      "중국문화": {
-        "page": 263,
-        "youtube": "https://youtu.be/rs8rdtrNenk?si=DHMw7cedcDlRSVhA"
       },
       "통합사회1": {
         "page": 84
@@ -1400,6 +1403,10 @@
       "전문 수학": {
         "page": 1,
         "pdfFile": "professional_math.pdf"
+      },
+      "중국 문화": {
+        "page": 263,
+        "youtube": "https://youtu.be/rs8rdtrNenk?si=DHMw7cedcDlRSVhA"
       }
     },
     "pdfFile": "guide.pdf"
@@ -1471,7 +1478,7 @@
       {
         "area": "국어",
         "name": "공통국어1",
-        "baseCredit": 4,
+        "baseCredit": 3,
         "types": [
           "공통"
         ],
@@ -1479,14 +1486,14 @@
           {
             "grade": 1,
             "semester": 1,
-            "credits": 4
+            "credits": 3
           }
         ]
       },
       {
         "area": "국어",
         "name": "공통국어2",
-        "baseCredit": 4,
+        "baseCredit": 3,
         "types": [
           "공통"
         ],
@@ -1494,7 +1501,7 @@
           {
             "grade": 1,
             "semester": 2,
-            "credits": 4
+            "credits": 3
           }
         ]
       },
@@ -1621,7 +1628,7 @@
       {
         "area": "영어",
         "name": "공통영어1",
-        "baseCredit": 4,
+        "baseCredit": 3,
         "types": [
           "공통"
         ],
@@ -1629,14 +1636,14 @@
           {
             "grade": 1,
             "semester": 1,
-            "credits": 4
+            "credits": 3
           }
         ]
       },
       {
         "area": "영어",
         "name": "공통영어2",
-        "baseCredit": 4,
+        "baseCredit": 3,
         "types": [
           "공통"
         ],
@@ -1644,7 +1651,7 @@
           {
             "grade": 1,
             "semester": 2,
-            "credits": 4
+            "credits": 3
           }
         ]
       },
@@ -1971,7 +1978,8 @@
         "subjects": [
           "일본어",
           "중국어",
-          "스페인어"
+          "스페인어",
+          "한문"
         ],
         "selectCount": 1,
         "creditsPerSubject": 3,
@@ -1990,9 +1998,10 @@
         "grade": 2,
         "area": "제2외국어",
         "subjects": [
-          "일본어회화",
-          "중국어회화",
-          "스페인어회화"
+          "일본어 회화",
+          "중국어 회화",
+          "스페인어 회화",
+          "언어생활과 한자"
         ],
         "selectCount": 1,
         "creditsPerSubject": 3,
@@ -2278,7 +2287,7 @@
           "창의공학설계",
           "정보과학",
           "일본 문화",
-          "중국문화"
+          "중국 문화"
         ],
         "selectCount": 1,
         "creditsPerSubject": 3,
@@ -2301,8 +2310,7 @@
           "생활과학 탐구",
           "소프트웨어와 생활",
           "심화 일본어",
-          "심화 중국어",
-          "한문 고전 읽기"
+          "심화 중국어"
         ],
         "selectCount": 1,
         "creditsPerSubject": 3,
@@ -2320,9 +2328,6 @@
       }
     ],
     "subjectTypes": {
-      "일본어회화": "진로선택",
-      "중국어회화": "진로선택",
-      "스페인어회화": "진로선택",
       "언어생활과 한자": "융합선택",
       "프로그래밍": "진로선택",
       "인간 발달": "진로선택",
@@ -2374,13 +2379,16 @@
       "창의공학설계": "융합선택",
       "정보과학": "진로선택",
       "일본 문화": "융합선택",
-      "중국문화": "융합선택",
       "생활과학 탐구": "진로선택",
       "소프트웨어와 생활": "융합선택",
       "심화 일본어": "진로선택",
       "심화 중국어": "진로선택",
       "한문 고전 읽기": "진로선택",
-      "언어생활 탐구": "융합선택"
+      "언어생활 탐구": "융합선택",
+      "일본어 회화": "진로선택",
+      "중국어 회화": "진로선택",
+      "스페인어 회화": "진로선택",
+      "중국 문화": "융합선택"
     },
     "subjectInfo": {
       "언어생활과 한자": {
@@ -2500,10 +2508,6 @@
         "page": 30,
         "youtube": "https://youtu.be/xfVsxIQ6Jm4?si=SUC0ujHezOhOMf0D"
       },
-      "중국문화": {
-        "page": 263,
-        "youtube": "https://youtu.be/rs8rdtrNenk?si=DHMw7cedcDlRSVhA"
-      },
       "통합사회1": {
         "page": 84
       },
@@ -2596,10 +2600,6 @@
         "page": 100,
         "youtube": "https://youtu.be/NGGraFaU4iU?si=AedcyIr8YbqRcVGP"
       },
-      "중국어회화": {
-        "page": 262,
-        "youtube": "https://youtu.be/yRFZ6c-4aPE?si=Y2RqFmFA-m3DIqpL"
-      },
       "생물의 유전": {
         "page": 123,
         "youtube": "https://youtu.be/Vtczou7KQ8g?si=6yX1AM9sKQlIq41c"
@@ -2669,10 +2669,6 @@
         "page": 29,
         "youtube": "https://youtu.be/7dfpunC4Y5w?si=IfRC8LE0hrehtZl9"
       },
-      "일본어회화": {
-        "page": 266,
-        "youtube": "https://youtu.be/ZAoHvWbl1t8?si=8OTwetMzG_aNvLLp"
-      },
       "실용 통계": {
         "page": 53,
         "youtube": "https://youtu.be/5J0ZcNsgEOQ?si=kfBy_YieKAm3Nqzs"
@@ -2696,10 +2692,6 @@
       "융합과학 탐구": {
         "page": 128,
         "youtube": "https://youtu.be/Bu1ucVUYhRo?si=j6k0bSTk6vyBLOvl"
-      },
-      "스페인어회화": {
-        "page": 258,
-        "youtube": "https://youtu.be/v3JwizuWEQA?si=REf5ekMrPy0FZhrf"
       },
       "세포와 물질대사": {
         "page": 122,
@@ -2779,6 +2771,22 @@
       "전문 수학": {
         "page": 1,
         "pdfFile": "professional_math.pdf"
+      },
+      "일본어 회화": {
+        "page": 266,
+        "youtube": "https://youtu.be/ZAoHvWbl1t8?si=8OTwetMzG_aNvLLp"
+      },
+      "중국어 회화": {
+        "page": 262,
+        "youtube": "https://youtu.be/yRFZ6c-4aPE?si=Y2RqFmFA-m3DIqpL"
+      },
+      "스페인어 회화": {
+        "page": 258,
+        "youtube": "https://youtu.be/v3JwizuWEQA?si=REf5ekMrPy0FZhrf"
+      },
+      "중국 문화": {
+        "page": 263,
+        "youtube": "https://youtu.be/rs8rdtrNenk?si=DHMw7cedcDlRSVhA"
       }
     },
     "pdfFile": "guide.pdf"
@@ -2812,8 +2820,8 @@
       },
       {
         "area": "사회(역사/도덕 포함)",
-        "required": 14,
-        "total": 14,
+        "required": 16,
+        "total": 16,
         "details": [
           {
             "label": "한국사",
@@ -3368,8 +3376,8 @@
         "grade": 2,
         "area": "제2외국어",
         "subjects": [
-          "일본어 회화",
-          "중국어 회화"
+          "일본어회화",
+          "중국어회화"
         ],
         "selectCount": 1,
         "creditsPerSubject": 3,

@@ -20,7 +20,67 @@ let subjectInfoMap = {}; // key: "year::과목명" -> 시트 정보
 // ----- 시작 -----
 document.addEventListener('DOMContentLoaded', init);
 
+// 과목 유형별 색상 CSS 동적 삽입
+function injectTypeColorStyles() {
+  if (document.getElementById('subject-type-colors')) return;
+  const style = document.createElement('style');
+  style.id = 'subject-type-colors';
+  style.textContent = `
+    /* 과목 카드 왼쪽 색 띠 (유형별) */
+    .subject-card[data-type-color="공통"] { border-left: 4px solid #78786e; }
+    .subject-card[data-type-color="일반선택"] { border-left: 4px solid #5a6e45; }
+    .subject-card[data-type-color="진로선택"] { border-left: 4px solid #8c7eb0; }
+    .subject-card[data-type-color="융합선택"] { border-left: 4px solid #c4a5db; }
+
+    /* 유형 뱃지 색상 */
+    .subject-card-type {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+    .subject-card-type[data-type="공통"] { background: #e5e5e0; color: #4a4a44; }
+    .subject-card-type[data-type="일반선택"] { background: #eef0e8; color: #4a5e38; }
+    .subject-card-type[data-type="진로선택"] { background: #f0edf5; color: #7b6faa; }
+    .subject-card-type[data-type="융합선택"] {
+      background: rgba(168, 159, 212, 0.15);
+      color: #7b6faa;
+      border: 1px solid #d4ccdf;
+    }
+    /* 여러 유형 지원 - 공백으로 구분된 다중 선택 일 때 (기본) */
+    .subject-card-type[data-type*="/"] { background: #f0edf5; color: #7b6faa; }
+
+    /* 모달 유형 뱃지 */
+    .modal-meta-tag.tag-type[data-type="공통"] { background: #e5e5e0; color: #4a4a44; }
+    .modal-meta-tag.tag-type[data-type="일반선택"] { background: #eef0e8; color: #4a5e38; }
+    .modal-meta-tag.tag-type[data-type="진로선택"] { background: #f0edf5; color: #7b6faa; }
+    .modal-meta-tag.tag-type[data-type="융합선택"] {
+      background: rgba(168, 159, 212, 0.15);
+      color: #7b6faa;
+      border: 1px solid #d4ccdf;
+    }
+  `;
+  document.head.appendChild(style);
+}
+
+// 과목 유형 → 색상 결정 (여러 유형이면 가장 "진한" 쪽 우선)
+function pickPrimaryType(types) {
+  if (!types) return '공통';
+  const arr = Array.isArray(types) ? types : String(types).split(/[,/\s]+/).filter(Boolean);
+  // 우선순위: 공통 > 융합선택 > 진로선택 > 일반선택
+  const priority = ['공통', '융합선택', '진로선택', '일반선택'];
+  for (const t of priority) {
+    if (arr.includes(t)) return t;
+  }
+  return arr[0] || '공통';
+}
+
 async function init() {
+  // 유형 색상 CSS 삽입
+  injectTypeColorStyles();
+
   // 상단바 입학년도 표시
   const topYear = document.getElementById('topbarYear');
   if (topYear) topYear.querySelector('.year-badge').textContent = `${YEAR}학년도 입학생`;
@@ -156,6 +216,7 @@ function subjectCardHtml(subject, grade, isElective) {
   const semLabel = sem ? `${sem.semester}학기` : '';
   const credits = sem ? sem.credits : subject.baseCredit;
   const types = subject.types.join(', ');
+  const primaryType = pickPrimaryType(subject.types);
 
   return `
     <button class="subject-card${isElective ? ' subject-card-elective' : ''}"
@@ -163,12 +224,13 @@ function subjectCardHtml(subject, grade, isElective) {
             data-area="${escapeAttr(subject.area)}"
             data-credits="${credits}"
             data-types="${escapeAttr(types)}"
+            data-type-color="${primaryType}"
             data-semester="${grade}학년 ${semLabel}"
             data-category="학교지정">
       <span class="subject-card-name">${escapeHtml(subject.name)}</span>
       <div class="subject-card-meta">
         <span class="subject-card-credit">${credits}학점</span>
-        <span class="subject-card-type">${escapeHtml(types)}</span>
+        <span class="subject-card-type" data-type="${primaryType}">${escapeHtml(types)}</span>
       </div>
       <span class="subject-card-semester">${semLabel}</span>
     </button>
@@ -181,18 +243,21 @@ function electiveCardHtml(name, group, grade) {
   const subjectTypes = curriculumData.subjectTypes || {};
   const customType = subjectTypes[name];
   const types = customType ? customType : group.types.join(' / ');
+  // 색상용 primary 유형 - 과목별 지정이 있으면 그걸 쓰고, 없으면 그룹에서 대표 하나 뽑기
+  const primaryType = customType ? customType : pickPrimaryType(group.types);
   return `
     <button class="subject-card subject-card-elective"
             data-name="${escapeAttr(name)}"
             data-area="${escapeAttr(group.area)}"
             data-credits="${group.creditsPerSubject || 3}"
             data-types="${escapeAttr(types)}"
+            data-type-color="${primaryType}"
             data-semester="${grade}학년 ${semText}"
             data-category="${grade}학년 선택 (택${group.selectCount})">
       <span class="subject-card-name">${escapeHtml(name)}</span>
       <div class="subject-card-meta">
         <span class="subject-card-credit">${group.creditsPerSubject || 3}학점</span>
-        <span class="subject-card-type">${escapeHtml(types)}</span>
+        <span class="subject-card-type" data-type="${primaryType}">${escapeHtml(types)}</span>
       </div>
       <span class="subject-card-semester">${semText}</span>
     </button>
@@ -223,7 +288,7 @@ function openModal(data) {
   areaEl.textContent = data.area;
   metaEl.innerHTML = `
     <span class="modal-meta-tag tag-credit">${data.credits}학점</span>
-    <span class="modal-meta-tag tag-type">${escapeHtml(data.types)}</span>
+    <span class="modal-meta-tag tag-type" data-type="${escapeAttr(pickPrimaryType(data.types))}">${escapeHtml(data.types)}</span>
     <span class="modal-meta-tag tag-semester">${data.semester}</span>
   `;
 
