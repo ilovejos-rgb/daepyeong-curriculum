@@ -230,6 +230,24 @@
       color: var(--ink-900);
       font-weight: 500;
     }
+    /* 과목별 유형 색상 (subjectTypes 지정 시) */
+    .subject-choice-item[data-type="공통"] {
+      background: var(--ink-100); color: var(--ink-700);
+      border-color: var(--ink-100);
+    }
+    .subject-choice-item[data-type="일반선택"] {
+      background: var(--green-50); color: var(--green-700);
+      border-color: var(--green-50);
+    }
+    .subject-choice-item[data-type="진로선택"] {
+      background: var(--lavender-50); color: var(--lavender-700);
+      border-color: var(--lavender-50);
+    }
+    .subject-choice-item[data-type="융합선택"] {
+      background: rgba(168, 159, 212, 0.15);
+      color: var(--lavender-700);
+      border-color: var(--lavender-200);
+    }
     .choice-badge {
       display: inline-block;
       padding: 3px 10px;
@@ -682,6 +700,14 @@
       const semCols = ['1-1', '1-2', '2-1', '2-2', '3-1', '3-2'];
       const semKey = (g, s) => `${g}-${s}`;
 
+      // 과목별 유형 지정 (subjectTypes가 있으면 과목 pill에 색 반영)
+      const subjectTypes = yd.subjectTypes || {};
+      const subjectPill = (sub) => {
+        const t = subjectTypes[sub];
+        const dataType = t ? ` data-type="${escapeHtml(t)}"` : '';
+        return `<span class="subject-choice-item"${dataType}>${escapeHtml(sub)}</span>`;
+      };
+
       let allRows = '';
       [2, 3].forEach(grade => {
         if (byGrade[grade].length === 0) return;
@@ -689,7 +715,7 @@
           const sems = {};
           (g.semesters || []).forEach(x => { sems[semKey(x.grade, x.semester)] = x.credits; });
           const types = g.types || [];
-          const subjectsHtml = (g.subjects || []).map(sub => `<span class="subject-choice-item">${escapeHtml(sub)}</span>`).join('');
+          const subjectsHtml = (g.subjects || []).map(subjectPill).join('');
 
           const isFirst = idx === 0;
           allRows += `
@@ -720,7 +746,7 @@
           const sems = {};
           (g.semesters || []).forEach(x => { sems[semKey(x.grade, x.semester)] = x.credits; });
           const types = g.types || [];
-          const subjectsHtml = (g.subjects || []).map(sub => `<span class="subject-choice-item">${escapeHtml(sub)}</span>`).join('');
+          const subjectsHtml = (g.subjects || []).map(subjectPill).join('');
           const pills = semCols.filter(sk => sems[sk]).map(sk => {
             const [g2, s2] = sk.split('-');
             return `<span class="m-sem-pill">${g2}-${s2} <strong>${sems[sk]}</strong></span>`;
