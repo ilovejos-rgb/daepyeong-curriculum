@@ -8,6 +8,16 @@ const params = new URLSearchParams(location.search);
 const _yearParam = params.get('year');
 const YEAR = ['2025', '2026', '2027'].includes(_yearParam) ? _yearParam : '2026';
 
+// 고시외 과목 (학교 자체 개발 과목) - 표시 시 뒤에 * 붙임
+const EXTRA_SUBJECTS = new Set([
+  '융합사고수학',
+  '문화로 보는 한국사',
+  '프런티어 사이언스',
+]);
+function displayName(name) {
+  return EXTRA_SUBJECTS.has(name) ? `${name}*` : name;
+}
+
 // ----- 구글 시트 연동 설정 (나중에 입력) -----
 // 구글 시트를 "웹에 게시" → CSV 형식으로 게시한 URL을 여기에 붙여넣으면
 // 사이트가 자동으로 시트의 과목 설명을 읽어옵니다.
@@ -21,6 +31,11 @@ let subjectInfoMap = {}; // key: "year::과목명" -> 시트 정보
 document.addEventListener('DOMContentLoaded', init);
 
 // 과목 유형별 색상 CSS 동적 삽입
+// 색 체계:
+//  - 공통: 회색
+//  - 일반선택: 초록 (올리브)
+//  - 진로선택: 라벤더 (진하게)
+//  - 융합선택: 테라코타/피치 (완전 다른 톤으로 구분)
 function injectTypeColorStyles() {
   if (document.getElementById('subject-type-colors')) return;
   const style = document.createElement('style');
@@ -28,9 +43,9 @@ function injectTypeColorStyles() {
   style.textContent = `
     /* 과목 카드 왼쪽 색 띠 (유형별) */
     .subject-card[data-type-color="공통"] { border-left: 4px solid #78786e; }
-    .subject-card[data-type-color="일반선택"] { border-left: 4px solid #5a6e45; }
-    .subject-card[data-type-color="진로선택"] { border-left: 4px solid #8c7eb0; }
-    .subject-card[data-type-color="융합선택"] { border-left: 4px solid #c4a5db; }
+    .subject-card[data-type-color="일반선택"] { border-left: 4px solid #4a5e38; }
+    .subject-card[data-type-color="진로선택"] { border-left: 4px solid #6b5a9a; }
+    .subject-card[data-type-color="융합선택"] { border-left: 4px solid #c66b3d; }
 
     /* 유형 뱃지 색상 */
     .subject-card-type {
@@ -41,13 +56,17 @@ function injectTypeColorStyles() {
       font-weight: 700;
       line-height: 1.5;
     }
-    .subject-card-type[data-type="공통"] { background: #e5e5e0; color: #4a4a44; }
-    .subject-card-type[data-type="일반선택"] { background: #eef0e8; color: #4a5e38; }
-    .subject-card-type[data-type="진로선택"] { background: #f0edf5; color: #7b6faa; }
+    .subject-card-type[data-type="공통"] {
+      background: #e5e5e0; color: #4a4a44;
+    }
+    .subject-card-type[data-type="일반선택"] {
+      background: #eef0e8; color: #4a5e38;
+    }
+    .subject-card-type[data-type="진로선택"] {
+      background: #ebe4f5; color: #594481;
+    }
     .subject-card-type[data-type="융합선택"] {
-      background: rgba(168, 159, 212, 0.15);
-      color: #7b6faa;
-      border: 1px solid #d4ccdf;
+      background: #fde7d8; color: #a0491f;
     }
     /* 여러 유형 지원 - 공백으로 구분된 다중 선택 일 때 (기본) */
     .subject-card-type[data-type*="/"] { background: #f0edf5; color: #7b6faa; }
@@ -55,11 +74,9 @@ function injectTypeColorStyles() {
     /* 모달 유형 뱃지 */
     .modal-meta-tag.tag-type[data-type="공통"] { background: #e5e5e0; color: #4a4a44; }
     .modal-meta-tag.tag-type[data-type="일반선택"] { background: #eef0e8; color: #4a5e38; }
-    .modal-meta-tag.tag-type[data-type="진로선택"] { background: #f0edf5; color: #7b6faa; }
+    .modal-meta-tag.tag-type[data-type="진로선택"] { background: #ebe4f5; color: #594481; }
     .modal-meta-tag.tag-type[data-type="융합선택"] {
-      background: rgba(168, 159, 212, 0.15);
-      color: #7b6faa;
-      border: 1px solid #d4ccdf;
+      background: #fde7d8; color: #a0491f;
     }
   `;
   document.head.appendChild(style);
@@ -227,7 +244,7 @@ function subjectCardHtml(subject, grade, isElective) {
             data-type-color="${primaryType}"
             data-semester="${grade}학년 ${semLabel}"
             data-category="학교지정">
-      <span class="subject-card-name">${escapeHtml(subject.name)}</span>
+      <span class="subject-card-name">${escapeHtml(displayName(subject.name))}</span>
       <div class="subject-card-meta">
         <span class="subject-card-credit">${credits}학점</span>
         <span class="subject-card-type" data-type="${primaryType}">${escapeHtml(types)}</span>
@@ -254,7 +271,7 @@ function electiveCardHtml(name, group, grade) {
             data-type-color="${primaryType}"
             data-semester="${grade}학년 ${semText}"
             data-category="${grade}학년 선택 (택${group.selectCount})">
-      <span class="subject-card-name">${escapeHtml(name)}</span>
+      <span class="subject-card-name">${escapeHtml(displayName(name))}</span>
       <div class="subject-card-meta">
         <span class="subject-card-credit">${group.creditsPerSubject || 3}학점</span>
         <span class="subject-card-type" data-type="${primaryType}">${escapeHtml(types)}</span>
@@ -284,7 +301,7 @@ function openModal(data) {
   const metaEl = document.getElementById('modalMeta');
   const bodyEl = document.getElementById('modalBody');
 
-  titleEl.textContent = data.name;
+  titleEl.textContent = displayName(data.name);
   areaEl.textContent = data.area;
   metaEl.innerHTML = `
     <span class="modal-meta-tag tag-credit">${data.credits}학점</span>

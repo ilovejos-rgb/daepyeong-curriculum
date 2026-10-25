@@ -193,7 +193,7 @@
       color: var(--ink-300);
     }
 
-    /* 유형 뱃지 */
+    /* 유형 뱃지 - 네 가지 색이 명확히 구분되게 */
     .type-chip {
       display: inline-block;
       padding: 2px 8px;
@@ -202,14 +202,10 @@
       font-weight: 700;
       line-height: 1.4;
     }
-    .type-chip.공통 { background: var(--ink-100); color: var(--ink-700); }
-    .type-chip.일반선택 { background: var(--green-50); color: var(--green-700); }
-    .type-chip.진로선택 { background: var(--lavender-50); color: var(--lavender-700); }
-    .type-chip.융합선택 {
-      background: rgba(168, 159, 212, 0.15);
-      color: var(--lavender-700);
-      border: 1px solid var(--lavender-200);
-    }
+    .type-chip.공통 { background: #e5e5e0; color: #4a4a44; }
+    .type-chip.일반선택 { background: #eef0e8; color: #4a5e38; }
+    .type-chip.진로선택 { background: #ebe4f5; color: #594481; }
+    .type-chip.융합선택 { background: #fde7d8; color: #a0491f; }
     .types-stack {
       display: flex; flex-wrap: wrap; gap: 2px;
     }
@@ -230,23 +226,22 @@
       color: var(--ink-900);
       font-weight: 500;
     }
-    /* 과목별 유형 색상 (subjectTypes 지정 시) */
+    /* 과목별 유형 색상 (subjectTypes 지정 시) - 네 가지 색이 명확히 구분 */
     .subject-choice-item[data-type="공통"] {
-      background: var(--ink-100); color: var(--ink-700);
-      border-color: var(--ink-100);
+      background: #e5e5e0; color: #4a4a44;
+      border-color: #d4d4ce;
     }
     .subject-choice-item[data-type="일반선택"] {
-      background: var(--green-50); color: var(--green-700);
-      border-color: var(--green-50);
+      background: #eef0e8; color: #4a5e38;
+      border-color: #d9dec9;
     }
     .subject-choice-item[data-type="진로선택"] {
-      background: var(--lavender-50); color: var(--lavender-700);
-      border-color: var(--lavender-50);
+      background: #ebe4f5; color: #594481;
+      border-color: #d4ccdf;
     }
     .subject-choice-item[data-type="융합선택"] {
-      background: rgba(168, 159, 212, 0.15);
-      color: var(--lavender-700);
-      border-color: var(--lavender-200);
+      background: #fde7d8; color: #a0491f;
+      border-color: #f2c6a8;
     }
     .choice-badge {
       display: inline-block;
@@ -464,6 +459,7 @@
       <span><span class="type-chip 일반선택">일반선택</span></span>
       <span><span class="type-chip 진로선택">진로선택</span></span>
       <span><span class="type-chip 융합선택">융합선택</span></span>
+      <span style="color:var(--ink-500);"><strong style="color:var(--ink-900);">*</strong> 고시외 과목(학교 자체 개발)</span>
     </div>
 
     <div id="curContent"></div>
@@ -475,6 +471,14 @@
     let allData = null;
     let currentYear = (new URLSearchParams(location.search).get('year')) || '2027';
     if (!['2025','2026','2027'].includes(currentYear)) currentYear = '2027';
+
+    // 고시외 과목 (학교 자체 개발) - 표시 시 * 붙임
+    const EXTRA_SUBJECTS = new Set([
+      '융합사고수학',
+      '문화로 보는 한국사',
+      '프런티어 사이언스',
+    ]);
+    const displayName = (name) => EXTRA_SUBJECTS.has(name) ? `${name}*` : name;
 
     async function init() {
       try {
@@ -605,7 +609,7 @@
           rows += `
             <tr>
               ${isFirst ? `<td class="td-area" rowspan="${rowspan}">${escapeHtml(area)}</td>` : ''}
-              <td class="td-name">${escapeHtml(s.name)}</td>
+              <td class="td-name">${escapeHtml(displayName(s.name))}</td>
               <td class="td-credit">${s.baseCredit || ''}</td>
               <td class="td-center"><span class="type-chip ${type}">${type.replace('선택','')}</span></td>
               ${semCols.map(sk => sems[sk] ? `<td class="td-credit">${sems[sk]}</td>` : '<td class="td-empty">·</td>').join('')}
@@ -633,7 +637,7 @@
           return `
             <div class="m-subject">
               <div class="m-subject-row">
-                <span class="m-subject-name">${escapeHtml(s.name)}</span>
+                <span class="m-subject-name">${escapeHtml(displayName(s.name))}</span>
                 <span class="type-chip ${type}">${type.replace('선택','')}</span>
               </div>
               <div class="m-sem-pills">${pills}</div>
@@ -705,7 +709,7 @@
       const subjectPill = (sub) => {
         const t = subjectTypes[sub];
         const dataType = t ? ` data-type="${escapeHtml(t)}"` : '';
-        return `<span class="subject-choice-item"${dataType}>${escapeHtml(sub)}</span>`;
+        return `<span class="subject-choice-item"${dataType}>${escapeHtml(displayName(sub))}</span>`;
       };
 
       let allRows = '';
