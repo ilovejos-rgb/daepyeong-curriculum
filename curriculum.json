@@ -586,9 +586,9 @@
         "grade": 2,
         "area": "제2외국어",
         "subjects": [
-          "일본어회화",
-          "중국어회화",
-          "스페인어회화",
+          "일본어 회화",
+          "중국어 회화",
+          "스페인어 회화",
           "언어생활과 한자"
         ],
         "selectCount": 1,
@@ -647,7 +647,7 @@
           "기하",
           "영미 문학 읽기",
           "인공지능 기초",
-          "인간발달",
+          "인간 발달",
           "음악 콘텐츠 제작 기초",
           "법과 사회",
           "윤리문제 탐구",
@@ -757,7 +757,7 @@
         "grade": 3,
         "area": "교과(군) 간 선택",
         "subjects": [
-          "언어생활 탐구",
+          "언어생활과 탐구",
           "수학과 문화",
           "금융과 경제생활"
         ],
@@ -831,7 +831,7 @@
         "grade": 3,
         "area": "예술",
         "subjects": [
-          "음악연주와 창작",
+          "음악 연주와 창작",
           "미술 창작"
         ],
         "selectCount": 1,
@@ -915,9 +915,6 @@
       }
     ],
     "subjectTypes": {
-      "일본어회화": "진로선택",
-      "중국어회화": "진로선택",
-      "스페인어회화": "진로선택",
       "언어생활과 한자": "융합선택",
       "독서토론과 글쓰기": "융합선택",
       "미디어 영어": "융합선택",
@@ -937,7 +934,6 @@
       "기하": "진로선택",
       "영미 문학 읽기": "진로선택",
       "인공지능 기초": "진로선택",
-      "인간발달": "진로선택",
       "음악 콘텐츠 제작 기초": "진로선택",
       "법과 사회": "진로선택",
       "윤리문제 탐구": "융합선택",
@@ -976,7 +972,6 @@
       "소프트웨어와 생활": "융합선택",
       "심화 일본어": "진로선택",
       "심화 중국어": "진로선택",
-      "언어생활 탐구": "융합선택",
       "중국 문화": "융합선택",
       "미술 감상과 비평": "진로선택",
       "미술 창작": "진로선택",
@@ -984,11 +979,16 @@
       "실용 통계": "융합선택",
       "심화 영어 독해와 작문": "진로선택",
       "음악 감상과 비평": "진로선택",
-      "음악연주와 창작": "진로선택",
       "일본어": "일반선택",
       "전문 수학": "진로선택",
       "중국어": "일반선택",
-      "한문": "일반선택"
+      "한문": "일반선택",
+      "인간 발달": "진로선택",
+      "일본어 회화": "진로선택",
+      "중국어 회화": "진로선택",
+      "스페인어 회화": "진로선택",
+      "음악 연주와 창작": "진로선택",
+      "언어생활과 탐구": "융합선택"
     },
     "subjectInfo": {
       "언어생활과 한자": {
@@ -1077,10 +1077,6 @@
         "page": 233,
         "youtube": "https://youtu.be/XyapiAehOHU?si=g0FFuqcNWubM_O6S"
       },
-      "음악연주와 창작": {
-        "page": 171,
-        "youtube": "https://youtu.be/eNRfMCWArao?si=rHUd0wjxV7Cjp59K"
-      },
       "과학탐구실험1": {
         "page": 112
       },
@@ -1141,10 +1137,12 @@
         "page": 31
       },
       "음악 감상과 비평": {
-        "page": 172
+        "page": 172,
+        "youtube": "https://youtu.be/YyEC5cSbt6Y?si=XW1WBFPzboMy69w9"
       },
       "미술 감상과 비평": {
-        "page": 174
+        "page": 174,
+        "youtube": "https://youtu.be/dJLyYiJw73s?si=lV0LOl4kVhkn6pP6"
       },
       "통합사회2": {
         "page": 85
@@ -1200,10 +1198,6 @@
         "page": 100,
         "youtube": "https://youtu.be/NGGraFaU4iU?si=AedcyIr8YbqRcVGP"
       },
-      "중국어회화": {
-        "page": 262,
-        "youtube": "https://youtu.be/yRFZ6c-4aPE?si=Y2RqFmFA-m3DIqpL"
-      },
       "생물의 유전": {
         "page": 123,
         "youtube": "https://youtu.be/Vtczou7KQ8g?si=6yX1AM9sKQlIq41c"
@@ -1219,7 +1213,8 @@
         "youtube": "https://youtu.be/e3KvK6g3mQM?si=oGJHAVSkYPxIWUwG"
       },
       "창의 공학 설계": {
-        "page": 234
+        "page": 234,
+        "youtube": "https://youtu.be/-4B8pj4bgcY?si=A21gp2GQhVIx5Lax"
       },
       "대수": {
         "page": 44,
@@ -1272,10 +1267,6 @@
         "page": 29,
         "youtube": "https://youtu.be/7dfpunC4Y5w?si=IfRC8LE0hrehtZl9"
       },
-      "일본어회화": {
-        "page": 266,
-        "youtube": "https://youtu.be/ZAoHvWbl1t8?si=8OTwetMzG_aNvLLp"
-      },
       "실용 통계": {
         "page": 53,
         "youtube": "https://youtu.be/5J0ZcNsgEOQ?si=kfBy_YieKAm3Nqzs"
@@ -1299,10 +1290,6 @@
       "융합과학 탐구": {
         "page": 128,
         "youtube": "https://youtu.be/Bu1ucVUYhRo?si=j6k0bSTk6vyBLOvl"
-      },
-      "스페인어회화": {
-        "page": 258,
-        "youtube": "https://youtu.be/v3JwizuWEQA?si=REf5ekMrPy0FZhrf"
       },
       "세포와 물질대사": {
         "page": 122,
@@ -1374,22 +1361,6 @@
         "page": 239,
         "youtube": "https://youtu.be/4hLZ0w2AUvk?si=NamJgW1fUSDZMJiR"
       },
-      "언어생활 탐구": {
-        "page": 35,
-        "youtube": "https://youtu.be/cvfDBOy9MCQ?si=02QcZ7kI5TMfQrk7"
-      },
-      "음악감상과 비평": {
-        "youtube": "https://youtu.be/YyEC5cSbt6Y?si=XW1WBFPzboMy69w9",
-        "page": 172
-      },
-      "미술감상과 비평": {
-        "youtube": "https://youtu.be/dJLyYiJw73s?si=lV0LOl4kVhkn6pP6",
-        "page": 174
-      },
-      "창의공학설계": {
-        "youtube": "https://youtu.be/-4B8pj4bgcY?si=A21gp2GQhVIx5Lax",
-        "page": 234
-      },
       "문화로 보는 한국사": {
         "pdfFile": "선택과목_안내_문화로보는한국사_.pdf",
         "page": 1
@@ -1401,6 +1372,26 @@
       "중국 문화": {
         "page": 263,
         "youtube": "https://youtu.be/rs8rdtrNenk?si=DHMw7cedcDlRSVhA"
+      },
+      "일본어 회화": {
+        "page": 266,
+        "youtube": "https://youtu.be/ZAoHvWbl1t8?si=8OTwetMzG_aNvLLp"
+      },
+      "중국어 회화": {
+        "page": 262,
+        "youtube": "https://youtu.be/yRFZ6c-4aPE?si=Y2RqFmFA-m3DIqpL"
+      },
+      "스페인어 회화": {
+        "page": 258,
+        "youtube": "https://youtu.be/v3JwizuWEQA?si=REf5ekMrPy0FZhrf"
+      },
+      "음악 연주와 창작": {
+        "page": 171,
+        "youtube": "https://youtu.be/eNRfMCWArao?si=rHUd0wjxV7Cjp59K"
+      },
+      "언어생활과 탐구": {
+        "page": 35,
+        "youtube": "https://youtu.be/cvfDBOy9MCQ?si=02QcZ7kI5TMfQrk7"
       }
     },
     "pdfFile": "guide.pdf"
@@ -2160,7 +2151,7 @@
         "grade": 3,
         "area": "교과(군) 간 선택",
         "subjects": [
-          "언어생활 탐구",
+          "언어생활과 탐구",
           "수학과 문화",
           "세계 문화와 영어",
           "금융과 경제생활"
@@ -2236,7 +2227,7 @@
         "grade": 3,
         "area": "예술",
         "subjects": [
-          "음악연주와 창작",
+          "음악 연주와 창작",
           "미술 창작"
         ],
         "selectCount": 1,
@@ -2256,8 +2247,8 @@
         "grade": 3,
         "area": "예술",
         "subjects": [
-          "음악감상과 비평",
-          "미술감상과 비평"
+          "음악 감상과 비평",
+          "미술 감상과 비평"
         ],
         "selectCount": 1,
         "creditsPerSubject": 3,
@@ -2276,7 +2267,7 @@
         "grade": 3,
         "area": "교양",
         "subjects": [
-          "창의공학설계",
+          "창의 공학 설계",
           "정보과학",
           "일본 문화",
           "중국 문화"
@@ -2368,7 +2359,6 @@
       "동아시아 역사 기행": "진로선택",
       "과학의 역사와 문화": "융합선택",
       "기후변화와 환경생태": "융합선택",
-      "창의공학설계": "융합선택",
       "정보과학": "진로선택",
       "일본 문화": "융합선택",
       "생활과학 탐구": "진로선택",
@@ -2376,22 +2366,23 @@
       "심화 일본어": "진로선택",
       "심화 중국어": "진로선택",
       "한문 고전 읽기": "진로선택",
-      "언어생활 탐구": "융합선택",
       "일본어 회화": "진로선택",
       "중국어 회화": "진로선택",
       "스페인어 회화": "진로선택",
       "중국 문화": "융합선택",
       "미술 창작": "진로선택",
-      "미술감상과 비평": "진로선택",
       "스페인어": "일반선택",
       "실용 통계": "융합선택",
       "심화 영어 독해와 작문": "진로선택",
       "영어 발표와 토론": "진로선택",
-      "음악감상과 비평": "진로선택",
-      "음악연주와 창작": "진로선택",
       "일본어": "일반선택",
       "전문 수학": "진로선택",
-      "중국어": "일반선택"
+      "중국어": "일반선택",
+      "음악 연주와 창작": "진로선택",
+      "언어생활과 탐구": "융합선택",
+      "창의 공학 설계": "융합선택",
+      "음악 감상과 비평": "진로선택",
+      "미술 감상과 비평": "진로선택"
     },
     "subjectInfo": {
       "언어생활과 한자": {
@@ -2417,10 +2408,6 @@
       "전자기와 양자": {
         "page": 119,
         "youtube": "https://youtu.be/quGNMwOC38Q?si=AF1jMnmvFObjrhD8"
-      },
-      "음악감상과 비평": {
-        "page": 172,
-        "youtube": "https://youtu.be/YyEC5cSbt6Y?si=XW1WBFPzboMy69w9"
       },
       "한문": {
         "page": 280,
@@ -2485,10 +2472,6 @@
         "page": 233,
         "youtube": "https://youtu.be/XyapiAehOHU?si=g0FFuqcNWubM_O6S"
       },
-      "음악연주와 창작": {
-        "page": 171,
-        "youtube": "https://youtu.be/eNRfMCWArao?si=rHUd0wjxV7Cjp59K"
-      },
       "과학탐구실험1": {
         "page": 112
       },
@@ -2513,10 +2496,6 @@
       },
       "통합사회1": {
         "page": 84
-      },
-      "미술감상과 비평": {
-        "page": 174,
-        "youtube": "https://youtu.be/dJLyYiJw73s?si=lV0LOl4kVhkn6pP6"
       },
       "통합과학1": {
         "page": 110
@@ -2616,10 +2595,6 @@
       "체육1": {
         "page": 144,
         "youtube": "https://youtu.be/e3KvK6g3mQM?si=oGJHAVSkYPxIWUwG"
-      },
-      "창의공학설계": {
-        "page": 234,
-        "youtube": "https://youtu.be/-4B8pj4bgcY?si=A21gp2GQhVIx5Lax"
       },
       "대수": {
         "page": 44,
@@ -2763,10 +2738,6 @@
         "page": 239,
         "youtube": "https://youtu.be/4hLZ0w2AUvk?si=NamJgW1fUSDZMJiR"
       },
-      "언어생활 탐구": {
-        "page": 35,
-        "youtube": "https://youtu.be/cvfDBOy9MCQ?si=02QcZ7kI5TMfQrk7"
-      },
       "문화로 보는 한국사": {
         "pdfFile": "선택과목_안내_문화로보는한국사_.pdf",
         "page": 1
@@ -2790,6 +2761,26 @@
       "중국 문화": {
         "page": 263,
         "youtube": "https://youtu.be/rs8rdtrNenk?si=DHMw7cedcDlRSVhA"
+      },
+      "음악 연주와 창작": {
+        "page": 171,
+        "youtube": "https://youtu.be/eNRfMCWArao?si=rHUd0wjxV7Cjp59K"
+      },
+      "언어생활과 탐구": {
+        "page": 35,
+        "youtube": "https://youtu.be/cvfDBOy9MCQ?si=02QcZ7kI5TMfQrk7"
+      },
+      "창의 공학 설계": {
+        "page": 234,
+        "youtube": "https://youtu.be/-4B8pj4bgcY?si=A21gp2GQhVIx5Lax"
+      },
+      "음악 감상과 비평": {
+        "page": 172,
+        "youtube": "https://youtu.be/YyEC5cSbt6Y?si=XW1WBFPzboMy69w9"
+      },
+      "미술 감상과 비평": {
+        "page": 174,
+        "youtube": "https://youtu.be/dJLyYiJw73s?si=lV0LOl4kVhkn6pP6"
       }
     },
     "pdfFile": "guide.pdf"
@@ -3379,8 +3370,8 @@
         "grade": 2,
         "area": "제2외국어",
         "subjects": [
-          "일본어회화",
-          "중국어회화"
+          "일본어 회화",
+          "중국어 회화"
         ],
         "selectCount": 1,
         "creditsPerSubject": 3,
@@ -3629,8 +3620,6 @@
       }
     ],
     "subjectTypes": {
-      "일본어회화": "진로선택",
-      "중국어회화": "진로선택",
       "프로그래밍": "진로선택",
       "인간 발달": "진로선택",
       "음악과 미디어": "융합선택",
@@ -3693,7 +3682,9 @@
       "음악 감상과 비평": "진로선택",
       "음악 연주와 창작": "진로선택",
       "일본어": "일반선택",
-      "중국어": "일반선택"
+      "중국어": "일반선택",
+      "일본어 회화": "진로선택",
+      "중국어 회화": "진로선택"
     },
     "subjectInfo": {
       "영어Ⅱ": {
@@ -3861,10 +3852,6 @@
         "page": 100,
         "youtube": "https://youtu.be/NGGraFaU4iU?si=AedcyIr8YbqRcVGP"
       },
-      "중국어회화": {
-        "page": 262,
-        "youtube": "https://youtu.be/yRFZ6c-4aPE?si=Y2RqFmFA-m3DIqpL"
-      },
       "생물의 유전": {
         "page": 123,
         "youtube": "https://youtu.be/Vtczou7KQ8g?si=6yX1AM9sKQlIq41c"
@@ -3929,10 +3916,6 @@
       "문학": {
         "page": 29,
         "youtube": "https://youtu.be/7dfpunC4Y5w?si=IfRC8LE0hrehtZl9"
-      },
-      "일본어회화": {
-        "page": 266,
-        "youtube": "https://youtu.be/ZAoHvWbl1t8?si=8OTwetMzG_aNvLLp"
       },
       "실용 통계": {
         "page": 53,
@@ -4033,6 +4016,14 @@
       },
       "창의 공학 설계": {
         "page": 234
+      },
+      "일본어 회화": {
+        "page": 266,
+        "youtube": "https://youtu.be/ZAoHvWbl1t8?si=8OTwetMzG_aNvLLp"
+      },
+      "중국어 회화": {
+        "page": 262,
+        "youtube": "https://youtu.be/yRFZ6c-4aPE?si=Y2RqFmFA-m3DIqpL"
       }
     },
     "pdfFile": "guide.pdf"

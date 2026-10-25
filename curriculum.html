@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <meta name="description" content="2022 개정 교육과정 기반 대평고등학교 편제표">
   <title>편제표 · 대평고등학교 교육과정 안내</title>
   <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
@@ -46,6 +46,16 @@
       line-height: 1.6;
     }
 
+    /* 상단 컨트롤 (연도 탭 + 뷰 토글) */
+    .cur-top-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
     /* 입학년도 탭 */
     .cur-year-tabs {
       display: inline-flex;
@@ -54,8 +64,35 @@
       border: 1px solid var(--ink-100);
       padding: 5px;
       border-radius: 999px;
-      margin-bottom: 20px;
       box-shadow: var(--shadow-sm);
+    }
+
+    /* 뷰 토글 (모바일에서만 보임) */
+    .cur-view-toggle {
+      display: none;
+      gap: 4px;
+      background: #fff;
+      border: 1px solid var(--ink-100);
+      padding: 5px;
+      border-radius: 999px;
+      box-shadow: var(--shadow-sm);
+    }
+    .cur-view-btn {
+      padding: 8px 14px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--ink-500);
+      border-radius: 999px;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      transition: all 0.2s;
+      font-family: inherit;
+      white-space: nowrap;
+    }
+    .cur-view-btn.active {
+      background: var(--green-700);
+      color: #fff;
     }
     .cur-year-tab {
       padding: 9px 20px;
@@ -427,14 +464,45 @@
       .req-grid { grid-template-columns: 1fr 1fr; padding: 12px; }
       .cur-year-tabs {
         display: flex;
-        width: 100%;
         overflow-x: auto;
       }
       .cur-year-tab { padding: 8px 14px; font-size: 12px; white-space: nowrap; }
 
-      /* 데스크톱 테이블 숨기고 모바일 카드 보이기 */
-      .desktop-only { display: none; }
-      .mobile-only { display: block; }
+      /* 모바일에서 뷰 토글 보이기 */
+      .cur-view-toggle { display: inline-flex; }
+
+      /* 기본은 카드 모드 */
+      body.view-cards .desktop-only { display: none; }
+      body.view-cards .mobile-only { display: block; }
+
+      /* 표 모드로 전환하면 테이블 보이기 */
+      body.view-table .desktop-only {
+        display: block;
+      }
+      body.view-table .mobile-only { display: none; }
+
+      /* 표 모드일 때 가로 스크롤 + 핀치 줌 안내 */
+      body.view-table .cur-table-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        touch-action: pan-x pan-y pinch-zoom;
+        border-radius: 0;
+        position: relative;
+      }
+      body.view-table .cur-table-wrap::before {
+        content: '👉 좌우로 스크롤 · 두 손가락으로 확대';
+        display: block;
+        font-size: 11px;
+        color: var(--ink-500);
+        padding: 8px 14px 4px;
+        background: var(--bg-cream);
+      }
+      body.view-table .cur-table {
+        min-width: 920px;
+        font-size: 12px;
+      }
+      body.view-table .cur-table thead th { padding: 8px 6px; font-size: 10px; }
+      body.view-table .cur-table tbody td { padding: 7px 6px; }
 
       .cur-section-head { padding: 12px 14px; }
       .cur-section-title { font-size: 14px; }
@@ -452,14 +520,20 @@
       <p class="cur-sub">입학년도별 전체 과목 편성을 한눈에 볼 수 있어요.</p>
     </header>
 
-    <div class="cur-year-tabs" id="yearTabs" role="tablist"></div>
+    <div class="cur-top-controls">
+      <div class="cur-year-tabs" id="yearTabs" role="tablist"></div>
+      <div class="cur-view-toggle" id="viewToggle" role="tablist" title="보기 방식 전환">
+        <button class="cur-view-btn active" data-view="cards">📱 카드</button>
+        <button class="cur-view-btn" data-view="table">📊 표</button>
+      </div>
+    </div>
 
     <div class="cur-legend">
       <span><span class="type-chip 공통">공통</span> 공통 과목</span>
       <span><span class="type-chip 일반선택">일반선택</span></span>
       <span><span class="type-chip 진로선택">진로선택</span></span>
       <span><span class="type-chip 융합선택">융합선택</span></span>
-      <span style="color:var(--ink-500);"><strong style="color:var(--ink-900);">*</strong> 고시외 과목(학교 자체 개발)</span>
+      <span style="color:var(--ink-500);"><strong style="color:var(--ink-900);">*</strong> 고시외 과목</span>
     </div>
 
     <div id="curContent"></div>
@@ -489,7 +563,33 @@
         return;
       }
       renderYearTabs();
+      setupViewToggle();
       render();
+    }
+
+    // 뷰 전환 (모바일에서만 보임)
+    function setupViewToggle() {
+      // localStorage에서 이전 선택 복원
+      const saved = (() => {
+        try { return localStorage.getItem('cur_view'); } catch { return null; }
+      })();
+      const initialView = saved === 'table' ? 'table' : 'cards';
+      applyView(initialView);
+
+      document.querySelectorAll('.cur-view-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          applyView(btn.dataset.view);
+        });
+      });
+    }
+
+    function applyView(view) {
+      document.body.classList.remove('view-cards', 'view-table');
+      document.body.classList.add('view-' + view);
+      document.querySelectorAll('.cur-view-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.view === view);
+      });
+      try { localStorage.setItem('cur_view', view); } catch {}
     }
 
     function renderYearTabs() {
