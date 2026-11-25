@@ -26,6 +26,7 @@ const SHEET_CSV_URL = ''; // 예: 'https://docs.google.com/spreadsheets/d/e/.../
 // ----- 전역 데이터 -----
 let curriculumData = null;
 let subjectInfoMap = {}; // key: "year::과목명" -> 시트 정보
+let currentSearchQuery = ''; // 페이지내 과목 검색어
 
 // ----- 시작 -----
 document.addEventListener('DOMContentLoaded', init);
@@ -125,6 +126,165 @@ async function init() {
   setupGradeTabs();
   renderGrade(1);
   setupModal();
+  setupGuideSearch();
+}
+
+// ===== 페이지내 과목 검색 =====
+function setupGuideSearch() {
+  const input = document.getElementById('guideSearch');
+  const wrap = document.getElementById('guideSearchWrap');
+  const clearBtn = document.getElementById('guideSearchClear');
+  if (!input) return;
+
+  const trigger = () => {
+    currentSearchQuery = input.value.trim().toLowerCase();
+    wrap.classList.toggle('has-query', !!currentSearchQuery);
+    performGuideSearch(currentSearchQuery);
+  };
+
+  input.addEventListener('input', trigger);
+  clearBtn.addEventListener('click', () => {
+    input.value = '';
+    input.focus();
+    trigger();
+  });
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      input.value = '';
+      trigger();
+      input.blur();
+    }
+  });
+
+  // "/" 키로 검색창 포커스 (다른 입력창에 있지 않을 때만)
+  document.addEventListener('keydown', (e) => {
+    const tag = (document.activeElement && document.activeElement.tagName) || '';
+    if (e.key === '/' && !['INPUT','TEXTAREA','SELECT'].includes(tag)) {
+      e.preventDefault();
+      input.focus();
+      input.select();
+    }
+  });
+}
+
+function performGuideSearch(q) {
+  const countEl = document.getElementById('guideSearchCount');
+  const hintEl = document.getElementById('guideSearchHint');
+  const container = document.getElementById('gradeContent');
+  if (!container) return;
+
+  // 초기화
+  container.querySelectorAll('.search-hit').forEach(el => el.classList.remove('search-hit'));
+  container.querySelectorAll('.search-hide').forEach(el => el.classList.remove('search-hide'));
+  container.querySelectorAll('.search-empty').forEach(el => el.classList.remove('search-empty'));
+  const existingEmpty = container.querySelector('.search-no-result');
+  if (existingEmpty) existingEmpty.remove();
+
+  if (!q) {
+    countEl.textContent = '';
+    countEl.classList.remove('zero');
+    if (hintEl) hintEl.innerHTML = '';
+    return;
+  }
+
+  // 현재 학년(= 지금 보이는 탭) 안에서 매칭
+  const matched = new Set();
+  let firstHit = null;
+
+  container.querySelectorAll('.subject-card').forEach(card => {
+    const name = (card.dataset.name || '').toLowerCase();
+    const area = (card.dataset.area || '').toLowerCase();
+    if (name.includes(q) || area.includes(q)) {
+      card.classList.add('search-hit');
+      matched.add(name);
+      if (!firstHit) firstHit = card;
+    } else {
+      card.classList.add('search-hide');
+    }
+  });
+
+  // 매치 없는 영역/선택 블록은 통째로 숨김
+  container.querySelectorAll('.area-block, .elective-block').forEach(block => {
+    const hasMatch = block.querySelector('.subject-card.search-hit');
+    if (!hasMatch) block.classList.add('search-empty');
+  });
+
+  const n = matched.size;
+  if (n > 0) {
+    countEl.textContent = `${n}개 과목 일치`;
+    countEl.classList.remove('zero');
+  } else {
+    countEl.textContent = '현재 학년에 결과 없음';
+    countEl.classList.add('zero');
+    // 결과 없음 안내 삽입
+    const empty = document.createElement('div');
+    empty.className = 'search-no-result';
+    empty.innerHTML = `"<strong>${escapeHtml(q)}</strong>" — 현재 학년에서는 찾지 못했습니다.`;
+    container.appendChild(empty);
+  }
+
+  // 다른 학년에 매치가 있으면 안내
+  if (hintEl) {
+    hintEl.innerHTML = '';
+    const otherGradeCounts = countMatchesPerGrade(q);
+    const currentGrade = getCurrentGuideGrade();
+    const otherHints = [];
+    for (const g of [1, 2, 3]) {
+      if (g === currentGrade) continue;
+      if (otherGradeCounts[g] > 0) {
+        otherHints.push(`<button type="button" class="guide-search-jump" data-grade="${g}">${g}학년 ${otherGradeCounts[g]}건 →</button>`);
+      }
+    }
+    if (otherHints.length) {
+      hintEl.innerHTML = `<span class="guide-search-hint-label">다른 학년에서도 찾기:</span> ${otherHints.join(' ')}`;
+      hintEl.querySelectorAll('.guide-search-jump').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const g = parseInt(btn.dataset.grade);
+          const tab = document.querySelector(`.grade-tab[data-grade="${g}"]`);
+          if (tab) tab.click();
+        });
+      });
+    }
+  }
+
+  // 첫 매치 스크롤 (뷰포트 밖일 때만)
+  if (firstHit) {
+    const rect = firstHit.getBoundingClientRect();
+    const inViewport = rect.top >= 80 && rect.bottom <= (window.innerHeight - 20);
+    if (!inViewport) {
+      firstHit.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
+}
+
+// 학년별 매치 개수 계산 (curriculumData 전체 기반)
+function countMatchesPerGrade(q) {
+  const matched = { 1: new Set(), 2: new Set(), 3: new Set() };
+  if (!curriculumData) return { 1: 0, 2: 0, 3: 0 };
+
+  (curriculumData.fixedSubjects || []).forEach(s => {
+    const name = (s.name || '').toLowerCase();
+    const area = (s.area || '').toLowerCase();
+    if (!name.includes(q) && !area.includes(q)) return;
+    (s.semesters || []).forEach(sem => {
+      if (matched[sem.grade]) matched[sem.grade].add(name);
+    });
+  });
+  (curriculumData.electiveGroups || []).forEach(g => {
+    const area = (g.area || '').toLowerCase();
+    (g.subjects || []).forEach(name => {
+      const lname = (name || '').toLowerCase();
+      if (lname.includes(q) || area.includes(q)) {
+        if (matched[g.grade]) matched[g.grade].add(lname);
+      }
+    });
+  });
+  return { 1: matched[1].size, 2: matched[2].size, 3: matched[3].size };
+}
+
+function getCurrentGuideGrade() {
+  const active = document.querySelector('.grade-tab.active');
+  return active ? parseInt(active.dataset.grade) : 1;
 }
 
 // ----- 교과군별 필수 학점 -----
@@ -151,6 +311,8 @@ function setupGradeTabs() {
       document.querySelectorAll('.grade-tab').forEach(t => t.classList.remove('active'));
       tab.classList.add('active');
       renderGrade(parseInt(tab.dataset.grade));
+      // 학년 바뀌면 검색도 다시 적용
+      if (currentSearchQuery) performGuideSearch(currentSearchQuery);
     });
   });
 }

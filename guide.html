@@ -7,6 +7,152 @@
   <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
   <link rel="icon" type="image/png" href="logo.png">
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* ===== 페이지내 과목 검색 ===== */
+    .guide-search-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+      margin-bottom: 8px;
+    }
+    .guide-search {
+      flex: 1 1 320px;
+      max-width: 460px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #fff;
+      border: 1.5px solid var(--ink-100, #e5e7db);
+      border-radius: 999px;
+      padding: 6px 14px;
+      box-shadow: var(--shadow-sm, 0 1px 2px rgba(0,0,0,0.04));
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .guide-search:focus-within {
+      border-color: var(--green-700, #4a5e38);
+      box-shadow: 0 0 0 3px rgba(74, 94, 56, 0.12);
+    }
+    .guide-search-icon {
+      font-size: 15px;
+      color: var(--ink-500, #6b6b60);
+      flex-shrink: 0;
+    }
+    .guide-search-input {
+      flex: 1;
+      min-width: 0;
+      border: 0;
+      background: transparent;
+      font-family: inherit;
+      font-size: 14px;
+      padding: 7px 0;
+      color: var(--ink-900, #2a2a24);
+      outline: none;
+    }
+    .guide-search-input::-webkit-search-decoration,
+    .guide-search-input::-webkit-search-cancel-button,
+    .guide-search-input::-webkit-search-results-button,
+    .guide-search-input::-webkit-search-results-decoration {
+      display: none;
+    }
+    .guide-search-clear {
+      border: 0;
+      background: var(--bg-cream, #f5f3ec);
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      color: var(--ink-500, #6b6b60);
+      cursor: pointer;
+      font-size: 11px;
+      line-height: 1;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-family: inherit;
+    }
+    .guide-search-clear:hover {
+      background: var(--ink-100, #e5e7db);
+      color: var(--ink-900, #2a2a24);
+    }
+    .guide-search.has-query .guide-search-clear { display: inline-flex; }
+    .guide-search-count {
+      font-size: 12px;
+      color: var(--green-700, #4a5e38);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .guide-search-count.zero { color: var(--ink-500, #6b6b60); }
+    .guide-search-hint {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+      font-size: 12px;
+      color: var(--ink-500, #6b6b60);
+      margin: 8px 0 0;
+      min-height: 0;
+    }
+    .guide-search-hint:empty { display: none; }
+    .guide-search-hint-label {
+      font-weight: 600;
+      color: var(--ink-500, #6b6b60);
+    }
+    .guide-search-jump {
+      border: 1px solid var(--green-700, #4a5e38);
+      background: #fff;
+      color: var(--green-700, #4a5e38);
+      padding: 4px 11px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.15s;
+    }
+    .guide-search-jump:hover {
+      background: var(--green-700, #4a5e38);
+      color: #fff;
+    }
+    .guide-search-tip {
+      font-size: 11px;
+      color: var(--ink-500, #6b6b60);
+      margin: 4px 0 0;
+    }
+    .guide-search-tip kbd {
+      display: inline-block;
+      padding: 1px 6px;
+      background: var(--bg-cream, #f5f3ec);
+      border: 1px solid var(--ink-100, #e5e7db);
+      border-radius: 4px;
+      font-size: 10px;
+      font-family: 'SF Mono', Menlo, monospace;
+      color: var(--ink-900, #2a2a24);
+    }
+
+    /* 검색 결과: 매칭 카드 강조, 비매칭 카드 숨김 */
+    .subject-card.search-hit {
+      outline: 3px solid #e8b800;
+      outline-offset: 2px;
+      box-shadow: 0 6px 18px rgba(232, 184, 0, 0.35);
+      position: relative;
+      z-index: 1;
+      transform: translateY(-1px);
+    }
+    .subject-card.search-hide { display: none !important; }
+    .area-block.search-empty,
+    .elective-block.search-empty { display: none; }
+    .grade-content .search-no-result {
+      text-align: center;
+      padding: 32px 20px;
+      color: var(--ink-500, #6b6b60);
+      font-size: 14px;
+      background: var(--bg-cream, #f5f3ec);
+      border-radius: 12px;
+      margin: 16px 0;
+    }
+  </style>
 </head>
 <body class="page-guide">
   <header class="topbar">
@@ -118,6 +264,19 @@
       <div class="grade-meta" id="gradeMeta">
         <span class="grade-meta-text">학기당 29학점</span>
       </div>
+
+      <div class="guide-search-row">
+        <div class="guide-search" id="guideSearchWrap">
+          <span class="guide-search-icon" aria-hidden="true">🔍</span>
+          <input type="search" id="guideSearch" class="guide-search-input"
+                 placeholder="과목명으로 찾기 (예: 미적분, 정치, 중국어)"
+                 inputmode="search" autocomplete="off" aria-label="과목명 검색">
+          <button class="guide-search-clear" id="guideSearchClear" aria-label="검색어 지우기" type="button">✕</button>
+        </div>
+        <span class="guide-search-count" id="guideSearchCount" aria-live="polite"></span>
+      </div>
+      <div class="guide-search-hint" id="guideSearchHint"></div>
+      <p class="guide-search-tip"><kbd>/</kbd> 키로 바로 검색 · <kbd>Esc</kbd> 로 지우기</p>
 
       <div class="grade-content" id="gradeContent">
         <!-- JS로 채워짐 -->

@@ -230,6 +230,116 @@
       will-change: transform;
     }
 
+    /* ===== 페이지내 과목 검색 ===== */
+    .cur-search-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    .cur-search {
+      flex: 1 1 320px;
+      max-width: 460px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #fff;
+      border: 1.5px solid var(--ink-100);
+      border-radius: 999px;
+      padding: 6px 14px;
+      box-shadow: var(--shadow-sm);
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .cur-search:focus-within {
+      border-color: var(--green-700);
+      box-shadow: 0 0 0 3px rgba(74, 94, 56, 0.12);
+    }
+    .cur-search-icon {
+      font-size: 15px;
+      color: var(--ink-500);
+      flex-shrink: 0;
+    }
+    .cur-search-input {
+      flex: 1;
+      min-width: 0;
+      border: 0;
+      background: transparent;
+      font-family: inherit;
+      font-size: 14px;
+      padding: 7px 0;
+      color: var(--ink-900);
+      outline: none;
+    }
+    .cur-search-input::-webkit-search-decoration,
+    .cur-search-input::-webkit-search-cancel-button,
+    .cur-search-input::-webkit-search-results-button,
+    .cur-search-input::-webkit-search-results-decoration {
+      display: none;
+    }
+    .cur-search-clear {
+      border: 0;
+      background: var(--bg-cream);
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      color: var(--ink-500);
+      cursor: pointer;
+      font-size: 11px;
+      line-height: 1;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-family: inherit;
+    }
+    .cur-search-clear:hover { background: var(--ink-100); color: var(--ink-900); }
+    .cur-search.has-query .cur-search-clear { display: inline-flex; }
+    .cur-search-count {
+      font-size: 12px;
+      color: var(--green-700);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .cur-search-count.zero { color: var(--ink-500); }
+    .cur-search-hint {
+      font-size: 11px;
+      color: var(--ink-500);
+      margin: -6px 0 16px;
+    }
+    .cur-search-hint kbd {
+      display: inline-block;
+      padding: 1px 6px;
+      background: var(--bg-cream);
+      border: 1px solid var(--ink-100);
+      border-radius: 4px;
+      font-size: 10px;
+      font-family: 'SF Mono', Menlo, monospace;
+      color: var(--ink-900);
+    }
+
+    /* 검색 결과 하이라이트 */
+    .search-hit {
+      background: #fff4b8 !important;
+      box-shadow: inset 0 0 0 2px #e8b800;
+      font-weight: 700 !important;
+      color: #5a4300 !important;
+      border-radius: 4px;
+      transition: all 0.15s;
+    }
+    .subject-choice-item.search-hit {
+      background: #fff4b8 !important;
+      color: #5a4300 !important;
+      border-color: #e8b800 !important;
+      transform: scale(1.04);
+    }
+    tr.search-row-hit td { background: #fffce8; }
+    .m-area-group.search-group-hit,
+    .m-elec-group.search-group-hit {
+      border-color: #e8b800;
+      box-shadow: 0 0 0 2px rgba(232, 184, 0, 0.15);
+    }
+
     /* 편제표 테이블 */
     .cur-table {
       width: 100%;
@@ -579,6 +689,18 @@
       </div>
     </div>
 
+    <div class="cur-search-row">
+      <div class="cur-search" id="curSearchWrap">
+        <span class="cur-search-icon" aria-hidden="true">🔍</span>
+        <input type="search" id="curSearch" class="cur-search-input"
+               placeholder="과목명으로 찾기 (예: 미적분, 중국어, 통합사회)"
+               inputmode="search" autocomplete="off" aria-label="과목명 검색">
+        <button class="cur-search-clear" id="curSearchClear" aria-label="검색어 지우기" type="button">✕</button>
+      </div>
+      <span class="cur-search-count" id="curSearchCount" aria-live="polite"></span>
+    </div>
+    <p class="cur-search-hint"><kbd>/</kbd> 키로 바로 검색 · <kbd>Esc</kbd> 로 지우기</p>
+
     <div class="cur-legend">
       <span><span class="type-chip 공통">공통</span> 공통 과목</span>
       <span><span class="type-chip 일반선택">일반선택</span></span>
@@ -596,6 +718,7 @@
     let allData = null;
     let currentYear = (new URLSearchParams(location.search).get('year')) || '2027';
     if (!['2025','2026','2027'].includes(currentYear)) currentYear = '2027';
+    let currentSearchQuery = '';
 
     // 고시외 과목 (학교 자체 개발) - 표시 시 * 붙임
     const EXTRA_SUBJECTS = new Set([
@@ -615,7 +738,104 @@
       }
       renderYearTabs();
       setupViewToggle();
+      setupSearch();
       render();
+    }
+
+    // ===== 페이지내 과목 검색 =====
+    function setupSearch() {
+      const input = document.getElementById('curSearch');
+      const wrap = document.getElementById('curSearchWrap');
+      const clearBtn = document.getElementById('curSearchClear');
+      if (!input) return;
+
+      const trigger = () => {
+        currentSearchQuery = input.value.trim().toLowerCase();
+        wrap.classList.toggle('has-query', !!currentSearchQuery);
+        performSearch(currentSearchQuery);
+      };
+
+      input.addEventListener('input', trigger);
+      clearBtn.addEventListener('click', () => {
+        input.value = '';
+        input.focus();
+        trigger();
+      });
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          input.value = '';
+          trigger();
+          input.blur();
+        }
+      });
+
+      // "/" 키로 검색창 포커스
+      document.addEventListener('keydown', (e) => {
+        const tag = (document.activeElement && document.activeElement.tagName) || '';
+        if (e.key === '/' && !['INPUT','TEXTAREA','SELECT'].includes(tag)) {
+          e.preventDefault();
+          input.focus();
+          input.select();
+        }
+      });
+    }
+
+    function performSearch(q) {
+      const countEl = document.getElementById('curSearchCount');
+
+      // 이전 하이라이트 제거
+      document.querySelectorAll('.search-hit').forEach(el => el.classList.remove('search-hit'));
+      document.querySelectorAll('.search-row-hit').forEach(el => el.classList.remove('search-row-hit'));
+      document.querySelectorAll('.search-group-hit').forEach(el => el.classList.remove('search-group-hit'));
+
+      if (!q) {
+        countEl.textContent = '';
+        countEl.classList.remove('zero');
+        return;
+      }
+
+      const matchedNames = new Set();
+      let firstHit = null;
+
+      // 매칭 대상 셀렉터 (테이블 + 모바일 카드)
+      const targets = document.querySelectorAll(
+        '.td-name, .td-area, .subject-choice-item, ' +
+        '.m-area-name, .m-subject-name, .m-elec-name'
+      );
+
+      targets.forEach(el => {
+        const text = (el.textContent || '').trim().toLowerCase();
+        if (text && text.includes(q)) {
+          el.classList.add('search-hit');
+          matchedNames.add(text);
+          // 보이는 매치 중 첫 번째만 스크롤 대상
+          if (!firstHit && el.offsetParent !== null) firstHit = el;
+          // 테이블 행 전체도 노란 배경
+          const tr = el.closest('tr');
+          if (tr) tr.classList.add('search-row-hit');
+          // 모바일 카드도 강조
+          const group = el.closest('.m-area-group, .m-elec-group');
+          if (group) group.classList.add('search-group-hit');
+        }
+      });
+
+      const n = matchedNames.size;
+      if (n > 0) {
+        countEl.textContent = `${n}개 과목 일치`;
+        countEl.classList.remove('zero');
+      } else {
+        countEl.textContent = '결과 없음';
+        countEl.classList.add('zero');
+      }
+
+      // 첫 매치 스크롤 (뷰포트 밖일 때만)
+      if (firstHit) {
+        const rect = firstHit.getBoundingClientRect();
+        const inViewport = rect.top >= 60 && rect.bottom <= (window.innerHeight - 20);
+        if (!inViewport) {
+          firstHit.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
     }
 
     // 뷰 전환 (모바일에서만 보임)
@@ -721,6 +941,8 @@
 
       document.getElementById('curContent').innerHTML = summaryHtml + reqHtml + fixedHtml + elecHtml;
       setupZoomControls();
+      // 연도 전환 후에도 검색 쿼리 유지
+      if (currentSearchQuery) performSearch(currentSearchQuery);
     }
 
     // 테이블 확대/축소 컨트롤
