@@ -24,81 +24,84 @@
       .year-cards { grid-template-columns: 1fr; }
     }
 
-    /* ===== 제작자 · 문의처 크레딧 ===== */
-    .hero-credits {
-      margin-top: 18px;
-      padding: 16px 20px;
-      background: rgba(255, 255, 255, 0.72);
-      border: 1px solid var(--ink-100, #e5e7db);
-      border-radius: 12px;
-      display: inline-flex;
-      flex-direction: column;
-      gap: 6px;
-      text-align: left;
-      max-width: 540px;
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
+    /* ===== 우상단 제작자·문의 뱃지 =====
+       화면 오른쪽 위 한 켠에 작게 떠 있는 라벨.
+       본문 레이아웃에 영향을 주지 않도록 fixed. */
+    .site-credits {
+      position: fixed;
+      top: 14px;
+      right: 14px;
+      z-index: 100;
+      padding: 8px 12px 7px;
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid rgba(74, 94, 56, 0.18);
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      text-align: right;
+      line-height: 1.4;
+      transition: background 0.15s, box-shadow 0.15s, transform 0.15s;
+      font-family: inherit;
     }
-    .hero-credits-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 13.5px;
-      flex-wrap: wrap;
+    .site-credits:hover {
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
     }
-    .hero-credits-label {
-      display: inline-block;
-      min-width: 36px;
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 0.04em;
-      color: var(--green-700, #4a5e38);
-      background: var(--bg-cream, #f5f3ec);
-      padding: 3px 10px;
-      border-radius: 999px;
-      text-align: center;
-    }
-    .hero-credits-text {
+    .site-credits-maker {
       font-weight: 700;
+      font-size: 11px;
       color: var(--green-900, #2d3a22);
+      letter-spacing: -0.01em;
+      white-space: nowrap;
     }
-    .hero-credits-email {
+    .site-credits-email {
+      display: block;
       color: var(--green-700, #4a5e38);
       font-weight: 700;
       text-decoration: none;
-      border-bottom: 1px dashed var(--green-700, #4a5e38);
-      transition: color 0.15s, border-color 0.15s;
       font-family: 'SF Mono', Menlo, Consolas, monospace;
-      font-size: 13px;
+      font-size: 11px;
+      letter-spacing: -0.02em;
+      margin-top: 1px;
+      white-space: nowrap;
+    }
+    .site-credits-email:hover {
+      text-decoration: underline;
+    }
+    .site-credits-notice {
+      display: block;
+      margin-top: 5px;
+      padding-top: 5px;
+      border-top: 1px dashed rgba(0, 0, 0, 0.12);
+      font-size: 9.5px;
+      color: var(--ink-500, #6b6b60);
+      line-height: 1.4;
+      white-space: nowrap;
       letter-spacing: -0.01em;
     }
-    .hero-credits-email:hover {
-      color: var(--green-900, #2d3a22);
-      border-bottom-color: var(--green-900, #2d3a22);
-    }
-    .hero-credits-notice {
-      font-size: 11.5px;
-      color: var(--ink-500, #6b6b60);
-      margin: 6px 0 0;
-      line-height: 1.6;
-      padding-top: 8px;
-      border-top: 1px dashed var(--ink-100, #e5e7db);
-    }
-    .hero-footer {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-    }
+
     @media (max-width: 560px) {
-      .hero-credits { padding: 14px 16px; }
-      .hero-credits-row { font-size: 12.5px; gap: 8px; }
-      .hero-credits-email { font-size: 12px; }
-      .hero-credits-notice { font-size: 11px; }
+      .site-credits {
+        top: 8px;
+        right: 8px;
+        padding: 5px 9px 5px;
+        border-radius: 8px;
+      }
+      .site-credits-maker { font-size: 9.5px; }
+      .site-credits-email { font-size: 9.5px; }
+      /* 모바일에서는 저작권 한 줄 생략 (공간 확보) — DOM에는 남아 크롤러도 읽을 수 있음 */
+      .site-credits-notice { display: none; }
     }
   </style>
 </head>
 <body class="page-home">
+  <aside class="site-credits" aria-label="제작 정보">
+    <div class="site-credits-maker">대평고등학교 교육과정부</div>
+    <a href="mailto:ilovejos@korea.kr" class="site-credits-email">ilovejos@korea.kr</a>
+    <div class="site-credits-notice">© 무단 복제·재배포 금지</div>
+  </aside>
+
   <main class="hero">
     <div class="hero-bg" aria-hidden="true">
       <div class="hero-bg-gradient"></div>
@@ -150,17 +153,6 @@
 
     <footer class="hero-footer">
       <p>졸업 필수 192학점 · 교과 174학점 + 창의적 체험활동 18학점</p>
-      <div class="hero-credits">
-        <div class="hero-credits-row">
-          <span class="hero-credits-label">제작</span>
-          <span class="hero-credits-text">대평고등학교 교육과정부</span>
-        </div>
-        <div class="hero-credits-row">
-          <span class="hero-credits-label">문의</span>
-          <a href="mailto:ilovejos@korea.kr" class="hero-credits-email">ilovejos@korea.kr</a>
-        </div>
-        <p class="hero-credits-notice">© 대평고등학교 교육과정부 · 본 자료는 교내 학생·학부모 안내를 목적으로 제작되었으며, 무단 복제·재배포를 금합니다.</p>
-      </div>
     </footer>
   </main>
 </body>
